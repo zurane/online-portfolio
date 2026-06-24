@@ -11,11 +11,21 @@
 
 <body>
     <header class="page-header">
+        <nav class="nav-bar">
+            <div class="nav-brand">
+                <span class="text-dent">Mpho Lebona<br></span>
+            </div>
+            <ul class="nav-links">
+                <li>About</li>
+                /
+                <li>Work</li>
+            </ul>
+        </nav>
         <div class="hero-container">
-            <p>
-                <span class="text-dent">Mpho Lebona</span> with 4+ years of experience
-                passionately working in digital & web design and a proficient web
-                developer
+            <p class="hero-text-reveal">
+                <span class="text-dent">UI/UX-focused</span> digital designer with 4+ years of experience creating
+                engaging digital experiences across
+                the web, combined with strong web development skills
                 <b><span class="forward-stroke">/</span></b>
             </p>
         </div>
@@ -24,11 +34,11 @@
     <main>
         <!-- Intro section -->
         <section class="two-col section-intro">
-            <div>
+            <div class="intro-image reveal reveal-left">
                 <!-- <h2>About me</h2> -->
-                <img src="./assets/portfolio-img-placeholder.avif" alt="" width="300">
+                <img src="./assets/profile-img.jpg" alt="" width="450">
             </div>
-            <div class="intro-copy">
+            <div class="intro-copy reveal reveal-right">
                 <p>
                     <span class="text-dent">Currently</span>, I’m a Web Designer at One
                     Design Company, where I bridge the gap between design and
@@ -40,6 +50,9 @@
                     work, I enjoy exploring Colorado by hiking, snowboarding, and
                     playing with my chocolate lab, Fern.
                 </p>
+                <div class="btn-wrapper">
+                    <a class="btn" href="#">View resume</a>
+                </div>
             </div>
         </section>
 
@@ -53,43 +66,44 @@
         </section>
         <!-- portfolio cards -->
         <section class="porfolio-grid">
-            <div class="portfolio">
+            <div class="portfolio reveal reveal-stagger-1">
                 <h3 class="portfolio-title">Venus +</h3>
                 <div class="portfolio-content">
-                    <span class="portfolio-overline">Node.js / Express / MongoDB / React / Tailwindcss</span>
+                    <span class="portfolio-overline">Node.js / Express / MongoDB / React / Rest API / Tailwindcss</span>
                     <p class="portfolio-description">
-                        An accessible & flexible design system and website for the
-                        cultural gem of Grand Rapids, Michigan
+                        A full backend application to track and manage subscriptions with with real users, real money,
+                        and real business logic.
                     </p>
-                    <a href="#" class="btn">Source code</a>
+                    <a href="#" class="btn">Learn more</a>
                 </div>
-                <img src="./assets/1767912430-frame-4116.avif" alt="" width="500" />
+                <img src="./assets/project-bg.jpg" alt="" width="500" />
             </div>
 
-            <div class="portfolio">
+            <div class="portfolio reveal reveal-stagger-2">
                 <h3 class="portfolio-title">car and DIY</h3>
                 <div class="portfolio-content">
-                    <span class="portfolio-overline">React / Postgresql / node.js / Rest API / Algolia </span>
+                    <span class="portfolio-overline">React / Postgresql / node.js / Rest API / Algolia / UI/UX </span>
                     <p class="portfolio-description">
-                        An accessible & flexible design system and website for the
-                        cultural gem of Grand Rapids, Michigan
+                        A vehicle troubleshooting web app designed to reduce driver anxiety. It replaces confusing
+                        technical jargon with symptom-based search, delivering instant, vehicle-specific DIY tutorials
+                        and smart escalation to local mechanics
                     </p>
-                    <a href="#" class="btn">Source code</a>
+                    <a href="#" class="btn">Learn more</a>
                 </div>
-                <img src="./assets/1767925355-frame-4288.avif" alt="" width="500" />
+                <img src="./assets/project-bg-3.jpg" alt="" width="500" />
             </div>
 
-            <div class="portfolio">
+            <div class="portfolio reveal reveal-stagger-3">
                 <h3 class="portfolio-title">Khuphuka Leadership <br />/ Academy</h3>
                 <div class="portfolio-content">
-                    <span class="portfolio-overline">Landing page / HTML5 / CSS3 / Vanilla JS</span>
+                    <span class="portfolio-overline">Landing page / HTML5 / CSS3 / Vanilla JS / Responsive</span>
                     <p class="portfolio-description">
-                        An accessible & flexible design system and website for the
-                        cultural gem of Grand Rapids, Michigan
+                        A learner development organization focused on nurturing confident, self-aware, and values-driven
+                        young leaders through experiential and learner-centered programmes.
                     </p>
-                    <a href="#" class="btn">Source code</a>
+                    <a href="#" class="btn">Learn more</a>
                 </div>
-                <img src="./assets/1767923794-frame-4282.avif" alt="" width="500" />
+                <img src="./assets/project-bg-2.jpg" alt="" width="500" />
             </div>
 
         </section>

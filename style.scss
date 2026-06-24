@@ -2,7 +2,8 @@
 
 // Colors
 $primary-color: #f8f8f8;
-$secondary-color: #222222;
+$secondary-color: #1f1f1f;
+$divider-color: #5b5b5b;
 $stroke-color: #d97757;
 $primary-font-family: "Google Sans", sans-serif;
 $global-container-padding-x: 0 50px;
@@ -11,6 +12,78 @@ $primary-body-copy-size: 2rem;
 $secondary-body-copy-size: 1.3rem;
 $headline-one-size: 2.5rem;
 $global-lt-spacing: -0.05em;
+
+// Scroll Reveal Animations
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Reveal classes
+.reveal {
+  opacity: 0;
+  
+  &.revealed {
+    animation: slideInUp 0.8s ease-out forwards;
+  }
+  
+  &.reveal-left.revealed {
+    animation: slideInLeft 0.8s ease-out forwards;
+  }
+  
+  &.reveal-right.revealed {
+    animation: slideInRight 0.8s ease-out forwards;
+  }
+  
+  &.reveal-fade.revealed {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  
+  // Stagger effect for multiple items
+  @for $i from 1 through 10 {
+    &.reveal-stagger-#{$i}.revealed {
+      animation: slideInUp 0.8s ease-out forwards;
+      animation-delay: $i * 0.1s;
+    }
+  }
+}
 
 * {
   padding: 0;
@@ -22,6 +95,35 @@ $global-lt-spacing: -0.05em;
   height: 100vh;
   background-color: $primary-color;
   position: relative;
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 50px;
+
+    .nav-brand {
+      text-transform: uppercase;
+      font-family: $primary-font-family;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: $global-lt-spacing;
+
+      .gray {
+        color: $stroke-color;
+        font-weight: 700;
+      }
+    }
+    .nav-links {
+      display: inline-flex;
+      gap: 15px;
+      font-family: $primary-font-family;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: $global-lt-spacing;
+      list-style: none;
+    }
+  }
   .hero-container {
     position: absolute;
     bottom: 100px;
@@ -51,7 +153,7 @@ main {
     grid-template-columns: 2fr 1fr;
     margin: 0 auto;
     padding: $section-padding;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid $divider-color;
     background-color: $secondary-color;
     h2 {
       font-family: $primary-font-family;
@@ -59,14 +161,30 @@ main {
       font-size: 1rem;
       font-weight: 500px;
       letter-spacing: $global-lt-spacing;
-      color: #5b5b5b;
+      color: $divider-color;
+    }
+    .intro-image {
+      margin: auto 0;
     }
     .intro-copy {
       p {
         font-family: $primary-font-family;
         font-size: 1.3rem;
         letter-spacing: $global-lt-spacing;
-        color: #5b5b5b;
+        color: $divider-color;
+      }
+      .btn-wrapper {
+        margin-top: 35px;
+
+        .btn {
+          font-family: $primary-font-family;
+          text-decoration: none;
+          color: $primary-color;
+          background-color: #3a3a3a;
+          padding: 7px 15px;
+          font-weight: 500;
+          border-radius: 5px;
+        }
       }
     }
   }
@@ -76,7 +194,7 @@ main {
     display: grid;
     grid-template-columns: 2fr 1fr;
     padding: $section-padding;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid $divider-color;
     background-color: $secondary-color;
 
     h2 {
@@ -85,14 +203,14 @@ main {
       font-size: 13px;
       font-weight: 500px;
       letter-spacing: $global-lt-spacing;
-      color: #5b5b5b;
+      color: $divider-color;
     }
 
     p {
       font-family: $primary-font-family;
       font-size: 13px;
       letter-spacing: $global-lt-spacing;
-      color: #5b5b5b;
+      color: $divider-color;
     }
   }
 }
@@ -105,7 +223,7 @@ main {
     display: grid;
     grid-template-columns: 2fr 2fr 1fr;
     justify-self: end;
-    border-bottom: 1px solid #5b5b5b;
+    border-bottom: 1px solid $divider-color;
     gap: 15px;
 
     .portfolio-title {
@@ -118,11 +236,13 @@ main {
     }
 
     .portfolio-content {
-      margin: auto;
+      margin: auto 0;
       font-family: $primary-font-family;
       letter-spacing: $global-lt-spacing;
+      align-items: left;
+      justify-content: left;
       .portfolio-overline {
-        color: #5b5b5b;
+        color: $divider-color;
       }
       .portfolio-description {
         width: 369px;
@@ -131,10 +251,13 @@ main {
       }
 
       .btn {
+        margin-top: 15px;
         text-decoration: none;
-        color: #5b5b5b;
-        padding-bottom: 10px;
-        border-bottom: 2px solid #5b5b5b;
+        color: $primary-color;
+        background-color: #3a3a3a;
+        padding: 7px 15px;
+        font-weight: 600;
+        border-radius: 5px;
       }
     }
   }
@@ -186,6 +309,19 @@ main {
           height: auto;
           margin-top: 15px;
         }
+      }
+    }
+  }
+
+  .page-header {
+    .hero-container {
+      bottom: 60px;
+      padding: 0 16px;
+
+      p {
+        width: 100%;
+        max-width: 100%;
+        font-size: 1.4rem;
       }
     }
   }
