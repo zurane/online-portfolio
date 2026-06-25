@@ -295,7 +295,7 @@ main .section-portfolio p {
   }
   main .porfolio-grid .portfolio .portfolio-content .portfolio-description {
     width: 100%;
-    padding: 15px 0;
+    padding: 15px 0 30px 0;
     font-size: 0.95rem;
   }
   main .porfolio-grid .portfolio img {
