@@ -59,23 +59,23 @@ $global-lt-spacing: -0.05em;
 // Reveal classes
 .reveal {
   opacity: 0;
-  
+
   &.revealed {
     animation: slideInUp 0.8s ease-out forwards;
   }
-  
+
   &.reveal-left.revealed {
     animation: slideInLeft 0.8s ease-out forwards;
   }
-  
+
   &.reveal-right.revealed {
     animation: slideInRight 0.8s ease-out forwards;
   }
-  
+
   &.reveal-fade.revealed {
     animation: fadeIn 0.8s ease-out forwards;
   }
-  
+
   // Stagger effect for multiple items
   @for $i from 1 through 10 {
     &.reveal-stagger-#{$i}.revealed {
@@ -264,13 +264,18 @@ main {
 }
 
 @media (max-width: 700px) {
+  .page-header {
+    .nav-bar {
+      padding: 25px 20px;
+    }
+  }
   main {
     .section-intro {
       display: grid;
       grid-template-columns: 1fr;
       gap: 30px;
       height: auto;
-      padding: 60px 20px;
+      padding: 60px 25px;
 
       .intro-copy {
         font-size: 1.4rem;
@@ -319,9 +324,9 @@ main {
       padding: 0 16px;
 
       p {
-        width: 100%;
+        width: 95%;
         max-width: 100%;
-        font-size: 1.4rem;
+        font-size: 1.5rem;
       }
     }
   }
