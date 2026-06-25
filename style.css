@@ -255,6 +255,54 @@ main .section-portfolio p {
   border-radius: 5px;
 }
 
+.section-skills {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  height: auto;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #5b5b5b;
+  padding: 100px 50px;
+}
+.section-skills h3 {
+  font-family: "Google Sans", sans-serif;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 500px;
+  letter-spacing: -0.05em;
+  padding: 25px 0;
+  color: #5b5b5b;
+}
+.section-skills .skills-section-inner {
+  display: grid;
+  grid-template-rows: 3;
+  margin-left: 4em;
+}
+.section-skills .skills-section-inner .skills {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 25px;
+  border-bottom: 1px solid rgb(235, 235, 235);
+}
+.section-skills .skills-section-inner .skills h4 {
+  font-family: "Google Sans", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: #bebebe;
+  padding: 25px 0;
+}
+.section-skills .skills-section-inner .skills .list-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 25px 0;
+}
+.section-skills .skills-section-inner .skills .list-wrapper .list li {
+  list-style: none;
+  padding: 2px 0;
+  font-size: 1.3rem;
+  font-family: "Google Sans", sans-serif;
+  color: #bebebe;
+}
+
 @media (max-width: 700px) {
   .page-header .nav-bar {
     padding: 25px 20px;
@@ -311,5 +359,38 @@ main .section-portfolio p {
     width: 95%;
     max-width: 100%;
     font-size: 1.5rem;
+  }
+  .section-skills {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 50px 20px;
+    gap: 5px;
+  }
+  .section-skills h3 {
+    padding: 0 0 5px 0;
+    font-size: 18px;
+  }
+  .section-skills .skills-section-inner {
+    margin-left: 0;
+  }
+  .section-skills .skills-section-inner .skills {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 20px 0;
+  }
+  .section-skills .skills-section-inner .skills h4 {
+    padding: 15px 0;
+    font-size: 1.1rem;
+    grid-column: 1/-1;
+  }
+  .section-skills .skills-section-inner .skills .list-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px 0;
+  }
+  .section-skills .skills-section-inner .skills .list-wrapper .list li {
+    font-size: 1rem;
+    padding: 5px 0;
   }
 }/*# sourceMappingURL=style.css.map */
