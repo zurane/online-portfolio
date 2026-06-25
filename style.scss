@@ -273,12 +273,16 @@ main {
     .section-intro {
       display: grid;
       grid-template-columns: 1fr;
+      padding: 50px 20px;
       gap: 30px;
       height: auto;
-      padding: 60px 25px;
-
-      .intro-copy {
-        font-size: 1.4rem;
+      margin: 0 auto;
+      img {
+        width: 100%;
+      }
+      .intro-copy p {
+        font-size: 1.1rem;
+        width: 100%;
       }
     }
 
