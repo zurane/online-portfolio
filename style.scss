@@ -324,6 +324,9 @@ main {
   padding: 250px 0;
   margin: auto 0;
   .contact-cta-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
     margin: auto;
     .contact-chip {
       background: rgba($primary-color, 0.096);
@@ -483,6 +486,12 @@ footer {
           }
         }
       }
+    }
+  }
+
+  .contact-chip {
+    img{
+      display: none;
     }
   }
 }

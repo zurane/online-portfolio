@@ -312,6 +312,9 @@ main .section-portfolio p {
   margin: auto 0;
 }
 .section-contact .contact-cta-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   margin: auto;
 }
 .section-contact .contact-cta-wrapper .contact-chip {
@@ -446,5 +449,8 @@ footer .row h5 {
   .section-skills .skills-section-inner .skills .list-wrapper .list li {
     font-size: 1rem;
     padding: 5px 0;
+  }
+  .contact-chip img {
+    display: none;
   }
 }/*# sourceMappingURL=style.css.map */
