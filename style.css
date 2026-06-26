@@ -260,7 +260,6 @@ main .section-portfolio p {
   grid-template-columns: 1fr 2fr;
   height: auto;
   background-color: #f8f8f8;
-  border-bottom: 1px solid #5b5b5b;
   padding: 100px 50px;
 }
 .section-skills h3 {
@@ -274,14 +273,16 @@ main .section-portfolio p {
 }
 .section-skills .skills-section-inner {
   display: grid;
-  grid-template-rows: 3;
+  grid-template-rows: 2;
   margin-left: 4em;
+}
+.section-skills .skills-section-inner .border {
+  border-bottom: 1px solid #eeeeee;
 }
 .section-skills .skills-section-inner .skills {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 25px;
-  border-bottom: 1px solid rgb(235, 235, 235);
+  gap: 30px;
 }
 .section-skills .skills-section-inner .skills h4 {
   font-family: "Google Sans", sans-serif;
@@ -293,7 +294,7 @@ main .section-portfolio p {
 .section-skills .skills-section-inner .skills .list-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 25px 0;
+  padding: 30px 0;
 }
 .section-skills .skills-section-inner .skills .list-wrapper .list li {
   list-style: none;
@@ -301,6 +302,59 @@ main .section-portfolio p {
   font-size: 1.3rem;
   font-family: "Google Sans", sans-serif;
   color: #bebebe;
+}
+
+.section-contact {
+  height: auto;
+  background-color: #000000;
+  text-align: center;
+  padding: 250px 0;
+  margin: auto 0;
+}
+.section-contact .contact-cta-wrapper {
+  margin: auto;
+}
+.section-contact .contact-cta-wrapper .contact-chip {
+  background: rgba(248, 248, 248, 0.096);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 15px;
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+}
+.section-contact .contact-cta-wrapper .contact-chip a {
+  font-family: "Google Sans", sans-serif;
+  color: #f8f8f8;
+  text-decoration: none;
+  background-color: #3a3a3a;
+  padding: 18px;
+  border-radius: 15px;
+}
+.section-contact .contact-cta-wrapper img {
+  border-radius: 15px;
+}
+
+footer {
+  background-color: #1f1f1f;
+  padding: 0 50px;
+}
+footer .footer-content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 65px;
+}
+footer .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+footer .row h5 {
+  font-size: 1.5rem;
+  font-family: "Google Sans", sans-serif;
+  color: #f8f8f8;
 }
 
 @media (max-width: 700px) {
