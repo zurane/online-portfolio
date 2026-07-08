@@ -490,8 +490,12 @@ footer {
   }
 
   .contact-chip {
-    img{
+    img {
       display: none;
+    }
+
+    a {
+      font-size: 12px;
     }
   }
 }

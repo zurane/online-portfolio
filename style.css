@@ -453,4 +453,7 @@ footer .row h5 {
   .contact-chip img {
     display: none;
   }
+  .contact-chip a {
+    font-size: 12px;
+  }
 }/*# sourceMappingURL=style.css.map */
