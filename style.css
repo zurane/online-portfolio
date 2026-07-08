@@ -101,7 +101,7 @@
 
 .page-header {
   height: 100vh;
-  background-color: #f8f8f8;
+  background-color: #000000;
   position: relative;
 }
 .page-header .nav-bar {
@@ -114,6 +114,7 @@
   text-transform: uppercase;
   font-family: "Google Sans", sans-serif;
   font-size: 0.75rem;
+  color: #f8f8f8;
   font-weight: 600;
   letter-spacing: -0.05em;
 }
@@ -125,6 +126,7 @@
   display: inline-flex;
   gap: 15px;
   font-family: "Google Sans", sans-serif;
+  color: #f8f8f8;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -137,10 +139,13 @@
   padding: 0 50px;
 }
 .page-header .hero-container p {
-  width: 578px;
-  font-size: 2rem;
+  width: 80%;
+  font-size: 5rem;
   font-family: "Google Sans", sans-serif;
+  font-weight: 500;
+  line-height: 1.2;
   letter-spacing: -0.05em;
+  color: #f8f8f8;
 }
 .page-header .hero-container p .forward-stroke {
   color: #d97757;
@@ -158,7 +163,7 @@ main .section-intro {
   margin: 0 auto;
   padding: 100px 50px;
   border-bottom: 1px solid #5b5b5b;
-  background-color: #1f1f1f;
+  background-color: #000000;
 }
 main .section-intro h2 {
   font-family: "Google Sans", sans-serif;
@@ -194,7 +199,7 @@ main .section-portfolio {
   grid-template-columns: 2fr 1fr;
   padding: 100px 50px;
   border-bottom: 1px solid #5b5b5b;
-  background-color: #1f1f1f;
+  background-color: #000000;
 }
 main .section-portfolio h2 {
   font-family: "Google Sans", sans-serif;
@@ -212,7 +217,7 @@ main .section-portfolio p {
 }
 
 .porfolio-grid {
-  background-color: #1f1f1f;
+  background-color: #000000;
   height: auto;
 }
 .porfolio-grid .portfolio {

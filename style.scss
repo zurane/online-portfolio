@@ -93,7 +93,7 @@ $global-lt-spacing: -0.05em;
 
 .page-header {
   height: 100vh;
-  background-color: $primary-color;
+  background-color: #000000;
   position: relative;
   .nav-bar {
     display: flex;
@@ -105,6 +105,7 @@ $global-lt-spacing: -0.05em;
       text-transform: uppercase;
       font-family: $primary-font-family;
       font-size: 0.75rem;
+      color: $primary-color;
       font-weight: 600;
       letter-spacing: $global-lt-spacing;
 
@@ -117,6 +118,7 @@ $global-lt-spacing: -0.05em;
       display: inline-flex;
       gap: 15px;
       font-family: $primary-font-family;
+      color: $primary-color;
       font-size: 0.75rem;
       font-weight: 600;
       text-transform: uppercase;
@@ -130,10 +132,13 @@ $global-lt-spacing: -0.05em;
     padding: $global-container-padding-x;
 
     p {
-      width: 578px;
-      font-size: $primary-body-copy-size;
+      width: 80%;
+      font-size: 5rem;
       font-family: $primary-font-family;
+      font-weight: 500;
+      line-height: 1.2;
       letter-spacing: $global-lt-spacing;
+      color: $primary-color;
       .forward-stroke {
         color: $stroke-color;
         font-weight: 900;
@@ -154,7 +159,9 @@ main {
     margin: 0 auto;
     padding: $section-padding;
     border-bottom: 1px solid $divider-color;
-    background-color: $secondary-color;
+    background-color: #000000;
+
+    
     h2 {
       font-family: $primary-font-family;
       text-transform: uppercase;
@@ -195,7 +202,7 @@ main {
     grid-template-columns: 2fr 1fr;
     padding: $section-padding;
     border-bottom: 1px solid $divider-color;
-    background-color: $secondary-color;
+    background-color: #000000;
 
     h2 {
       font-family: $primary-font-family;
@@ -216,7 +223,7 @@ main {
 }
 
 .porfolio-grid {
-  background-color: $secondary-color;
+  background-color: #000000;
   height: auto;
 
   .portfolio {
