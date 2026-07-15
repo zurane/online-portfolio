@@ -103,8 +103,19 @@
   height: 100vh;
   background-color: #000000;
   position: relative;
+  overflow: hidden;
+}
+.page-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(to right, transparent calc(25% - 0.5px), rgba(255, 255, 255, 0.055) calc(25% - 0.5px), rgba(255, 255, 255, 0.055) calc(25% + 0.5px), transparent calc(25% + 0.5px)), linear-gradient(to right, transparent calc(50% - 0.5px), rgba(255, 255, 255, 0.055) calc(50% - 0.5px), rgba(255, 255, 255, 0.055) calc(50% + 0.5px), transparent calc(50% + 0.5px)), linear-gradient(to right, transparent calc(75% - 0.5px), rgba(255, 255, 255, 0.055) calc(75% - 0.5px), rgba(255, 255, 255, 0.055) calc(75% + 0.5px), transparent calc(75% + 0.5px));
 }
 .page-header .nav-bar {
+  position: relative;
+  z-index: 2;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -135,6 +146,7 @@
 }
 .page-header .hero-container {
   position: absolute;
+  z-index: 2;
   bottom: 100px;
   padding: 0 50px;
 }
@@ -164,6 +176,15 @@ main .section-intro {
   padding: 100px 50px;
   border-bottom: 1px solid #5b5b5b;
   background-color: #000000;
+  position: relative;
+}
+main .section-intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(to right, transparent calc(25% - 0.5px), rgba(255, 255, 255, 0.055) calc(25% - 0.5px), rgba(255, 255, 255, 0.055) calc(25% + 0.5px), transparent calc(25% + 0.5px)), linear-gradient(to right, transparent calc(50% - 0.5px), rgba(255, 255, 255, 0.055) calc(50% - 0.5px), rgba(255, 255, 255, 0.055) calc(50% + 0.5px), transparent calc(50% + 0.5px)), linear-gradient(to right, transparent calc(75% - 0.5px), rgba(255, 255, 255, 0.055) calc(75% - 0.5px), rgba(255, 255, 255, 0.055) calc(75% + 0.5px), transparent calc(75% + 0.5px));
 }
 main .section-intro h2 {
   font-family: "Google Sans", sans-serif;
@@ -175,12 +196,14 @@ main .section-intro h2 {
 }
 main .section-intro .intro-image {
   margin: auto 0;
+  z-index: 2;
 }
 main .section-intro .intro-copy p {
   font-family: "Google Sans", sans-serif;
   font-size: 1.3rem;
   letter-spacing: -0.05em;
-  color: #5b5b5b;
+  color: #ccc;
+  z-index: 2;
 }
 main .section-intro .intro-copy .btn-wrapper {
   margin-top: 35px;

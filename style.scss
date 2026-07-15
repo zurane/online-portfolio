@@ -95,7 +95,45 @@ $global-lt-spacing: -0.05em;
   height: 100vh;
   background-color: #000000;
   position: relative;
+  overflow: hidden;
+
+  // Grid lines
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+      // Vertical lines
+
+      linear-gradient(
+        to right,
+        transparent calc(25% - 0.5px),
+        rgba(255, 255, 255, 0.055) calc(25% - 0.5px),
+        rgba(255, 255, 255, 0.055) calc(25% + 0.5px),
+        transparent calc(25% + 0.5px)
+      ),
+      linear-gradient(
+        to right,
+        transparent calc(50% - 0.5px),
+        rgba(255, 255, 255, 0.055) calc(50% - 0.5px),
+        rgba(255, 255, 255, 0.055) calc(50% + 0.5px),
+        transparent calc(50% + 0.5px)
+      ),
+      linear-gradient(
+        to right,
+        transparent calc(75% - 0.5px),
+        rgba(255, 255, 255, 0.055) calc(75% - 0.5px),
+        rgba(255, 255, 255, 0.055) calc(75% + 0.5px),
+        transparent calc(75% + 0.5px)
+      );
+  }
+
   .nav-bar {
+    position: relative;
+    z-index: 2;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -114,6 +152,7 @@ $global-lt-spacing: -0.05em;
         font-weight: 700;
       }
     }
+
     .nav-links {
       display: inline-flex;
       gap: 15px;
@@ -126,8 +165,10 @@ $global-lt-spacing: -0.05em;
       list-style: none;
     }
   }
+
   .hero-container {
     position: absolute;
+    z-index: 2;
     bottom: 100px;
     padding: $global-container-padding-x;
 
@@ -139,6 +180,7 @@ $global-lt-spacing: -0.05em;
       line-height: 1.1;
       letter-spacing: $global-lt-spacing;
       color: $primary-color;
+
       .forward-stroke {
         color: $stroke-color;
         font-weight: 900;
@@ -160,8 +202,39 @@ main {
     padding: $section-padding;
     border-bottom: 1px solid $divider-color;
     background-color: #000000;
+    position: relative;
 
-    
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+
+      background:
+        linear-gradient(
+          to right,
+          transparent calc(25% - 0.5px),
+          rgba(255, 255, 255, 0.055) calc(25% - 0.5px),
+          rgba(255, 255, 255, 0.055) calc(25% + 0.5px),
+          transparent calc(25% + 0.5px)
+        ),
+        linear-gradient(
+          to right,
+          transparent calc(50% - 0.5px),
+          rgba(255, 255, 255, 0.055) calc(50% - 0.5px),
+          rgba(255, 255, 255, 0.055) calc(50% + 0.5px),
+          transparent calc(50% + 0.5px)
+        ),
+        linear-gradient(
+          to right,
+          transparent calc(75% - 0.5px),
+          rgba(255, 255, 255, 0.055) calc(75% - 0.5px),
+          rgba(255, 255, 255, 0.055) calc(75% + 0.5px),
+          transparent calc(75% + 0.5px)
+        );
+    }
+
     h2 {
       font-family: $primary-font-family;
       text-transform: uppercase;
@@ -172,13 +245,15 @@ main {
     }
     .intro-image {
       margin: auto 0;
+      z-index: 2;
     }
     .intro-copy {
       p {
         font-family: $primary-font-family;
         font-size: 1.3rem;
         letter-spacing: $global-lt-spacing;
-        color: $divider-color;
+        color: #ccc;
+        z-index: 2;
       }
       .btn-wrapper {
         margin-top: 35px;
