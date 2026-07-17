@@ -211,11 +211,10 @@ main .section-intro .intro-copy .btn-wrapper {
 main .section-intro .intro-copy .btn-wrapper .btn {
   font-family: "Google Sans", sans-serif;
   text-decoration: none;
-  color: #f8f8f8;
-  background-color: #3a3a3a;
-  padding: 7px 15px;
+  color: #1f1f1f;
+  background-color: #f8f8f8;
+  padding: 10px 15px;
   font-weight: 500;
-  border-radius: 5px;
 }
 main .section-portfolio {
   display: grid;
@@ -250,62 +249,86 @@ main .section-portfolio p {
   border-bottom: 1px solid #5b5b5b;
   gap: 15px;
 }
+.porfolio-grid .portfolio::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(to right, transparent calc(25% - 0.5px), rgba(255, 255, 255, 0.055) calc(25% - 0.5px), rgba(255, 255, 255, 0.055) calc(25% + 0.5px), transparent calc(25% + 0.5px));
+}
 .porfolio-grid .portfolio .portfolio-title {
+  text-transform: uppercase;
   font-family: "Google Sans", sans-serif;
   letter-spacing: -0.05em;
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   color: #f8f8f8;
   padding: 0 50px;
   margin: auto 0;
 }
 .porfolio-grid .portfolio .portfolio-content {
   margin: auto 0;
+  padding-top: 45px;
   font-family: "Google Sans", sans-serif;
   letter-spacing: -0.05em;
-  align-items: left;
-  justify-content: left;
+  align-items: center;
+  justify-content: center;
 }
 .porfolio-grid .portfolio .portfolio-content .portfolio-overline {
   color: #5b5b5b;
 }
 .porfolio-grid .portfolio .portfolio-content .portfolio-description {
-  width: 369px;
+  width: 400px;
   padding: 20px 0;
+  font-size: 1.2rem;
   color: #f8f8f8;
+  margin-bottom: 10px;
 }
-.porfolio-grid .portfolio .portfolio-content .btn {
-  margin-top: 15px;
+.porfolio-grid .portfolio .portfolio-content .btn-wrapper .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-family: "Google Sans", sans-serif;
   text-decoration: none;
-  color: #f8f8f8;
-  background-color: #3a3a3a;
-  padding: 7px 15px;
-  font-weight: 600;
-  border-radius: 5px;
+  color: #1f1f1f;
+  background-color: #f8f8f8;
+  padding: 10px 15px;
+  font-weight: 500;
+}
+.porfolio-grid .portfolio .portfolio-content .btn-wrapper .material-symbols-outlined {
+  color: #1f1f1f;
+  font-size: 1.5rem;
+  font-weight: 100;
 }
 
 .section-skills {
   display: grid;
   grid-template-columns: 1fr 2fr;
   height: auto;
-  background-color: #f8f8f8;
+  background-color: #00ec97;
   padding: 100px 50px;
+}
+.section-skills::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(to right, transparent calc(25% - 0.5px), rgba(255, 255, 255, 0.055) calc(25% - 0.5px), rgba(0, 0, 0, 0.055) calc(25% + 0.5px), transparent calc(25% + 0.5px));
 }
 .section-skills h3 {
   font-family: "Google Sans", sans-serif;
-  text-transform: uppercase;
-  font-size: 13px;
+  font-size: 2.5rem;
   font-weight: 500px;
   letter-spacing: -0.05em;
   padding: 25px 0;
-  color: #5b5b5b;
+  color: #000000;
 }
 .section-skills .skills-section-inner {
   display: grid;
   grid-template-rows: 2;
   margin-left: 4em;
-}
-.section-skills .skills-section-inner .border {
-  border-bottom: 1px solid #eeeeee;
 }
 .section-skills .skills-section-inner .skills {
   display: grid;
@@ -316,7 +339,7 @@ main .section-portfolio p {
   font-family: "Google Sans", sans-serif;
   font-size: 1.3rem;
   font-weight: 300;
-  color: #bebebe;
+  color: #000000;
   padding: 25px 0;
 }
 .section-skills .skills-section-inner .skills .list-wrapper {
@@ -329,7 +352,7 @@ main .section-portfolio p {
   padding: 2px 0;
   font-size: 1.3rem;
   font-family: "Google Sans", sans-serif;
-  color: #bebebe;
+  color: #000000;
 }
 
 .section-contact {

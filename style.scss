@@ -257,15 +257,13 @@ main {
       }
       .btn-wrapper {
         margin-top: 35px;
-
         .btn {
           font-family: $primary-font-family;
           text-decoration: none;
-          color: $primary-color;
-          background-color: #3a3a3a;
-          padding: 7px 15px;
+          color: $secondary-color;
+          background-color: #f8f8f8;
+          padding: 10px 15px;
           font-weight: 500;
-          border-radius: 5px;
         }
       }
     }
@@ -308,10 +306,28 @@ main {
     border-bottom: 1px solid $divider-color;
     gap: 15px;
 
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background:
+      // Vertical lines
+        linear-gradient(
+        to right,
+        transparent calc(25% - 0.5px),
+        rgba(255, 255, 255, 0.055) calc(25% - 0.5px),
+        rgba(255, 255, 255, 0.055) calc(25% + 0.5px),
+        transparent calc(25% + 0.5px)
+      );
+    }
+
     .portfolio-title {
+      text-transform: uppercase;
       font-family: $primary-font-family;
       letter-spacing: $global-lt-spacing;
-      font-size: $headline-one-size;
+      font-size: 3.5rem;
       color: $primary-color;
       padding: $global-container-padding-x;
       margin: auto 0;
@@ -319,27 +335,40 @@ main {
 
     .portfolio-content {
       margin: auto 0;
+      padding-top: 45px;
       font-family: $primary-font-family;
       letter-spacing: $global-lt-spacing;
-      align-items: left;
-      justify-content: left;
+      align-items: center;
+      justify-content: center;
       .portfolio-overline {
         color: $divider-color;
       }
       .portfolio-description {
-        width: 369px;
+        width: 400px;
         padding: 20px 0;
+        font-size: 1.2rem;
         color: $primary-color;
+        margin-bottom: 10px;
       }
 
-      .btn {
-        margin-top: 15px;
-        text-decoration: none;
-        color: $primary-color;
-        background-color: #3a3a3a;
-        padding: 7px 15px;
-        font-weight: 600;
-        border-radius: 5px;
+      .btn-wrapper {
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+          font-family: $primary-font-family;
+          text-decoration: none;
+          color: $secondary-color;
+          background-color: #f8f8f8;
+          padding: 10px 15px;
+          font-weight: 500;
+        }
+        .material-symbols-outlined {
+          color: $secondary-color;
+          font-size: 1.5rem;
+          font-weight: 100;
+        }
       }
     }
   }
@@ -350,26 +379,37 @@ main {
   display: grid;
   grid-template-columns: 1fr 2fr;
   height: auto;
-  background-color: $primary-color;
+  background-color: #00ec97;
   padding: 100px 50px;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+      // Vertical lines
+      linear-gradient(
+      to right,
+      transparent calc(25% - 0.5px),
+      rgba(255, 255, 255, 0.055) calc(25% - 0.5px),
+      rgba(0, 0, 0, 0.055) calc(25% + 0.5px),
+      transparent calc(25% + 0.5px)
+    );
+  }
   h3 {
     font-family: $primary-font-family;
-    text-transform: uppercase;
-    font-size: 13px;
+    font-size: $headline-one-size;
     font-weight: 500px;
     letter-spacing: $global-lt-spacing;
     padding: 25px 0;
-    color: $divider-color;
+    color: #000000;
   }
 
   .skills-section-inner {
     display: grid;
     grid-template-rows: 2;
     margin-left: 4em;
-
-    .border {
-      border-bottom: 1px solid #eeeeee;
-    }
 
     .skills {
       display: grid;
@@ -380,7 +420,7 @@ main {
         font-family: $primary-font-family;
         font-size: 1.3rem;
         font-weight: 300;
-        color: #bebebe;
+        color: #000000;
         padding: 25px 0;
       }
       .list-wrapper {
@@ -392,7 +432,7 @@ main {
           padding: 2px 0;
           font-size: 1.3rem;
           font-family: $primary-font-family;
-          color: #bebebe;
+          color: #000000;
         }
       }
     }
