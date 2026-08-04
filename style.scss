@@ -200,7 +200,7 @@ main {
     grid-template-columns: 2fr 1fr;
     margin: 0 auto;
     padding: $section-padding;
-    border-bottom: 1px solid $divider-color;
+    border-bottom: 1px solid #ffffff0e;
     background-color: #000000;
     position: relative;
 
@@ -274,7 +274,7 @@ main {
     display: grid;
     grid-template-columns: 2fr 1fr;
     padding: $section-padding;
-    border-bottom: 1px solid $divider-color;
+    border-bottom: 1px solid #ffffff0e;
     background-color: #000000;
 
     h2 {
@@ -303,7 +303,7 @@ main {
     display: grid;
     grid-template-columns: 2fr 2fr 1fr;
     justify-self: end;
-    border-bottom: 1px solid $divider-color;
+    border-bottom: 1px solid #ffffff0e;
     gap: 15px;
 
     &::before {
@@ -352,6 +352,11 @@ main {
       }
 
       .btn-wrapper {
+        display: inline-flex;
+        gap: 5px;
+        .btn-green {
+          background-color: #00ec97 !important;
+        }
         .btn {
           display: inline-flex;
           align-items: center;
@@ -443,8 +448,37 @@ main {
   height: auto;
   background-color: #000000;
   text-align: center;
+  position: relative;
   padding: 250px 0;
   margin: auto 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+      // Vertical lines
+      linear-gradient(
+      to right,
+      transparent calc(25% - 0.5px),
+      rgba(255, 255, 255, 0.055) calc(25% - 0.5px),
+      rgba(255, 255, 255, 0.055) calc(25% + 0.5px),
+      transparent calc(25% + 0.5px)
+    ),
+
+    linear-gradient(
+      to left,
+      transparent calc(25% - 0.5px),
+      rgba(255, 255, 255, 0.055) calc(25% - 0.5px),
+      rgba(255, 255, 255, 0.055) calc(25% + 0.5px),
+      transparent calc(25% + 0.5px)
+    );
+
+    
+  }
+
   .contact-cta-wrapper {
     display: inline-flex;
     align-items: center;
@@ -475,11 +509,20 @@ main {
       border-radius: 15px;
     }
   }
+
+  .copyright-text{
+    font-family: $primary-font-family;
+    text-transform: uppercase;
+    color: #70707069;
+    font-size: 0.8rem;
+    margin-top: 50px;
+  }
 }
 
 footer {
   background-color: $secondary-color;
   padding: 0 50px;
+
   .footer-content-wrapper {
     display: grid;
     grid-template-columns: 1fr 2fr;

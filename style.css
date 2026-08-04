@@ -174,7 +174,7 @@ main .section-intro {
   grid-template-columns: 2fr 1fr;
   margin: 0 auto;
   padding: 100px 50px;
-  border-bottom: 1px solid #5b5b5b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.0549019608);
   background-color: #000000;
   position: relative;
 }
@@ -220,7 +220,7 @@ main .section-portfolio {
   display: grid;
   grid-template-columns: 2fr 1fr;
   padding: 100px 50px;
-  border-bottom: 1px solid #5b5b5b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.0549019608);
   background-color: #000000;
 }
 main .section-portfolio h2 {
@@ -246,7 +246,7 @@ main .section-portfolio p {
   display: grid;
   grid-template-columns: 2fr 2fr 1fr;
   justify-self: end;
-  border-bottom: 1px solid #5b5b5b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.0549019608);
   gap: 15px;
 }
 .porfolio-grid .portfolio::before {
@@ -283,6 +283,13 @@ main .section-portfolio p {
   font-size: 1.2rem;
   color: #f8f8f8;
   margin-bottom: 10px;
+}
+.porfolio-grid .portfolio .portfolio-content .btn-wrapper {
+  display: inline-flex;
+  gap: 5px;
+}
+.porfolio-grid .portfolio .portfolio-content .btn-wrapper .btn-green {
+  background-color: #00ec97 !important;
 }
 .porfolio-grid .portfolio .portfolio-content .btn-wrapper .btn {
   display: inline-flex;
@@ -359,8 +366,17 @@ main .section-portfolio p {
   height: auto;
   background-color: #000000;
   text-align: center;
+  position: relative;
   padding: 250px 0;
   margin: auto 0;
+}
+.section-contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(to right, transparent calc(25% - 0.5px), rgba(255, 255, 255, 0.055) calc(25% - 0.5px), rgba(255, 255, 255, 0.055) calc(25% + 0.5px), transparent calc(25% + 0.5px)), linear-gradient(to left, transparent calc(25% - 0.5px), rgba(255, 255, 255, 0.055) calc(25% - 0.5px), rgba(255, 255, 255, 0.055) calc(25% + 0.5px), transparent calc(25% + 0.5px));
 }
 .section-contact .contact-cta-wrapper {
   display: inline-flex;
@@ -389,6 +405,13 @@ main .section-portfolio p {
 }
 .section-contact .contact-cta-wrapper img {
   border-radius: 15px;
+}
+.section-contact .copyright-text {
+  font-family: "Google Sans", sans-serif;
+  text-transform: uppercase;
+  color: rgba(112, 112, 112, 0.4117647059);
+  font-size: 0.8rem;
+  margin-top: 50px;
 }
 
 footer {
