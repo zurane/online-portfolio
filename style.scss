@@ -4,7 +4,7 @@
 $primary-color: #f8f8f8;
 $secondary-color: #1f1f1f;
 $divider-color: #5b5b5b;
-$stroke-color: #d97757;
+$stroke-color: #00ec97;
 $primary-font-family: "Google Sans", sans-serif;
 $global-container-padding-x: 0 50px;
 $section-padding: 100px 50px;
@@ -475,8 +475,6 @@ main {
       rgba(255, 255, 255, 0.055) calc(25% + 0.5px),
       transparent calc(25% + 0.5px)
     );
-
-    
   }
 
   .contact-cta-wrapper {
@@ -514,7 +512,7 @@ main {
     font-family: $primary-font-family;
     text-transform: uppercase;
     color: #70707069;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     margin-top: 50px;
   }
 }

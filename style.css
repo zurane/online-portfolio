@@ -130,7 +130,7 @@
   letter-spacing: -0.05em;
 }
 .page-header .nav-bar .nav-brand .gray {
-  color: #d97757;
+  color: #00ec97;
   font-weight: 700;
 }
 .page-header .nav-bar .nav-links {
@@ -160,7 +160,7 @@
   color: #f8f8f8;
 }
 .page-header .hero-container p .forward-stroke {
-  color: #d97757;
+  color: #00ec97;
   font-weight: 900;
 }
 
@@ -410,7 +410,7 @@ main .section-portfolio p {
   font-family: "Google Sans", sans-serif;
   text-transform: uppercase;
   color: rgba(112, 112, 112, 0.4117647059);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   margin-top: 50px;
 }
 
