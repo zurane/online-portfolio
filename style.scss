@@ -256,8 +256,19 @@ main {
         z-index: 2;
       }
       .btn-wrapper {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
         margin-top: 35px;
+         .btn-green {
+          background-color: #00ec97 !important;
+          padding: 12px !important;
+        }
         .btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
           font-family: $primary-font-family;
           text-decoration: none;
           color: $secondary-color;
@@ -460,21 +471,21 @@ main {
     z-index: 1;
     background:
       // Vertical lines
-      linear-gradient(
-      to right,
-      transparent calc(25% - 0.5px),
-      rgba(255, 255, 255, 0.055) calc(25% - 0.5px),
-      rgba(255, 255, 255, 0.055) calc(25% + 0.5px),
-      transparent calc(25% + 0.5px)
-    ),
 
-    linear-gradient(
-      to left,
-      transparent calc(25% - 0.5px),
-      rgba(255, 255, 255, 0.055) calc(25% - 0.5px),
-      rgba(255, 255, 255, 0.055) calc(25% + 0.5px),
-      transparent calc(25% + 0.5px)
-    );
+      linear-gradient(
+        to right,
+        transparent calc(25% - 0.5px),
+        rgba(255, 255, 255, 0.055) calc(25% - 0.5px),
+        rgba(255, 255, 255, 0.055) calc(25% + 0.5px),
+        transparent calc(25% + 0.5px)
+      ),
+      linear-gradient(
+        to left,
+        transparent calc(25% - 0.5px),
+        rgba(255, 255, 255, 0.055) calc(25% - 0.5px),
+        rgba(255, 255, 255, 0.055) calc(25% + 0.5px),
+        transparent calc(25% + 0.5px)
+      );
   }
 
   .contact-cta-wrapper {
@@ -508,7 +519,7 @@ main {
     }
   }
 
-  .copyright-text{
+  .copyright-text {
     font-family: $primary-font-family;
     text-transform: uppercase;
     color: #70707069;
