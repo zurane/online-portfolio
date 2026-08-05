@@ -93,7 +93,7 @@ $global-lt-spacing: -0.05em;
 
 .page-header {
   height: 100vh;
-  background-color: #000000;
+  background-color: $stroke-color;
   position: relative;
   overflow: hidden;
 
@@ -106,26 +106,25 @@ $global-lt-spacing: -0.05em;
     z-index: 1;
     background:
       // Vertical lines
-
       linear-gradient(
         to right,
         transparent calc(25% - 0.5px),
-        rgba(255, 255, 255, 0.055) calc(25% - 0.5px),
-        rgba(255, 255, 255, 0.055) calc(25% + 0.5px),
+        rgba(0, 0, 0, 0.068) calc(25% - 0.5px),
+        rgba(0, 0, 0, 0.068) calc(25% + 0.5px),
         transparent calc(25% + 0.5px)
       ),
       linear-gradient(
         to right,
         transparent calc(50% - 0.5px),
-        rgba(255, 255, 255, 0.055) calc(50% - 0.5px),
-        rgba(255, 255, 255, 0.055) calc(50% + 0.5px),
+        rgba(0, 0, 0, 0.068) calc(50% - 0.5px),
+        rgba(0, 0, 0, 0.068) calc(50% + 0.5px),
         transparent calc(50% + 0.5px)
       ),
       linear-gradient(
         to right,
         transparent calc(75% - 0.5px),
-        rgba(255, 255, 255, 0.055) calc(75% - 0.5px),
-        rgba(255, 255, 255, 0.055) calc(75% + 0.5px),
+        rgba(0, 0, 0, 0.068) calc(75% - 0.5px),
+        rgba(0, 0, 0, 0.068) calc(75% + 0.5px),
         transparent calc(75% + 0.5px)
       );
   }
@@ -133,18 +132,17 @@ $global-lt-spacing: -0.05em;
   .nav-bar {
     position: relative;
     z-index: 2;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 50px;
+    padding: 15px 50px;
 
     .nav-brand {
       text-transform: uppercase;
       font-family: $primary-font-family;
-      font-size: 0.75rem;
-      color: $primary-color;
-      font-weight: 600;
+      font-size: 4rem;
+      color: #000000;
+      font-weight: 900;
       letter-spacing: $global-lt-spacing;
 
       .gray {
@@ -157,8 +155,8 @@ $global-lt-spacing: -0.05em;
       display: inline-flex;
       gap: 15px;
       font-family: $primary-font-family;
-      color: $primary-color;
-      font-size: 0.75rem;
+      color: #000000;
+      font-size: 1rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: $global-lt-spacing;
@@ -172,14 +170,14 @@ $global-lt-spacing: -0.05em;
     bottom: 100px;
     padding: $global-container-padding-x;
 
-    p {
+    .hero-text {
       width: 80%;
-      font-size: 5rem;
+      font-size: 8.5rem;
       font-family: $primary-font-family;
-      font-weight: 500;
+      font-weight: 900;
       line-height: 1.1;
       letter-spacing: $global-lt-spacing;
-      color: $primary-color;
+      color: #000000;
 
       .forward-stroke {
         color: $stroke-color;
@@ -201,7 +199,7 @@ main {
     margin: 0 auto;
     padding: $section-padding;
     border-bottom: 1px solid #ffffff0e;
-    background-color: #000000;
+    background-color: #F7DEEB;
     position: relative;
 
     &::before {
@@ -215,21 +213,21 @@ main {
         linear-gradient(
           to right,
           transparent calc(25% - 0.5px),
-          rgba(255, 255, 255, 0.055) calc(25% - 0.5px),
+          rgba(0, 0, 0, 0.144) calc(25% - 0.5px),
           rgba(255, 255, 255, 0.055) calc(25% + 0.5px),
           transparent calc(25% + 0.5px)
         ),
         linear-gradient(
           to right,
           transparent calc(50% - 0.5px),
-          rgba(255, 255, 255, 0.055) calc(50% - 0.5px),
+          rgba(0, 0, 0, 0.144) calc(50% - 0.5px),
           rgba(255, 255, 255, 0.055) calc(50% + 0.5px),
           transparent calc(50% + 0.5px)
         ),
         linear-gradient(
           to right,
           transparent calc(75% - 0.5px),
-          rgba(255, 255, 255, 0.055) calc(75% - 0.5px),
+          rgba(0, 0, 0, 0) calc(75% - 0.5px),
           rgba(255, 255, 255, 0.055) calc(75% + 0.5px),
           transparent calc(75% + 0.5px)
         );
@@ -248,14 +246,17 @@ main {
       z-index: 2;
     }
     .intro-copy {
+      z-index: 2;
       p {
         font-family: $primary-font-family;
         font-size: 1.3rem;
+        font-weight: 400;
         letter-spacing: $global-lt-spacing;
-        color: #ccc;
+        color: #000000;
         z-index: 2;
       }
       .btn-wrapper {
+        
         display: inline-flex;
         align-items: center;
         gap: 5px;
@@ -300,6 +301,7 @@ main {
     p {
       font-family: $primary-font-family;
       font-size: 13px;
+      font-weight: 400 !important;
       letter-spacing: $global-lt-spacing;
       color: $divider-color;
     }
@@ -353,10 +355,12 @@ main {
       justify-content: center;
       .portfolio-overline {
         color: $divider-color;
+        font-weight: 400;
       }
       .portfolio-description {
         width: 400px;
         padding: 20px 0;
+        font-weight: 500;
         font-size: 1.2rem;
         color: $primary-color;
         margin-bottom: 10px;
@@ -447,6 +451,7 @@ main {
           list-style: none;
           padding: 2px 0;
           font-size: 1.3rem;
+          font-weight: 400;
           font-family: $primary-font-family;
           color: #000000;
         }
@@ -506,6 +511,7 @@ main {
 
       a {
         font-family: $primary-font-family;
+        font-weight: 400;
         color: $primary-color;
         text-decoration: none;
         background-color: #3a3a3a;
