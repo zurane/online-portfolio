@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_outward" />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_forward,arrow_outward" />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./style.scss" />
     <title>m</title>
@@ -24,34 +24,26 @@
             </ul>
         </nav>
         <div class="hero-container">
-            <p class="hero-text reveal">
-                <span class="text-dent">Digital designer and Frontend developer </span>
-                <b>
-            </p>
+            
         </div>
     </header>
     <main>
         <!-- Intro section -->
-        <section class="two-col section-intro">
-            <div class="intro-image reveal reveal-left">
-
-                <img src="./assets/profile-img.jpg" alt="" width="450">
-            </div>
-            <div class="intro-copy reveal reveal-right">
-                <p>
-                    <span class="text-dent">Currently</span>, I’m a Web Designer at One
-                    Design Company, where I bridge the gap between design and
-                    development. In this hybrid design engineering role, I guide
-                    projects from concept to launch — ensuring every interface is
-                    accessible, performant, polished, and delightful to use. Previously,
-                    I was part of the product design team at the Noun Project, where we
-                    laid the foundation for the product and grew the team. Outside of
-                    work, I enjoy exploring Colorado by hiking, snowboarding, and
-                    playing with my chocolate lab, Fern.
-                </p>
-                <div class="btn-wrapper">
-                    <a href="#" class="btn"><span class="material-symbols-outlined">arrow_outward</span> </a>
-                    <a class="btn btn-green" href="#">View resume</a>
+        <section class="section-intro">
+            <div class="intro-inner">
+                <span class="intro-overline reveal">ABOUT</span>
+                <h2 class="intro-headline reveal reveal-stagger-1">
+                    Hi, I’m Mpho — a digital designer and frontend developer crafting clear, thoughtful
+                    experiences across digital products, websites, and visual systems.
+                </h2>
+                <div class="intro-body">
+                    <div class="intro-aside reveal reveal-stagger-2">
+                        
+                        <a href="#" class="intro-link">More about me <span class="material-symbols-outlined">arrow_forward</span></a>
+                    </div>
+                    <div class="intro-image reveal reveal-right">
+                        <img src="./assets/profile-img.jpg" alt="Portrait of Mpho Lebona" width="424" height="547" />
+                    </div>
                 </div>
             </div>
         </section>
@@ -65,59 +57,53 @@
         </section>
         <!-- portfolio cards -->
         <section class="porfolio-grid">
-            <div class="portfolio reveal reveal-stagger-1">
-                <div></div>
-
-                <div class="portfolio-content">
-                    <span class="portfolio-overline">Node.js / Express / MongoDB / React / Rest API / Tailwindcss</span>
-                    <p class="portfolio-description">
-                        A full backend application to track and manage subscriptions with with real users, real money,
-                        and real business logic.
-                    </p>
+            <article class="portfolio reveal reveal-stagger-1">
+                <a href="./portfolio/subscription-manager.html" class="portfolio-media">
+                    <img src="https://res.cloudinary.com/dcphsyjhi/image/upload/v1785851611/venus_s3gcxp.jpg" alt="Subscription Tracker project cover" loading="lazy" />
+                </a>
+                <div class="portfolio-bar">
+                    <div class="portfolio-heading">
+                        <h3 class="portfolio-title">Subscription Tracker</h3>
+                        <span class="portfolio-overline">Node.js / Express / MongoDB / React / Rest API / Tailwindcss</span>
+                    </div>
                     <div class="btn-wrapper">
-                        <a href="#" class="btn"><span class="material-symbols-outlined">arrow_outward</span> </a>
-                        <a href="#" class="btn btn-green"><span>Learn more</span> </a>
+                        <a href="./portfolio/subscription-manager.html" class="btn" aria-label="Open Subscription Tracker"><span class="material-symbols-outlined">arrow_outward</span></a>
+                        <a href="./portfolio/subscription-manager.html" class="btn btn-green"><span>Learn more</span></a>
                     </div>
                 </div>
-                <img src="https://res.cloudinary.com/dcphsyjhi/image/upload/v1785851611/venus_s3gcxp.jpg" alt=""
-                    width="500" />
-            </div>
+            </article>
 
-            <div class="portfolio reveal reveal-stagger-2">
-                <div></div>
-
-                <div class="portfolio-content">
-                    <span class="portfolio-overline">React / Postgresql / node.js / Rest API / Algolia / UI/UX </span>
-                    <p class="portfolio-description">
-                        A vehicle troubleshooting web app designed to reduce driver anxiety. Symptom-based search,
-                        delivering instant, vehicle-specific DIY tutorials
-                        and smart escalation to local mechanics
-                    </p>
+            <article class="portfolio reveal reveal-stagger-2">
+                <a href="#" class="portfolio-media">
+                    <img src="https://res.cloudinary.com/dcphsyjhi/image/upload/v1785849009/car-and-diy-project-cover_dd7rnp.jpg" alt="Car &amp; DIY project cover" loading="lazy" />
+                </a>
+                <div class="portfolio-bar">
+                    <div class="portfolio-heading">
+                        <h3 class="portfolio-title">Car &amp; DIY</h3>
+                        <span class="portfolio-overline">React / Postgresql / Node.js / Rest API / Algolia / UI/UX</span>
+                    </div>
                     <div class="btn-wrapper">
-                        <a href="#" class="btn"><span class="material-symbols-outlined">arrow_outward</span> </a>
-                        <a href="#" class="btn btn-green"><span>Learn more</span> </a>
+                        <a href="#" class="btn" aria-label="Open Car &amp; DIY"><span class="material-symbols-outlined">arrow_outward</span></a>
+                        <a href="#" class="btn btn-green"><span>Learn more</span></a>
                     </div>
                 </div>
-                <img src="https://res.cloudinary.com/dcphsyjhi/image/upload/v1785849009/car-and-diy-project-cover_dd7rnp.jpg"
-                    alt="" width="500" />
-            </div>
+            </article>
 
-            <div class="portfolio reveal reveal-stagger-3">
-                <div></div>
-                <div class="portfolio-content">
-                    <span class="portfolio-overline">Landing page / HTML5 / CSS3 / Vanilla JS / Responsive</span>
-                    <p class="portfolio-description">
-                        A learner development organization focused on nurturing confident, self-aware, and values-driven
-                        young leaders through experiential and learner-centered programmes.
-                    </p>
+            <article class="portfolio reveal reveal-stagger-3">
+                <a href="#" class="portfolio-media">
+                    <img src="./assets/khuphuka-snapshot.jpg" alt="Khuphuka project cover" loading="lazy" />
+                </a>
+                <div class="portfolio-bar">
+                    <div class="portfolio-heading">
+                        <h3 class="portfolio-title">Khuphuka</h3>
+                        <span class="portfolio-overline">Landing page / HTML5 / CSS3 / Vanilla JS / Responsive</span>
+                    </div>
                     <div class="btn-wrapper">
-                        <a href="#" class="btn"><span class="material-symbols-outlined">arrow_outward</span> </a>
-                        <a href="#" class="btn btn-green"><span>Learn more</span> </a>
+                        <a href="#" class="btn" aria-label="Open Khuphuka"><span class="material-symbols-outlined">arrow_outward</span></a>
+                        <a href="#" class="btn btn-green"><span>Learn more</span></a>
                     </div>
                 </div>
-                <img src="./assets/khuphuka-snapshot.jpg" alt="" width="500" />
-            </div>
-
+            </article>
         </section>
 
         <section class="section-skills reveal">
@@ -199,6 +185,7 @@
         </section>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
     <script src="scripts.js"></script>
 </body>
 <!-- <footer>
