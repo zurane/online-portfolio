@@ -87,8 +87,53 @@ function initSmoothScroll() {
 }
 
 // ---------------------------------------------------------------------------
+// Scroll blur on project covers
+// Each cover starts blurred and sharpens as it travels up into the viewport.
+// Progress 0 = image top at the bottom edge, 1 = image top 55% of the way up.
+// ---------------------------------------------------------------------------
+function initScrollBlur(lenis) {
+    const covers = document.querySelectorAll('.portfolio-media');
+    if (!covers.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        covers.forEach((el) => {
+            el.style.setProperty('--blur', '0px');
+            el.style.setProperty('--blur-scale', '1');
+        });
+        return;
+    }
+
+    const MAX_BLUR = 14;   // px at progress 0
+    const TRAVEL = 0.55;   // fraction of viewport height over which the blur clears
+    let ticking = false;
+
+    function update() {
+        ticking = false;
+        const vh = window.innerHeight;
+        covers.forEach((el) => {
+            const top = el.getBoundingClientRect().top;
+            const progress = Math.min(1, Math.max(0, (vh - top) / (vh * TRAVEL)));
+            // ease-out so the last bit of blur lingers then clears softly
+            const eased = 1 - Math.pow(1 - progress, 2);
+            el.style.setProperty('--blur', ((1 - eased) * MAX_BLUR).toFixed(2) + 'px');
+            el.style.setProperty('--blur-scale', (1 + (1 - eased) * 0.06).toFixed(4));
+        });
+    }
+
+    function request() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+    }
+
+    if (lenis) lenis.on('scroll', request);
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', request);
+    update();
+}
+
+// ---------------------------------------------------------------------------
 // Preloader
-// Counts 0% -> 100% over a minimum duration, waits for window load, then fades
+// Runs the label sequence over a minimum duration, waits for window load, then wipes
 // the overlay upward and fires "preloader:done".
 // ---------------------------------------------------------------------------
 function initPreloader() {
@@ -137,7 +182,7 @@ function initPreloader() {
         let progress = easeOutCubic(t) * 100;
         if (!loaded) progress = Math.min(progress, HOLD_AT);
 
-        countEl.textContent = Math.round(progress) + '%';
+        if (countEl) countEl.textContent = Math.round(progress) + '%';
         if (barEl) barEl.style.transform = `scaleX(${progress / 100})`;
 
         if (progress >= 100 && loaded) {
@@ -156,9 +201,17 @@ function initPreloader() {
             html.classList.remove('is-loading');
             document.dispatchEvent(new CustomEvent('preloader:done'));
 
-            const remove = () => preloader.remove();
-            preloader.addEventListener('transitionend', remove, { once: true });
-            setTimeout(remove, 1500); // safety net if transitionend never fires
+            let removed = false;
+            const remove = () => {
+                if (removed) return;
+                removed = true;
+                preloader.remove();
+            };
+            // Only the panel's own wipe counts; child opacity transitions bubble up too
+            preloader.addEventListener('transitionend', (event) => {
+                if (event.target === preloader) remove();
+            });
+            setTimeout(remove, 2000); // safety net if transitionend never fires
         }, reduceMotion ? 0 : 250);
     }
 
@@ -174,6 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('preloader:done', () => {
         if (lenis) lenis.start();
         initReveal();
+        initScrollBlur(lenis);
     }, { once: true });
 
     initPreloader();
