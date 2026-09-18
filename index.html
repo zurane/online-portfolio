@@ -12,15 +12,21 @@
 </head>
 
 <body>
+    <!-- Page preloader (removed from the DOM once the page has loaded) -->
+    <div class="preloader" id="preloader" aria-hidden="true">
+        <div class="preloader-spinner">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="preloader-label" id="preloaderLabel">Please wait...</div>
+        <div class="preloader-count"><span id="preloaderCount">0%</span></div>
+    </div>
     <header class="page-header">
         <nav class="nav-bar">
-            <div class="nav-brand">
-                ₼
-            </div>
+            <a href="#" class="nav-brand" aria-label="Back to top">₼</a>
             <ul class="nav-links">
-                <li>About</li>
-                /
-                <li>Work</li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#work">Work</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
         <div class="hero-container">
@@ -29,10 +35,10 @@
     </header>
     <main>
         <!-- Intro section -->
-        <section class="section-intro">
+        <section class="section-intro" id="about">
             <div class="intro-inner">
                 <span class="intro-overline reveal">ABOUT</span>
-                <h2 class="intro-headline reveal reveal-stagger-1">
+                <h2 class="intro-headline reveal text-reveal" data-split="words">
                     Hi, I’m Mpho — a digital designer and frontend developer crafting clear, thoughtful
                     experiences across digital products, websites, and visual systems.
                 </h2>
@@ -48,7 +54,7 @@
             </div>
         </section>
         <!-- Portfolio section -->
-        <section class="two-col section-portfolio">
+        <section class="two-col section-portfolio" id="work">
             <div>
                 <h2>PROJECTS & PORTFOLIO</h2>
             </div>
@@ -79,7 +85,7 @@
                 </a>
                 <div class="portfolio-bar">
                     <div class="portfolio-heading">
-                        <h3 class="portfolio-title">Car &amp; DIY</h3>
+                        <h3 class="portfolio-title">Car DIY</h3>
                         <span class="portfolio-overline">React / Postgresql / Node.js / Rest API / Algolia / UI/UX</span>
                     </div>
                     <div class="btn-wrapper">
@@ -169,7 +175,7 @@
             </div>
 
         </section>
-        <section class="section-contact">
+        <section class="section-contact" id="contact">
             <div class="contact-cta-wrapper reveal">
                 <div class="contact-chip">
                     <img src="./assets/portfolio-img-placeholder.jpg" alt="" width="58">
@@ -181,36 +187,13 @@
                     <a href="mailto:hola.mpho@gmail.com">Behance</a>
                 </div>
             </div>
-            <p class="copyright-text">Handcrafted digitally by Mpho Lebona © 2026. All rights reserved.</p>
+            <p class="copyright-text">© 2026. All rights reserved.</p>
         </section>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
     <script src="scripts.js"></script>
 </body>
-<!-- <footer>
-    <div class="footer-container">
-        <div class="footer-content-wrapper">
-            <div>
-                Mpho Lebona
-            </div>
 
-            <div class="footer-content-right">
-               <div class="row">
-                 <h5>Contact</h5>
-                 <p>Hello@mpholebona.co.za</p>
-               </div>
-               <div class="row">
-                <h5>Follow</h5>
-                <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-               </div>
-            </div>
-        </div>
-    </div>
-</footer> -->
 
 </html>

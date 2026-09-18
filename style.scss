@@ -89,6 +89,49 @@ $portfolio-gutter: 20px;
   }
 }
 
+// Word-by-word text reveal (markup built by splitWords() in scripts.js)
+.text-reveal {
+  &.reveal {
+    opacity: 1;
+    will-change: auto;
+  }
+  &.revealed {
+    animation: none;
+  }
+
+  .word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    // leave room for descenders inside the clip box
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+  }
+
+  .word-inner {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(110%);
+    transition:
+      transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.5s ease;
+    transition-delay: calc(var(--i, 0) * 45ms);
+  }
+
+  &.revealed .word-inner {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-reveal .word-inner {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -136,15 +179,19 @@ $portfolio-gutter: 20px;
   .nav-bar {
     position: relative;
     z-index: 2;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     align-items: center;
-    padding: 15px 50px;
+    padding: 15px 0;
 
     .nav-brand {
+      justify-self: start;
+      padding-left: 50px;
+      text-decoration: none;
+      line-height: 1;
       text-transform: uppercase;
       font-family: $primary-font-family;
-      font-size: 4rem;
+      font-size: 2rem;
       color: #000000;
       font-weight: 900;
       letter-spacing: $global-lt-spacing;
@@ -155,16 +202,50 @@ $portfolio-gutter: 20px;
       }
     }
 
+    // One link centred in each of the header's three right-hand columns
     .nav-links {
-      display: inline-flex;
-      gap: 15px;
+      grid-column: 2 / -1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
+      margin: 0;
+      padding: 0;
       font-family: $primary-font-family;
-      color: #000000;
-      font-size: 1rem;
+      font-size: 0.850rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: $global-lt-spacing;
       list-style: none;
+
+      li {
+        text-align: center;
+      }
+
+      a {
+        position: relative;
+        display: inline-block;
+        padding: 4px 0;
+        color: #000000;
+        text-decoration: none;
+
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 1.5px;
+          background-color: currentColor;
+          transform: scaleX(0);
+          transform-origin: left center;
+          transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        &:hover::after,
+        &:focus-visible::after {
+          transform: scaleX(1);
+        }
+      }
     }
   }
 
@@ -583,29 +664,23 @@ main {
   padding: 250px 0;
   margin: auto 0;
 
-  &::before {
+  // Vertical guide lines on the same edges as the portfolio card column
+  &::before,
+  &::after {
     content: "";
     position: absolute;
-    inset: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #ffffff0e;
     pointer-events: none;
     z-index: 1;
-    background:
-      // Vertical lines
-
-      linear-gradient(
-        to right,
-        transparent calc(25% - 0.5px),
-        rgba(255, 255, 255, 0.055) calc(25% - 0.5px),
-        rgba(255, 255, 255, 0.055) calc(25% + 0.5px),
-        transparent calc(25% + 0.5px)
-      ),
-      linear-gradient(
-        to left,
-        transparent calc(25% - 0.5px),
-        rgba(255, 255, 255, 0.055) calc(25% - 0.5px),
-        rgba(255, 255, 255, 0.055) calc(25% + 0.5px),
-        transparent calc(25% + 0.5px)
-      );
+  }
+  &::before {
+    left: max($portfolio-gutter, calc((100% - #{$portfolio-column}) / 2));
+  }
+  &::after {
+    right: max($portfolio-gutter, calc((100% - #{$portfolio-column}) / 2));
   }
 
   .contact-cta-wrapper {
@@ -675,7 +750,19 @@ footer {
 @media (max-width: 700px) {
   .page-header {
     .nav-bar {
-      padding: 25px 20px;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 20px;
+    }
+    .nav-brand {
+      padding-left: 0;
+      font-size: 2.5rem;
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      width: auto;
+      font-size: 0.9rem;
     }
   }
   main {
@@ -820,4 +907,106 @@ html.lenis body {
 }
 .lenis.lenis-stopped {
   overflow: hidden;
+}
+
+// ---------------------------------------------------------------------------
+// Page preloader
+// ---------------------------------------------------------------------------
+html.is-loading {
+  overflow: hidden;
+}
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  background-color: #000000;
+  color: $primary-color;
+  font-family: $primary-font-family;
+  transition: opacity 0.6s ease;
+  will-change: opacity;
+
+  // Windows-style boot spinner: six dots orbiting a circle with staggered timing
+  .preloader-spinner {
+    position: relative;
+    width: 44px;
+    height: 44px;
+
+    span {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      margin-left: -2.5px;
+      border-radius: 50%;
+      background-color: $primary-color;
+      opacity: 0;
+      transform-origin: 50% 22px;
+      animation: preloaderOrbit 2.4s cubic-bezier(0.5, 0.05, 0.5, 0.95) infinite;
+
+      @for $i from 1 through 6 {
+        &:nth-child(#{$i}) {
+          animation-delay: ($i - 1) * 0.13s;
+        }
+      }
+    }
+  }
+
+  .preloader-label {
+    margin-top: 12px;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: $primary-color;
+    transition: opacity 0.2s ease;
+
+    &.is-swapping {
+      opacity: 0;
+    }
+  }
+
+  .preloader-count {
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: $divider-color;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &.is-done {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes preloaderOrbit {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 1;
+  }
+  86%,
+  100% {
+    transform: rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader .preloader-spinner span {
+    animation: none;
+    opacity: 1;
+    transform: rotate(calc(var(--i, 0) * 60deg));
+  }
 }
