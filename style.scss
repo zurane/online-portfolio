@@ -139,7 +139,7 @@ $portfolio-gutter: 20px;
 }
 
 .page-header {
-  height: 25vh;
+  height: 10vh;
   position: relative;
   overflow: hidden;
   background-color: $primary-color;
@@ -199,6 +199,48 @@ $portfolio-gutter: 20px;
       .gray {
         color: $stroke-color;
         font-weight: 700;
+      }
+    }
+
+    // Hamburger — only shown on small screens (see the 700px media query)
+    .nav-toggle {
+      display: none;
+      position: relative;
+      width: 44px;
+      height: 44px;
+      margin-left: auto;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+
+      .nav-toggle-bar {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 22px;
+        height: 2px;
+        background-color: #000000;
+        border-radius: 2px;
+        transform-origin: center;
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+
+        &:first-child {
+          transform: translate(-50%, calc(-50% - 4px));
+        }
+        &:last-child {
+          transform: translate(-50%, calc(-50% + 4px));
+        }
+      }
+
+      &[aria-expanded="true"] .nav-toggle-bar {
+        &:first-child {
+          transform: translate(-50%, -50%) rotate(45deg);
+        }
+        &:last-child {
+          transform: translate(-50%, -50%) rotate(-45deg);
+        }
       }
     }
 
@@ -480,7 +522,7 @@ main {
     .portfolio-title {
       margin: 0;
       font-family: $primary-font-family;
-      font-size: 2rem;
+      font-size: 1.25rem;
       font-weight: 600;
       letter-spacing: $global-lt-spacing;
       color: $primary-color;
@@ -601,62 +643,168 @@ main {
 // Skills section
 .section-skills {
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  height: auto;
-  background-color: #00ec97;
-  padding: 100px 50px;
+  background-color: $stroke-color;
+  padding: 100px max($portfolio-gutter, calc((100% - #{$portfolio-column}) / 2));
 
-  // Vertical guide line on the same edge as the portfolio card column
-  &::before {
+  // Vertical guide lines on the same edges as the portfolio card column
+  &::before,
+  &::after {
     content: "";
     position: absolute;
     top: 0;
     bottom: 0;
-    left: max($portfolio-gutter, calc((100% - #{$portfolio-column}) / 2));
     width: 1px;
     background-color: rgba(0, 0, 0, 0.12);
     pointer-events: none;
     z-index: 1;
   }
-  h3 {
+  &::before {
+    left: max($portfolio-gutter, calc((100% - #{$portfolio-column}) / 2));
+  }
+  &::after {
+    right: max($portfolio-gutter, calc((100% - #{$portfolio-column}) / 2));
+  }
+
+  .skills-inner {
+    padding: 0 32px;
     font-family: $primary-font-family;
-    font-size: $headline-one-size;
-    font-weight: 500px;
-    letter-spacing: $global-lt-spacing;
-    padding: 25px 0;
     color: #000000;
   }
 
-  .skills-section-inner {
+  .skills-overline {
+    display: block;
+    margin-bottom: 40px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .capabilities {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .capability {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  .capability-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    width: 100%;
+    padding: 14px 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    &:focus-visible {
+      outline: 2px solid #000000;
+      outline-offset: 4px;
+    }
+  }
+
+  .capability-name {
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: $global-lt-spacing;
+  }
+
+  // Plus sign built from two bars so it can rotate into a minus
+  .capability-icon {
+    position: relative;
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background-color: rgba(0, 0, 0, 0.55);
+      transform: translate(-50%, -50%);
+      transition: background-color 0.2s ease;
+    }
+    &::before {
+      width: 20px;
+      height: 1.5px;
+    }
+    &::after {
+      width: 1.5px;
+      height: 20px;
+    }
+  }
+
+  .capability-toggle:hover .capability-icon::before,
+  .capability-toggle:hover .capability-icon::after {
+    background-color: #000000;
+  }
+
+  // Collapsible panel: grid-row trick animates height without a fixed max
+  .capability-panel {
     display: grid;
-    grid-template-rows: 2;
-    margin-left: 4em;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 
-    .skills {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 30px;
+    .capability-panel-inner {
+      min-height: 0;
+      overflow: hidden;
+      visibility: hidden;
+      transition: visibility 0s linear 0.45s;
+    }
 
-      h4 {
-        font-family: $primary-font-family;
-        font-size: 1.3rem;
-        font-weight: 300;
-        color: #000000;
-        padding: 25px 0;
-      }
-      .list-wrapper {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        padding: 30px 0;
-        .list li {
-          list-style: none;
-          padding: 2px 0;
-          font-size: 1.3rem;
-          font-weight: 400;
-          font-family: $primary-font-family;
-          color: #000000;
-        }
+    p {
+      max-width: 48ch;
+      margin-bottom: 20px;
+      font-size: 1.15rem;
+      font-weight: 400;
+      line-height: 1.45;
+    }
+  }
+
+  .capability-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 32px;
+    padding: 0;
+    list-style: none;
+
+    li {
+      padding: 6px 14px;
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+  }
+
+  .capability.is-open {
+    .capability-icon {
+      transform: rotate(45deg);
+    }
+
+    .capability-panel {
+      grid-template-rows: 1fr;
+
+      .capability-panel-inner {
+        visibility: visible;
+        transition: visibility 0s linear 0s;
       }
     }
   }
@@ -691,9 +839,13 @@ main {
 
   .contact-cta-wrapper {
     display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     gap: 5px;
+    max-width: 100%;
     margin: auto;
+    padding: 0 20px;
     .contact-chip {
       background: rgba($primary-color, 0.096);
       backdrop-filter: blur(16px);
@@ -713,6 +865,7 @@ main {
         background-color: #3a3a3a;
         padding: 18px;
         border-radius: 15px;
+        white-space: nowrap;
       }
     }
 
@@ -755,21 +908,153 @@ footer {
 
 @media (max-width: 700px) {
   .page-header {
+    // Hide the vertical grid lines on small screens
+    &::before {
+      display: none;
+    }
+
+    // Nested under .nav-bar so these outrank the desktop grid rules above.
+    // On small screens the bar becomes a fixed frosted-glass panel; the links
+    // collapse into a stacked list that drops out beneath the logo row.
     .nav-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
       display: flex;
-      justify-content: space-between;
-      padding: 20px 20px;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 14px 20px;
+      background-color: rgba($primary-color, 0.72);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      backdrop-filter: blur(24px) saturate(1.4);
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+      transition: box-shadow 0.4s ease;
+
+      .nav-brand {
+        padding-left: 0;
+        font-size: 2.5rem;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        flex-basis: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        visibility: hidden;
+        text-transform: none;
+        letter-spacing: -0.03em;
+        font-size: 2.2rem;
+        font-weight: 400;
+        transition:
+          max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+          visibility 0s linear 0.5s;
+
+        li {
+          text-align: left;
+          opacity: 0;
+          transform: translateY(-8px);
+          transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+        }
+
+        a {
+          display: block;
+          padding: 10px 0;
+          color: $divider-color;
+
+          // No underline reveal in the stacked list
+          &::after {
+            display: none;
+          }
+        }
+      }
+
+      &.is-open {
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+
+        .nav-links {
+          max-height: 70vh;
+          visibility: visible;
+          padding: 10px 0 12px;
+          transition:
+            max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+            visibility 0s linear 0s;
+
+          li {
+            opacity: 1;
+            transform: translateY(0);
+          }
+
+          @for $i from 1 through 4 {
+            li:nth-child(#{$i}) {
+              transition-delay: 0.08s + $i * 0.05s;
+            }
+          }
+        }
+      }
     }
-    .nav-brand {
-      padding-left: 0;
-      font-size: 2.5rem;
+  }
+
+  .section-contact {
+    padding: 120px 20px;
+
+    // Hide the vertical guide lines on small screens
+    &::before,
+    &::after {
+      display: none;
     }
-    .nav-links {
+
+    .contact-cta-wrapper {
       display: flex;
-      gap: 20px;
-      width: auto;
-      font-size: 0.9rem;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+      width: 100%;
+      padding: 0;
+
+      .contact-chip {
+        display: flex;
+        width: 100%;
+
+        img {
+          flex: 0 0 58px;
+          width: 58px;
+          height: 58px;
+          object-fit: cover;
+        }
+
+        a {
+          flex: 1 1 0;
+          padding: 18px 12px;
+          text-align: center;
+        }
+      }
     }
+
+    .copyright-text {
+      margin-top: 40px;
+    }
+  }
+
+  // Page can't scroll behind the open menu
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  // Native anchor jumps (no Lenis) land below the fixed bar
+  main [id] {
+    scroll-margin-top: 72px;
   }
   main {
     .section-intro {
@@ -826,7 +1111,7 @@ footer {
         }
 
         .portfolio-title {
-          font-size: 1.25rem;
+          font-size: 1.2rem;
         }
 
         .portfolio-overline {
@@ -850,52 +1135,44 @@ footer {
   }
 
   .section-skills {
-    display: grid;
-    grid-template-columns: 1fr;
-    padding: 50px 20px;
-    gap: 5px;
+    padding: 60px 20px;
 
-    h3 {
-      padding: 0 0 5px 0;
-      font-size: 18px;
+    .skills-inner {
+      padding: 0 12px;
     }
 
-    .skills-section-inner {
-      margin-left: 0;
+    .skills-overline {
+      margin-bottom: 28px;
+    }
 
-      .skills {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 15px;
-        padding: 20px 0;
+    .capability-toggle {
+      padding: 12px 0;
+    }
 
-        h4 {
-          padding: 15px 0;
-          font-size: 1.1rem;
-          grid-column: 1 / -1;
-        }
+    .capability-name {
+      font-size: 2rem;
+    }
 
-        .list-wrapper {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          padding: 10px 0;
+    .capability-icon {
+      width: 16px;
+      height: 16px;
+      margin-right: 4px;
 
-          .list li {
-            font-size: 1rem;
-            padding: 5px 0;
-          }
-        }
+      &::before {
+        width: 16px;
+      }
+      &::after {
+        height: 16px;
       }
     }
-  }
 
-  .contact-chip {
-    img {
-      display: none;
+    .capability-panel p {
+      font-size: 1rem;
+      margin-bottom: 16px;
     }
 
-    a {
-      font-size: 12px;
+    .capability-tags {
+      margin-bottom: 24px;
     }
   }
 }
@@ -1009,6 +1286,22 @@ html.is-loading {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .section-skills {
+    .capability-icon,
+    .capability-panel,
+    .capability-panel-inner {
+      transition: none !important;
+    }
+  }
+
+  .page-header .nav-bar {
+    .nav-toggle-bar,
+    .nav-links,
+    .nav-links li {
+      transition: none !important;
+    }
+  }
+
   .preloader {
     transition: opacity 0.3s ease;
 

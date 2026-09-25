@@ -22,7 +22,12 @@
     <header class="page-header">
         <nav class="nav-bar">
             <a href="#" class="nav-brand" aria-label="Back to top">₼</a>
-            <ul class="nav-links">
+            <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false"
+                aria-controls="navLinks">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#about">About</a></li>
                 <li><a href="#work">Work</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -36,7 +41,7 @@
         <!-- Intro section -->
         <section class="section-intro" id="about">
             <div class="intro-inner">
-                <span class="intro-overline reveal">ABOUT</span>
+                <span class="intro-overline reveal"></span>
                 <h2 class="intro-headline reveal text-reveal" data-split="words">
                     Hi, I’m Mpho — a digital designer and frontend developer crafting clear, thoughtful
                     experiences across digital products, websites, and visual systems.
@@ -64,7 +69,7 @@
         <section class="porfolio-grid">
             <article class="portfolio reveal reveal-stagger-1">
                 <a href="./portfolio/subscription-manager.html" class="portfolio-media">
-                    <img src="https://res.cloudinary.com/dcphsyjhi/image/upload/v1785851611/venus_s3gcxp.jpg" alt="Subscription Tracker project cover" loading="lazy" />
+                    <img src="https://res.cloudinary.com/dcphsyjhi/image/upload/v1790337310/crowd-43586-16x9_oqlhgh.png" alt="Subscription Tracker project cover" loading="lazy" />
                 </a>
                 <div class="portfolio-bar">
                     <div class="portfolio-heading">
@@ -80,7 +85,7 @@
 
             <article class="portfolio reveal reveal-stagger-2">
                 <a href="#" class="portfolio-media">
-                    <img src="https://res.cloudinary.com/dcphsyjhi/image/upload/v1785849009/car-and-diy-project-cover_dd7rnp.jpg" alt="Car &amp; DIY project cover" loading="lazy" />
+                    <img src="https://res.cloudinary.com/dcphsyjhi/image/upload/v1790337310/cipher-84799-16x9_e0qjtq.png" alt="Car &amp; DIY project cover" loading="lazy" />
                 </a>
                 <div class="portfolio-bar">
                     <div class="portfolio-heading">
@@ -96,7 +101,7 @@
 
             <article class="portfolio reveal reveal-stagger-3">
                 <a href="#" class="portfolio-media">
-                    <img src="./assets/khuphuka-snapshot.jpg" alt="Khuphuka project cover" loading="lazy" />
+                    <img src="https://res.cloudinary.com/dcphsyjhi/image/upload/v1790337577/sear-41793-16x9_n5wa52.png" alt="Khuphuka project cover" loading="lazy" />
                 </a>
                 <div class="portfolio-bar">
                     <div class="portfolio-heading">
@@ -111,68 +116,109 @@
             </article>
         </section>
 
-        <section class="section-skills reveal">
-            <h3>
-                Capabilities
-            </h3>
-
-            <div class="skills-section-inner">
-
-                <div class="rows">
-
-                    <div class="skills border reveal reveal-stagger-1">
-                        <h4>Creative</h4>
-                        <div class="list-wrapper">
-                            <ul class="list">
-                                <li>Interface design</li>
-                                <li>User Experience</li>
-                                <li>Web development</li>
-                                <li>Brand Identity</li>
-                                <li>Web design</li>
-                                <li>Digital</li>
-                            </ul>
-                            <ul class="list">
-                                <li>Figma / Figjam</li>
-                                <li>Webflow</li>
-                                <li>Illustrator</li>
-                                <li>Photoshop</li>
-                                <li>Gemini</li>
-                                <li>Google stitch</li>
-                            </ul>
+        <section class="section-skills" id="capabilities">
+            <div class="skills-inner">
+                <span class="skills-overline reveal">Specialty &amp; Capabilities</span>
+                <ul class="capabilities">
+                    <li class="capability reveal reveal-stagger-1">
+                        <button class="capability-toggle" type="button" aria-expanded="false" aria-controls="capability-1">
+                            <span class="capability-name">Experience design</span>
+                            <span class="capability-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="capability-panel" id="capability-1">
+                            <div class="capability-panel-inner">
+                                <p>Research-led flows and journeys that make products feel obvious.</p>
+                                <ul class="capability-tags">
+                                    <li>User experience</li>
+                                    <li>Figma / Figjam</li>
+                                    <li>Google Stitch</li>
+                                    <li>Trello / Notion</li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div class="skills reveal reveal-stagger-2">
-                        <h4>Technical</h4>
-                        <div class="list-wrapper">
-                            <ul class="list">
-                                <li>Javascript</li>
-                                <li>Node.js</li>
-                                <li>Express</li>
-                                <li>React</li>
-                                <li>Mongo DB</li>
-                                <li>Postgresql</li>
-                                <li>Prisma ORM</li>
-                                <li>Rest API</li>
-                                <li>CSS / SCSS</li>
-                                <li>Tailwindcss</li>
-                                <li>HTML5</li>
-                            </ul>
-                            <ul class="list">
-                                <li>VS Code</li>
-                                <li>Postman</li>
-                                <li>Git & Github</li>
-                                <li>Vite / NPM</li>
-                                <li>Netlify / Vercel</li>
-                                <li>Codex</li>
-                                <li>Claude</li>
-                                <li>Trello / Notion</li>
-                            </ul>
+                    </li>
+                    <li class="capability reveal reveal-stagger-2">
+                        <button class="capability-toggle" type="button" aria-expanded="false" aria-controls="capability-2">
+                            <span class="capability-name">Web development</span>
+                            <span class="capability-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="capability-panel" id="capability-2">
+                            <div class="capability-panel-inner">
+                                <p>Fast, accessible front ends backed by clean APIs and data.</p>
+                                <ul class="capability-tags">
+                                    <li>JavaScript</li>
+                                    <li>React</li>
+                                    <li>Node.js</li>
+                                    <li>Express</li>
+                                    <li>PostgreSQL</li>
+                                    <li>MongoDB</li>
+                                    <li>Prisma ORM</li>
+                                    <li>REST API</li>
+                                    <li>HTML5</li>
+                                    <li>CSS / SCSS</li>
+                                    <li>Tailwind CSS</li>
+                                    <li>Vite / NPM</li>
+                                    <li>Git &amp; GitHub</li>
+                                    <li>Netlify / Vercel</li>
+                                    <li>VS Code</li>
+                                    <li>Postman</li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-
-                </div>
+                    </li>
+                    <li class="capability reveal reveal-stagger-3">
+                        <button class="capability-toggle" type="button" aria-expanded="false" aria-controls="capability-3">
+                            <span class="capability-name">Interface design</span>
+                            <span class="capability-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="capability-panel" id="capability-3">
+                            <div class="capability-panel-inner">
+                                <p>Clear, consistent screens and component systems built to ship.</p>
+                                <ul class="capability-tags">
+                                    <li>Interface design</li>
+                                    <li>Web design</li>
+                                    <li>Figma</li>
+                                    <li>Webflow</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="capability reveal reveal-stagger-4">
+                        <button class="capability-toggle" type="button" aria-expanded="false" aria-controls="capability-4">
+                            <span class="capability-name">Identity design</span>
+                            <span class="capability-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="capability-panel" id="capability-4">
+                            <div class="capability-panel-inner">
+                                <p>Marks, type and colour systems that hold up across every touchpoint.</p>
+                                <ul class="capability-tags">
+                                    <li>Brand identity</li>
+                                    <li>Illustrator</li>
+                                    <li>Photoshop</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="capability reveal reveal-stagger-5">
+                        <button class="capability-toggle" type="button" aria-expanded="false" aria-controls="capability-5">
+                            <span class="capability-name">Digital design</span>
+                            <span class="capability-icon" aria-hidden="true"></span>
+                        </button>
+                        <div class="capability-panel" id="capability-5">
+                            <div class="capability-panel-inner">
+                                <p>Layouts, motion and content for the web, prototyped with modern tools.</p>
+                                <ul class="capability-tags">
+                                    <li>Digital</li>
+                                    <li>Webflow</li>
+                                    <li>Gemini</li>
+                                    <li>Codex</li>
+                                    <li>Claude</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
-
         </section>
         <section class="section-contact" id="contact">
             <div class="contact-cta-wrapper reveal">

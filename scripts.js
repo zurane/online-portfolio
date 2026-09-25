@@ -71,6 +71,15 @@ function initSmoothScroll() {
     }
     requestAnimationFrame(raf);
 
+    // On small screens the nav bar is fixed, so targets need to land below it.
+    // Measured as the logo row only (bar height minus the dropdown list).
+    function fixedHeaderHeight() {
+        const bar = document.querySelector('.nav-bar');
+        if (!bar || getComputedStyle(bar).position !== 'fixed') return 0;
+        const list = bar.querySelector('.nav-links');
+        return Math.round(bar.offsetHeight - (list ? list.offsetHeight : 0));
+    }
+
     // Route same-page anchor links through Lenis so they glide instead of jump
     document.querySelectorAll('a[href^="#"]').forEach((link) => {
         link.addEventListener('click', (event) => {
@@ -79,7 +88,7 @@ function initSmoothScroll() {
             const target = document.querySelector(hash);
             if (!target) return;
             event.preventDefault();
-            lenis.scrollTo(target, { offset: 0 });
+            lenis.scrollTo(target, { offset: -fixedHeaderHeight() });
         });
     });
 
@@ -219,8 +228,85 @@ function initPreloader() {
 }
 
 // ---------------------------------------------------------------------------
+// Mobile menu
+// The hamburger toggles an `is-open` class on the nav bar; CSS does the rest.
+function initMobileNav() {
+    const navBar = document.querySelector('.nav-bar');
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    if (!navBar || !toggle || !links) return;
+
+    const mobile = window.matchMedia('(max-width: 700px)');
+
+    function setOpen(open) {
+        navBar.classList.toggle('is-open', open);
+        document.body.classList.toggle('menu-open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        if (window.lenis) {
+            if (open) window.lenis.stop();
+            else window.lenis.start();
+        }
+    }
+
+    const isOpen = () => navBar.classList.contains('is-open');
+
+    toggle.addEventListener('click', () => setOpen(!isOpen()));
+
+    // Tapping a link closes the menu before the page scrolls. Capture phase so
+    // Lenis is restarted before the anchor's own scrollTo handler runs —
+    // Lenis silently drops scroll requests while it is stopped.
+    links.addEventListener('click', (event) => {
+        if (event.target.closest('a')) setOpen(false);
+    }, true);
+
+    // Tap outside the panel
+    document.addEventListener('click', (event) => {
+        if (isOpen() && !navBar.contains(event.target)) setOpen(false);
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && isOpen()) {
+            setOpen(false);
+            toggle.focus();
+        }
+    });
+
+    // Leaving the mobile breakpoint resets everything
+    mobile.addEventListener('change', (event) => {
+        if (!event.matches && isOpen()) setOpen(false);
+    });
+}
+
+// ---------------------------------------------------------------------------
+// Capabilities accordion
+// One row open at a time; CSS animates the panel via grid-template-rows.
+function initCapabilities() {
+    const rows = Array.from(document.querySelectorAll('.capability'));
+    if (!rows.length) return;
+
+    function setOpen(row, open) {
+        row.classList.toggle('is-open', open);
+        const toggle = row.querySelector('.capability-toggle');
+        if (toggle) toggle.setAttribute('aria-expanded', String(open));
+    }
+
+    rows.forEach((row) => {
+        const toggle = row.querySelector('.capability-toggle');
+        if (!toggle) return;
+        toggle.addEventListener('click', () => {
+            const willOpen = !row.classList.contains('is-open');
+            rows.forEach((other) => { if (other !== row) setOpen(other, false); });
+            setOpen(row, willOpen);
+        });
+    });
+}
+
+// ---------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     splitWords();
+    initMobileNav();
+    initCapabilities();
     const lenis = initSmoothScroll();
     if (lenis) lenis.stop(); // no scrolling while the preloader is up
 
