@@ -279,34 +279,53 @@ function initMobileNav() {
 }
 
 // ---------------------------------------------------------------------------
-// Capabilities accordion
-// One row open at a time; CSS animates the panel via grid-template-rows.
-function initCapabilities() {
-    const rows = Array.from(document.querySelectorAll('.capability'));
-    if (!rows.length) return;
+// Portfolio filter tabs
+// Each tab carries data-filter; each card lists its categories in data-category
+// (space separated). Cards that match replay the reveal animation so a filter
+// change feels like a fresh load, and the header count tracks what is visible.
+function initPortfolioTabs() {
+    const tabs = Array.from(document.querySelectorAll('.portfolio-tab'));
+    const cards = Array.from(document.querySelectorAll('.portfolio-list .portfolio'));
+    const count = document.querySelector('.portfolio-count');
+    const empty = document.querySelector('.portfolio-empty');
+    if (!tabs.length || !cards.length) return;
 
-    function setOpen(row, open) {
-        row.classList.toggle('is-open', open);
-        const toggle = row.querySelector('.capability-toggle');
-        if (toggle) toggle.setAttribute('aria-expanded', String(open));
+    function apply(filter, animate) {
+        let shown = 0;
+        cards.forEach((card) => {
+            const tags = (card.dataset.category || '').split(/\s+/);
+            const match = filter === 'all' || tags.includes(filter);
+            card.classList.toggle('is-filtered-out', !match);
+            if (!match) return;
+            if (animate) {
+                card.classList.remove('revealed');
+                card.style.animationDelay = (shown * 70) + 'ms';
+                void card.offsetWidth; // force reflow so the animation restarts
+                card.classList.add('revealed');
+            }
+            shown += 1;
+        });
+        if (count) count.textContent = '(' + shown + ')';
+        if (empty) empty.hidden = shown > 0;
     }
 
-    rows.forEach((row) => {
-        const toggle = row.querySelector('.capability-toggle');
-        if (!toggle) return;
-        toggle.addEventListener('click', () => {
-            const willOpen = !row.classList.contains('is-open');
-            rows.forEach((other) => { if (other !== row) setOpen(other, false); });
-            setOpen(row, willOpen);
+    tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+            if (tab.getAttribute('aria-pressed') === 'true') return;
+            tabs.forEach((other) => other.setAttribute('aria-pressed', String(other === tab)));
+            apply(tab.dataset.filter || 'all', true);
         });
     });
+
+    const active = tabs.find((tab) => tab.getAttribute('aria-pressed') === 'true') || tabs[0];
+    apply(active.dataset.filter || 'all', false);
 }
 
 // ---------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     splitWords();
     initMobileNav();
-    initCapabilities();
+    initPortfolioTabs();
     const lenis = initSmoothScroll();
     if (lenis) lenis.stop(); // no scrolling while the preloader is up
 
