@@ -719,7 +719,16 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
 }
 
 .page-header--dark {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: visible;
   background-color: #0a0a0a;
+}
+.page-header--dark .nav-bar {
+  flex: 0 0 auto;
 }
 .page-header--dark .nav-bar .nav-brand,
 .page-header--dark .nav-bar .nav-links a {
@@ -727,6 +736,29 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
 }
 .page-header--dark .nav-bar .nav-toggle .nav-toggle-bar {
   background-color: #faf9f5;
+}
+.page-header--dark .case-hero {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px clamp(50px, 7.15vw, 103px);
+  background-color: #dbf4ff;
+}
+.page-header--dark .case-hero-text {
+  max-width: 880px;
+  font-family: "Hedvig Letters Serif", Georgia, serif;
+  font-size: clamp(1.35rem, 2.15vw, 1.95rem);
+  font-weight: 400;
+  line-height: 1.32;
+  letter-spacing: -0.01em;
+  color: #0a0a0a;
+  text-wrap: pretty;
+}
+.page-header--dark .case-hero-mark {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
 }
 
 .case-study {
@@ -736,50 +768,34 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
 }
 .case-study .case-intro {
   padding-top: clamp(80px, 8.3vw, 120px);
-  padding-right: clamp(0px, 6.25vw, 90px);
+}
+.case-study .case-intro-inner {
+  padding-left: 39.6%;
 }
 .case-study .case-headline {
-  margin-bottom: clamp(64px, 8.75vw, 126px);
-  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  max-width: 745px;
+  margin-bottom: 64px;
+  font-size: clamp(2.25rem, 4vw, 3.625rem);
   font-weight: 700;
-  line-height: 1.12;
+  line-height: 1.14;
   letter-spacing: -0.05em;
-  text-align: justify;
   color: #2e2e2e;
 }
-.case-study .case-intro-body {
-  display: grid;
-  grid-template-columns: 31.25vw minmax(0, 1fr);
-  column-gap: 12.25vw;
-  align-items: start;
-  margin-left: calc(-1 * clamp(50px, 7.15vw, 103px));
-}
-.case-study .case-intro-image {
-  aspect-ratio: 25/22;
-  overflow: hidden;
-  background-color: #1f1f1f;
-}
-.case-study .case-intro-image img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 30% 50%;
-}
 .case-study .case-copy {
-  max-width: 766px;
-  font-size: 1.125rem;
-  line-height: 1.55;
+  max-width: 640px;
+  font-size: 1.35rem;
+  line-height: 1.35;
   letter-spacing: -0.02em;
-}
-.case-study .case-copy .case-copy-title {
-  margin-bottom: 26px;
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.4;
 }
 .case-study .case-copy p + p {
   margin-top: 28px;
+}
+.case-study .case-copy-title {
+  margin-top: 64px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
 }
 .case-study .case-link {
   color: inherit;
@@ -799,8 +815,8 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
 .case-study .case-showcase {
   display: grid;
   grid-template-columns: minmax(0, 338fr) minmax(0, 334fr) minmax(0, 388fr);
-  gap: 16px;
-  margin-top: 108px;
+  gap: 12px;
+  margin: 108px calc(-1 * clamp(50px, 7.15vw, 103px)) 0;
 }
 .case-study .case-card {
   display: flex;
@@ -833,7 +849,8 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
 }
 .case-study .case-caption {
   grid-column: 1/-1;
-  margin-top: -8px;
+  margin-top: -4px;
+  padding-right: clamp(50px, 7.15vw, 103px);
   font-size: 12px;
   font-weight: 500;
   line-height: 1.4;
@@ -890,12 +907,12 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
   padding-top: 140px;
 }
 .case-study .case-conclusion-inner {
-  max-width: 930px;
+  max-width: 950px;
   margin: 0 auto;
 }
 .case-study .case-conclusion-label {
   margin-bottom: 8px;
-  font-size: 1.125rem;
+  font-size: 1.115rem;
   font-weight: 500;
   line-height: 1.4;
   letter-spacing: -0.02em;
@@ -903,27 +920,17 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
 }
 .case-study .case-conclusion p {
   font-family: "Hedvig Letters Serif", Georgia, serif;
-  font-size: clamp(1.5rem, 2.25vw, 2rem);
+  font-size: clamp(1.25rem, 2.25vw, 2rem);
   font-weight: 400;
   line-height: 1.32;
   letter-spacing: -0.01em;
   color: #ffffff;
+  text-wrap: pretty;
 }
 
 @media (max-width: 900px) {
-  .case-study .case-intro {
-    padding-right: 0;
-  }
-  .case-study .case-headline {
-    text-align: left;
-  }
-  .case-study .case-intro-body {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 40px;
-    margin-left: 0;
-  }
-  .case-study .case-intro-image {
-    width: min(100%, 420px);
+  .case-study .case-intro-inner {
+    padding-left: 0;
   }
   .case-study .case-showcase {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -940,26 +947,33 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
   .page-header--dark .nav-bar .nav-links a {
     color: #b4b4b4;
   }
+  .page-header--dark .case-hero {
+    margin-top: 72px;
+    padding: 40px 24px;
+  }
   .case-study {
     padding: 0 20px 60px;
   }
   .case-study .case-intro {
-    padding-top: 110px;
+    padding-top: 80px;
   }
   .case-study .case-headline {
-    margin-bottom: 48px;
-    font-size: 2.2rem;
-  }
-  .case-study .case-intro-image {
-    width: 100%;
+    margin-bottom: 40px;
   }
   .case-study .case-copy {
-    font-size: 1rem;
+    font-size: 1.125rem;
+  }
+  .case-study .case-copy-title {
+    margin-top: 40px;
+    font-size: 1.25rem;
   }
   .case-study .case-showcase {
     grid-template-columns: minmax(0, 1fr);
-    margin-top: 60px;
-    gap: 16px;
+    margin: 60px -20px 0;
+    gap: 12px;
+  }
+  .case-study .case-caption {
+    padding-right: 20px;
   }
   .case-study .case-photo {
     aspect-ratio: 4/5;

@@ -854,9 +854,17 @@ $case-gutter: clamp(50px, 7.15vw, 103px);
 
 // Dark variant of the header for pages with a dark background
 .page-header--dark {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: visible;
   background-color: $case-bg;
 
   .nav-bar {
+    flex: 0 0 auto;
+
     .nav-brand,
     .nav-links a {
       color: $primary-color;
@@ -866,6 +874,33 @@ $case-gutter: clamp(50px, 7.15vw, 103px);
       background-color: $primary-color;
     }
   }
+
+  // Light-blue panel, edge to edge, that fills the rest of the first screen
+  .case-hero {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px $case-gutter;
+    background-color: #dbf4ff;
+  }
+
+  .case-hero-text {
+    max-width: 880px;
+    font-family: $serif-font-family;
+    font-size: clamp(1.35rem, 2.15vw, 1.95rem);
+    font-weight: 400;
+    line-height: 1.32;
+    letter-spacing: -0.01em;
+    color: #0a0a0a;
+    text-wrap: pretty;
+  }
+
+  .case-hero-mark {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.14em;
+  }
 }
 
 .case-study {
@@ -873,63 +908,43 @@ $case-gutter: clamp(50px, 7.15vw, 103px);
   font-family: $primary-font-family;
   color: #ffffff;
 
-  // Big statistic headline, then a photo on the left with the story copy beside it.
-  // The headline and the copy share one right edge, inset further than the page
-  // gutter so the headline justifies over three lines.
+  // Project story: headline, copy and closing title stacked in a right-hand
+  // column that starts ~41% of the way across the viewport
   .case-intro {
     padding-top: clamp(80px, 8.3vw, 120px);
-    padding-right: clamp(0px, 6.25vw, 90px);
+  }
+
+  .case-intro-inner {
+    padding-left: 39.6%;
   }
 
   .case-headline {
-    margin-bottom: clamp(64px, 8.75vw, 126px);
-    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    max-width: 745px;
+    margin-bottom: 64px;
+    font-size: clamp(2.25rem, 4vw, 3.625rem);
     font-weight: 700;
-    line-height: 1.12;
+    line-height: 1.14;
     letter-spacing: $global-lt-spacing;
-    text-align: justify;
     color: #2e2e2e;
   }
 
-  // Photo bleeds to the left edge of the viewport; copy starts at 43.5vw
-  .case-intro-body {
-    display: grid;
-    grid-template-columns: 31.25vw minmax(0, 1fr);
-    column-gap: 12.25vw;
-    align-items: start;
-    margin-left: calc(-1 * #{$case-gutter});
-  }
-
-  .case-intro-image {
-    aspect-ratio: 25 / 22;
-    overflow: hidden;
-    background-color: $secondary-color;
-
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: 30% 50%;
-    }
-  }
-
   .case-copy {
-    max-width: 766px;
-    font-size: 1.125rem;
-    line-height: 1.55;
+    max-width: 640px;
+    font-size: 1.35rem;
+    line-height: 1.35;
     letter-spacing: -0.02em;
-
-    .case-copy-title {
-      margin-bottom: 26px;
-      font-size: 1.25rem;
-      font-weight: 600;
-      line-height: 1.4;
-    }
 
     p + p {
       margin-top: 28px;
     }
+  }
+
+  .case-copy-title {
+    margin-top: 64px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
   }
 
   // Inline source links in the copy
@@ -952,12 +967,13 @@ $case-gutter: clamp(50px, 7.15vw, 103px);
     }
   }
 
-  // Three tiles: exploded band, app screen, photo (proportions from the mockup)
+  // Three tiles: exploded band, app screen, photo (proportions from the mockup).
+  // The row breaks out of the page gutter and runs edge to edge.
   .case-showcase {
     display: grid;
     grid-template-columns: minmax(0, 338fr) minmax(0, 334fr) minmax(0, 388fr);
-    gap: 16px;
-    margin-top: 108px;
+    gap: 12px;
+    margin: 108px calc(-1 * #{$case-gutter}) 0;
   }
 
   // Light-blue tiles with artwork inset and centred
@@ -1000,7 +1016,8 @@ $case-gutter: clamp(50px, 7.15vw, 103px);
   // Small note beneath a showcase row, e.g. an image credit
   .case-caption {
     grid-column: 1 / -1;
-    margin-top: -8px;
+    margin-top: -4px;
+    padding-right: $case-gutter;
     font-size: 12px;
     font-weight: 500;
     line-height: 1.4;
@@ -1072,13 +1089,13 @@ $case-gutter: clamp(50px, 7.15vw, 103px);
   }
 
   .case-conclusion-inner {
-    max-width: 930px;
+    max-width: 950px;
     margin: 0 auto;
   }
 
   .case-conclusion-label {
     margin-bottom: 8px;
-    font-size: 1.125rem;
+    font-size: 1.115rem;
     font-weight: 500;
     line-height: 1.4;
     letter-spacing: -0.02em;
@@ -1087,32 +1104,21 @@ $case-gutter: clamp(50px, 7.15vw, 103px);
 
   .case-conclusion p {
     font-family: $serif-font-family;
-    font-size: clamp(1.5rem, 2.25vw, 2rem);
+    font-size: clamp(1.25rem, 2.25vw, 2rem);
     font-weight: 400;
     line-height: 1.32;
     letter-spacing: -0.01em;
     color: #ffffff;
+    // Avoid a single short word stranded on the last line
+    text-wrap: pretty;
   }
 }
 
 @media (max-width: 900px) {
   .case-study {
-    .case-intro {
-      padding-right: 0;
-    }
-
-    .case-headline {
-      text-align: left;
-    }
-
-    .case-intro-body {
-      grid-template-columns: minmax(0, 1fr);
-      row-gap: 40px;
-      margin-left: 0;
-    }
-
-    .case-intro-image {
-      width: min(100%, 420px);
+    // Story column spans the full width on narrower screens
+    .case-intro-inner {
+      padding-left: 0;
     }
 
     // Two tiles side by side, photo full width beneath them
@@ -1128,11 +1134,19 @@ $case-gutter: clamp(50px, 7.15vw, 103px);
 }
 
 @media (max-width: 700px) {
-  .page-header--dark .nav-bar {
-    background-color: rgba($case-bg, 0.72);
+  .page-header--dark {
+    .nav-bar {
+      background-color: rgba($case-bg, 0.72);
 
-    .nav-links a {
-      color: #b4b4b4;
+      .nav-links a {
+        color: #b4b4b4;
+      }
+    }
+
+    // The nav is fixed here, so the panel starts below it
+    .case-hero {
+      margin-top: 72px;
+      padding: 40px 24px;
     }
   }
 
@@ -1140,26 +1154,30 @@ $case-gutter: clamp(50px, 7.15vw, 103px);
     padding: 0 20px 60px;
 
     .case-intro {
-      padding-top: 110px;
+      padding-top: 80px;
     }
 
     .case-headline {
-      margin-bottom: 48px;
-      font-size: 2.2rem;
-    }
-
-    .case-intro-image {
-      width: 100%;
+      margin-bottom: 40px;
     }
 
     .case-copy {
-      font-size: 1rem;
+      font-size: 1.125rem;
+    }
+
+    .case-copy-title {
+      margin-top: 40px;
+      font-size: 1.25rem;
     }
 
     .case-showcase {
       grid-template-columns: minmax(0, 1fr);
-      margin-top: 60px;
-      gap: 16px;
+      margin: 60px -20px 0;
+      gap: 12px;
+    }
+
+    .case-caption {
+      padding-right: 20px;
     }
 
     .case-photo {
