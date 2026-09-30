@@ -1098,9 +1098,12 @@ $case-gutter: clamp(50px, 7.15vw, 103px);
     padding-top: 140px;
   }
 
+  // Light-blue rule down the left edge, spanning label and paragraph
   .case-conclusion-inner {
     max-width: 950px;
     margin: 0 auto;
+    padding-left: 40px;
+    border-left: 8px solid #dbf4ff;
   }
 
   .case-conclusion-label {
@@ -1200,6 +1203,11 @@ $case-gutter: clamp(50px, 7.15vw, 103px);
 
     .case-conclusion {
       padding-top: 80px;
+    }
+
+    .case-conclusion-inner {
+      padding-left: 20px;
+      border-left-width: 5px;
     }
 
     .case-heading {

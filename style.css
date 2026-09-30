@@ -917,6 +917,8 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
 .case-study .case-conclusion-inner {
   max-width: 950px;
   margin: 0 auto;
+  padding-left: 40px;
+  border-left: 8px solid #dbf4ff;
 }
 .case-study .case-conclusion-label {
   margin-bottom: 8px;
@@ -991,6 +993,10 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
   }
   .case-study .case-conclusion {
     padding-top: 80px;
+  }
+  .case-study .case-conclusion-inner {
+    padding-left: 20px;
+    border-left-width: 5px;
   }
   .case-study .case-heading {
     margin-bottom: 36px;
