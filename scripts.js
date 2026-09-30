@@ -153,16 +153,14 @@ function initPreloader() {
     }
 
     const html = document.documentElement;
-    const countEl = document.getElementById('preloaderCount');
-    const barEl = document.getElementById('preloaderBar');
     const labelEl = document.getElementById('preloaderLabel');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Label sequence: each entry is [delay in ms, text]. The counter finishes after the last one.
+    // Label sequence: each entry is [delay in ms, text]. Progress finishes after the last one.
     const PHASES = reduceMotion
         ? [[0, 'Starting up...']]
         : [[0, 'Please wait...'], [1500, 'Starting up...']];
-    const MIN_DURATION = reduceMotion ? 250 : 3000; // ms the counter takes to reach 100%
+    const MIN_DURATION = reduceMotion ? 250 : 3000; // ms the progress takes to reach 100%
     const HOLD_AT = 92;                              // where to wait if assets are still loading
     const start = performance.now();
     let loaded = document.readyState === 'complete';
@@ -190,9 +188,6 @@ function initPreloader() {
         const t = Math.min(1, (now - start) / MIN_DURATION);
         let progress = easeOutCubic(t) * 100;
         if (!loaded) progress = Math.min(progress, HOLD_AT);
-
-        if (countEl) countEl.textContent = Math.round(progress) + '%';
-        if (barEl) barEl.style.transform = `scaleX(${progress / 100})`;
 
         if (progress >= 100 && loaded) {
             finish();

@@ -6,11 +6,8 @@ $secondary-color: #1f1f1f;
 $divider-color: #5b5b5b;
 $stroke-color: #00ec97;
 $primary-font-family: "Google Sans", sans-serif;
-$global-container-padding-x: 0 50px;
-$section-padding: 100px 50px;
-$primary-body-copy-size: 2rem;
-$secondary-body-copy-size: 1.3rem;
-$headline-one-size: 2.5rem;
+// Loaded per page from Google Fonts (see portfolio/safeband.html)
+$serif-font-family: "Hedvig Letters Serif", Georgia, serif;
 $global-lt-spacing: -0.05em;
 // Width of the centred project column; the header text and guide lines align to its edges.
 $portfolio-column: clamp(710px, 56vw, 1140px);
@@ -169,11 +166,6 @@ $muted-text: #8c8c8c;
       color: #000000;
       font-weight: 900;
       letter-spacing: $global-lt-spacing;
-
-      .gray {
-        color: $stroke-color;
-        font-weight: 700;
-      }
     }
 
     // Hamburger — only shown on small screens (see the 700px media query)
@@ -265,31 +257,6 @@ $muted-text: #8c8c8c;
     }
   }
 
-  .hero-container {
-    position: absolute;
-    z-index: 2;
-    bottom: 100px;
-    padding: $global-container-padding-x;
-
-    .hero-text {
-      width: 80%;
-      font-size: 9.5rem;
-      font-family: $primary-font-family;
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: $global-lt-spacing;
-      color: #000000;
-
-      .forward-stroke {
-        color: $stroke-color;
-        font-weight: 900;
-      }
-    }
-  }
-}
-
-.text-dent {
-  padding-left: 2.5rem;
 }
 
 .visually-hidden {
@@ -351,15 +318,6 @@ main {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-    }
-
-    .intro-quote {
-      margin: 0;
-      font-size: 0.85rem;
-      font-weight: 400;
-      line-height: 1.6;
-      text-transform: uppercase;
-      letter-spacing: 0;
     }
 
     .intro-link {
@@ -468,8 +426,9 @@ main {
 }
 
 // Full-bleed row of portrait cards: cover on top, title and categories below
-.porfolio-grid {
+.portfolio-grid {
   background-color: #000000;
+  border-bottom: 1px solid #00000010;
   padding: 0 $bleed-gutter 120px;
 
   .portfolio-list {
@@ -561,6 +520,7 @@ main {
       margin: 0;
       font-family: $primary-font-family;
       font-size: 13px;
+      text-transform: capitalize;
       font-weight: 700;
       line-height: 1.4;
       letter-spacing: -0.01em;
@@ -579,19 +539,20 @@ main {
 }
 
 @media (max-width: 1100px) {
-  .porfolio-grid .portfolio-list {
+  .portfolio-grid .portfolio-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   main .section-portfolio .portfolio-tab,
-  .porfolio-grid .portfolio .portfolio-media img {
+  .portfolio-grid .portfolio .portfolio-media img {
     transition: none !important;
   }
 }
 
 .section-contact {
+
   height: auto;
   background-color: #000000;
   text-align: center;
@@ -661,29 +622,6 @@ main {
     color: #70707069;
     font-size: 0.7rem;
     margin-top: 50px;
-  }
-}
-
-footer {
-  background-color: $secondary-color;
-  padding: 0 50px;
-
-  .footer-content-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 65px;
-  }
-
-  .row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    h5 {
-      font-size: 1.5rem;
-      font-family: $primary-font-family;
-      color: $primary-color;
-    }
   }
 }
 
@@ -892,8 +830,9 @@ footer {
         flex: 0 0 auto;
       }
     }
-    .porfolio-grid {
+    .portfolio-grid {
       padding-bottom: 50px;
+      
 
       .portfolio-list {
         grid-template-columns: minmax(0, 1fr);
@@ -901,16 +840,360 @@ footer {
       }
     }
   }
+}
 
-  .page-header {
-    .hero-container {
-      bottom: 60px;
-      padding: 0 16px;
+// ---------------------------------------------------------------------------
+// Case study pages (portfolio/*.html)
+// ---------------------------------------------------------------------------
+$case-bg: #0a0a0a;
+$case-gutter: clamp(50px, 7.15vw, 103px);
 
-      p {
-        width: 95%;
+.page-case-study {
+  background-color: $case-bg;
+}
+
+// Dark variant of the header for pages with a dark background
+.page-header--dark {
+  background-color: $case-bg;
+
+  .nav-bar {
+    .nav-brand,
+    .nav-links a {
+      color: $primary-color;
+    }
+
+    .nav-toggle .nav-toggle-bar {
+      background-color: $primary-color;
+    }
+  }
+}
+
+.case-study {
+  padding: 0 $case-gutter 110px;
+  font-family: $primary-font-family;
+  color: #ffffff;
+
+  // Big statistic headline, then a photo on the left with the story copy beside it.
+  // The headline and the copy share one right edge, inset further than the page
+  // gutter so the headline justifies over three lines.
+  .case-intro {
+    padding-top: clamp(80px, 8.3vw, 120px);
+    padding-right: clamp(0px, 6.25vw, 90px);
+  }
+
+  .case-headline {
+    margin-bottom: clamp(64px, 8.75vw, 126px);
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: $global-lt-spacing;
+    text-align: justify;
+    color: #2e2e2e;
+  }
+
+  // Photo bleeds to the left edge of the viewport; copy starts at 43.5vw
+  .case-intro-body {
+    display: grid;
+    grid-template-columns: 31.25vw minmax(0, 1fr);
+    column-gap: 12.25vw;
+    align-items: start;
+    margin-left: calc(-1 * #{$case-gutter});
+  }
+
+  .case-intro-image {
+    aspect-ratio: 25 / 22;
+    overflow: hidden;
+    background-color: $secondary-color;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 30% 50%;
+    }
+  }
+
+  .case-copy {
+    max-width: 766px;
+    font-size: 1.125rem;
+    line-height: 1.55;
+    letter-spacing: -0.02em;
+
+    .case-copy-title {
+      margin-bottom: 26px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    p + p {
+      margin-top: 28px;
+    }
+  }
+
+  // Inline source links in the copy
+  .case-link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(255, 255, 255, 0.4);
+    transition: text-decoration-color 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      text-decoration-color: currentColor;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $stroke-color;
+      outline-offset: 3px;
+    }
+  }
+
+  // Three tiles: exploded band, app screen, photo (proportions from the mockup)
+  .case-showcase {
+    display: grid;
+    grid-template-columns: minmax(0, 338fr) minmax(0, 334fr) minmax(0, 388fr);
+    gap: 16px;
+    margin-top: 108px;
+  }
+
+  // Light-blue tiles with artwork inset and centred
+  .case-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10%;
+    background-color: #dbf4ff;
+
+    // Exploded band: fills the padded area
+    &--image {
+      aspect-ratio: 338 / 480;
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    // App screen: phone-shaped screenshot centred at 80% of the tile's height
+    &--screen {
+      aspect-ratio: 334 / 480;
+      align-items: center;
+
+      img {
+        display: block;
+        height: 100%;
+        width: auto;
         max-width: 100%;
-        font-size: 1.5rem;
+        object-fit: contain;
+        border-radius: 5.5% / 2.5%;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+      }
+    }
+  }
+
+  // Small note beneath a showcase row, e.g. an image credit
+  .case-caption {
+    grid-column: 1 / -1;
+    margin-top: -8px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    text-align: right;
+    color: $muted-text;
+  }
+
+  .case-photo {
+    aspect-ratio: 388 / 480;
+    overflow: hidden;
+    background-color: $secondary-color;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .case-process {
+    margin-top: 64px;
+  }
+
+  .case-heading {
+    max-width: 15em;
+    margin-bottom: 72px;
+    font-size: clamp(2rem, 3.1vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.17;
+    letter-spacing: -0.03em;
+  }
+
+  .case-figure {
+    background-color: #ffffff;
+
+    // Soft-cornered panel for static diagrams
+    &--rounded {
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    // Space between stacked heading + figure pairs
+    + .case-heading {
+      margin-top: 110px;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    // Embeds (e.g. Figma) fill the column and keep a 16:9 frame
+    iframe {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Closing statement: small blue label over a centred serif paragraph
+  .case-conclusion {
+    padding-top: 140px;
+  }
+
+  .case-conclusion-inner {
+    max-width: 930px;
+    margin: 0 auto;
+  }
+
+  .case-conclusion-label {
+    margin-bottom: 8px;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    color: #dbf4ff;
+  }
+
+  .case-conclusion p {
+    font-family: $serif-font-family;
+    font-size: clamp(1.5rem, 2.25vw, 2rem);
+    font-weight: 400;
+    line-height: 1.32;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+  }
+}
+
+@media (max-width: 900px) {
+  .case-study {
+    .case-intro {
+      padding-right: 0;
+    }
+
+    .case-headline {
+      text-align: left;
+    }
+
+    .case-intro-body {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 40px;
+      margin-left: 0;
+    }
+
+    .case-intro-image {
+      width: min(100%, 420px);
+    }
+
+    // Two tiles side by side, photo full width beneath them
+    .case-showcase {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .case-photo {
+      grid-column: 1 / -1;
+      aspect-ratio: 16 / 10;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .page-header--dark .nav-bar {
+    background-color: rgba($case-bg, 0.72);
+
+    .nav-links a {
+      color: #b4b4b4;
+    }
+  }
+
+  .case-study {
+    padding: 0 20px 60px;
+
+    .case-intro {
+      padding-top: 110px;
+    }
+
+    .case-headline {
+      margin-bottom: 48px;
+      font-size: 2.2rem;
+    }
+
+    .case-intro-image {
+      width: 100%;
+    }
+
+    .case-copy {
+      font-size: 1rem;
+    }
+
+    .case-showcase {
+      grid-template-columns: minmax(0, 1fr);
+      margin-top: 60px;
+      gap: 16px;
+    }
+
+    .case-photo {
+      aspect-ratio: 4 / 5;
+    }
+
+    .case-process {
+      margin-top: 48px;
+    }
+
+    .case-conclusion {
+      padding-top: 80px;
+    }
+
+    .case-heading {
+      margin-bottom: 36px;
+    }
+
+    .case-figure + .case-heading {
+      margin-top: 64px;
+    }
+
+    // Keep the flowchart legible: let it scroll sideways instead of shrinking
+    .case-figure {
+      overflow-x: auto;
+
+      img {
+        width: 760px;
+        max-width: none;
+      }
+
+      // Taller frame so the embedded canvas is usable on a phone
+      iframe {
+        aspect-ratio: 3 / 4;
       }
     }
   }
