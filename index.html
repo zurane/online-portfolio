@@ -20,7 +20,7 @@
     </div>
     <header class="page-header">
         <nav class="nav-bar">
-            <a href="#" class="nav-brand" aria-label="Back to top">₼</a>
+            <a href="#" class="nav-brand" aria-label="Back to top">ɰ</a>
             <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false"
                 aria-controls="navLinks">
                 <span class="nav-toggle-bar"></span>
@@ -31,6 +31,8 @@
                 <li><a href="#work">Work</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <!-- Local time in Johannesburg, kept ticking by initNavTime() -->
+            <time class="nav-time" id="navTime" aria-hidden="true"></time>
         </nav>
     </header>
     <main>
@@ -50,9 +52,7 @@
                         <a href="#" class="intro-link">More about me <span
                                 class="material-symbols-outlined">arrow_forward</span></a>
                     </div>
-                    <div class="intro-image reveal reveal-right">
-                        <img src="./assets/dithered-intro-img.jpg" alt="Portrait of Mpho Lebona" width="424" height="547" />
-                    </div>
+                    
                 </div>
             </div>
         </section>
@@ -66,7 +66,7 @@
                 <button class="portfolio-tab" type="button" aria-pressed="false" data-filter="website">Websites</button>
                 <button class="portfolio-tab" type="button" aria-pressed="false" data-filter="ui-ux">UI / UX</button>
             </div>
-            <p class="portfolio-count" aria-live="polite">(3)</p>
+            <p class="portfolio-count" aria-live="polite">(4)</p>
         </section>
         <!-- portfolio cards: the whole card is the link, so cover images are decorative -->
         <section class="portfolio-grid">
@@ -84,7 +84,19 @@
                     </a>
                 </article>
 
-                <article class="portfolio reveal reveal-stagger-2" data-category="web-app ui-ux">
+                <article class="portfolio reveal reveal-stagger-2" data-category="ui-ux">
+                    <a href="./portfolio/safeband.html" class="portfolio-link">
+                        <div class="portfolio-media">
+                            <img src="./assets/safe-band.png" alt="" loading="lazy" />
+                        </div>
+                        <div class="portfolio-bar">
+                            <h3 class="portfolio-title">Safeband</h3>
+                            <span class="portfolio-overline">A wearable that keeps children safe on the way to school.</span>
+                        </div>
+                    </a>
+                </article>
+
+                <article class="portfolio reveal reveal-stagger-3" data-category="web-app ui-ux">
                     <a href="#" class="portfolio-link">
                         <div class="portfolio-media">
                             <img src="https://res.cloudinary.com/dcphsyjhi/image/upload/v1790337310/cipher-84799-16x9_e0qjtq.png"
@@ -98,7 +110,7 @@
                     </a>
                 </article>
 
-                <article class="portfolio reveal reveal-stagger-3" data-category="website">
+                <article class="portfolio reveal reveal-stagger-4" data-category="website">
                     <a href="#" class="portfolio-link">
                         <div class="portfolio-media">
                             <img src="https://res.cloudinary.com/dcphsyjhi/image/upload/v1790337577/sear-41793-16x9_n5wa52.png"
@@ -119,7 +131,8 @@
             <div class="contact-cta-wrapper reveal">
                 <div class="contact-chip">
                     <img src="./assets/portfolio-img-placeholder.jpg" alt="" width="58">
-                    <a href="mailto:hola.mpho@gmail.com">Let's chat</a>
+                    <!-- Opens the contact dialog; the mailto stays as the no-JS fallback -->
+                    <a href="mailto:hola.mpho@gmail.com" data-contact-open>Let's chat</a>
                 </div>
                 <div class="contact-chip">
                     <a href="https://www.linkedin.com/in/mpho-lebona/" target="_blank">LinkedIn</a>
@@ -129,6 +142,25 @@
             </div>
             <p class="copyright-text">© 2026. All rights reserved.</p>
         </section>
+
+        <!-- Contact form: submitting hands the name and message to the visitor's email app -->
+        <dialog class="contact-dialog" id="contactDialog" aria-labelledby="contactDialogTitle" data-lenis-prevent>
+            <form class="contact-form" id="contactForm">
+                <h2 class="contact-form-title" id="contactDialogTitle">Let's chat</h2>
+                <label class="contact-field">
+                    <span>Name</span>
+                    <input type="text" name="name" autocomplete="name" required />
+                </label>
+                <label class="contact-field">
+                    <span>Message</span>
+                    <textarea name="message" rows="5" required></textarea>
+                </label>
+                <div class="contact-form-actions">
+                    <button class="contact-form-cancel" type="button" data-contact-close>Cancel</button>
+                    <button class="contact-form-submit" type="submit">Send</button>
+                </div>
+            </form>
+        </dialog>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>

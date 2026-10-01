@@ -8,7 +8,8 @@
         content="Safeband is a lightweight wearable that gives parents and guardians real-time updates on a child's journey to school." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&display=swap" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&display=swap" />
     <link rel="stylesheet" href="../style.css" />
     <title>Safeband</title>
 </head>
@@ -16,7 +17,7 @@
 <body class="page-case-study">
     <header class="page-header page-header--dark">
         <nav class="nav-bar">
-            <a href="../index.html" class="nav-brand" aria-label="Back to home">₼</a>
+            <a href="../index.html" class="nav-brand" aria-label="Back to home">ɰ</a>
             <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false"
                 aria-controls="navLinks">
                 <span class="nav-toggle-bar"></span>
@@ -27,6 +28,8 @@
                 <li><a href="../index.html#work">Work</a></li>
                 <li><a href="../index.html#contact">Contact</a></li>
             </ul>
+            <!-- Local time in Johannesburg, kept ticking by initNavTime() -->
+            <time class="nav-time" id="navTime" aria-hidden="true"></time>
         </nav>
         <!-- Full-height opening panel: the design challenge in one paragraph -->
         <div class="case-hero">
@@ -48,28 +51,48 @@
         <section class="case-intro">
             <div class="case-intro-inner">
                 <h2 class="case-headline reveal text-reveal" data-split="words">
-                    In South Africa, A Child Is Reported Missing Every Five Hours.
+                    Reimagining Child Safety
                 </h2>
-                <div class="case-copy reveal reveal-stagger-1">
-                    <p>
-                        According to
-                        <a href="https://missingchildren.org.za/" class="case-link" target="_blank"
-                            rel="noopener">Missing Children SA</a>, about 77% of reported children are found.
-                        That means roughly 23% remain unaccounted for.
-                    </p>
-                    <p>
-                        Safeband aims to help protect children during their journey to school. It gives
-                        parents and guardians real-time updates from the moment a child leaves home until
-                        they arrive at their learning environment.
-                    </p>
-                    <p>
-                        The solution offers more than location tracking. It can monitor basic health
-                        information, such as heart rate, which may help flag signs of stress or illness. It
-                        also aims to speed up the process of reporting a missing child to the South African
-                        Police Service (SAPS), with social media sharing options to help raise awareness.
-                    </p>
+                <!-- Statement rows: small label on the left, copy in the story column -->
+                <div class="case-row reveal reveal-stagger-1">
+                    <h3 class="case-row-label">About</h3>
+                    <div class="case-copy">
+                        <p>
+                            Safeband aims to help protect children during their journey to school. It gives
+                            parents and guardians real-time updates from the moment a child leaves home until
+                            they arrive at their learning environment.
+                        </p>
+                    </div>
                 </div>
-                <h3 class="case-copy-title reveal reveal-stagger-2">Now Reimagining Child Safety with Safeband</h3>
+                <div class="case-row reveal reveal-stagger-2">
+                    <h3 class="case-row-label">Problem</h3>
+                    <div class="case-copy">
+                        <p>
+                            In South Africa, A Child Is Reported Missing Every Five Hours and according to
+                            <a href="https://missingchildren.org.za/" class="case-link" target="_blank"
+                                rel="noopener">Missing Children SA</a>, about 77% of reported children are found.
+                            That means roughly 23% remain unaccounted for.
+                        </p>
+                        <p>In South African townships, children often walk to and from school alone or use unregulated
+                            informal transport, which exposes them to crime and to getting lost, while their parents
+                            have no reliable way to know they arrived safely. The challenge is to design an affordable,
+                            easy-to-use solution that gives caregivers real-time peace of mind despite limited access to
+                            technology and varying levels of digital literacy.</p>
+                    </div>
+                </div>
+                <div class="case-row reveal reveal-stagger-3">
+                    <h3 class="case-row-label">Approach</h3>
+                    <div class="case-copy">
+                        <p>
+                            SafeBand pairs a wearable band with a smart app so parents always know where their child is
+                            and how they're doing. The band tracks location in real time and picks up signs of distress,
+                            such as a spike in heart rate or panic, then alerts parents right away. If a child goes
+                            missing, one tap sends their full profile to SAPS in under a minute and creates a
+                            missing-child poster ready to share on social media.
+                        </p>
+
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -96,7 +119,9 @@
         <section class="case-process">
             <h2 class="case-heading reveal">Application Interface design</h2>
             <div class="case-figure reveal">
-                <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/proto/OxTif3NBsAn3J4bV3UBwND/Safeband?node-id=5-12&viewport=-1229%2C657%2C0.44&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=5%3A12&page-id=0%3A1&embed-host=share" allowfullscreen></iframe>
+                <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450"
+                    src="https://embed.figma.com/proto/OxTif3NBsAn3J4bV3UBwND/Safeband?node-id=5-12&viewport=-1229%2C657%2C0.44&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=5%3A12&page-id=0%3A1&embed-host=share"
+                    allowfullscreen></iframe>
             </div>
             <h2 class="case-heading reveal">Approach and thinking process</h2>
             <div class="case-figure case-figure--rounded reveal">

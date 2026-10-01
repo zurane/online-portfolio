@@ -317,8 +317,114 @@ function initPortfolioTabs() {
 }
 
 // ---------------------------------------------------------------------------
+// Nav alignment
+// The intro headline wraps short of its column, so the last nav link is pulled
+// in to sit above the right edge of the longest headline line (--nav-inset).
+// ---------------------------------------------------------------------------
+function initNavAlign() {
+    const list = document.querySelector('.nav-links');
+    const inner = document.querySelector('.intro-inner');
+    const headline = document.querySelector('.intro-headline');
+    if (!list || !inner || !headline) return;
+
+    function measure() {
+        // The stacked mobile menu doesn't follow the intro column
+        if (getComputedStyle(list).position !== 'absolute') {
+            list.style.removeProperty('--nav-inset');
+            return;
+        }
+        let right = 0;
+        headline.querySelectorAll('.word').forEach((word) => {
+            right = Math.max(right, word.getBoundingClientRect().right);
+        });
+        if (!right) return;
+        const inset = Math.max(0, inner.getBoundingClientRect().right - right);
+        list.style.setProperty('--nav-inset', inset.toFixed(1) + 'px');
+    }
+
+    measure();
+    window.addEventListener('resize', measure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    document.addEventListener('preloader:done', measure, { once: true });
+}
+
+// ---------------------------------------------------------------------------
+// Nav clock
+// Shows the current time in Johannesburg (not the visitor's own time zone).
+// ---------------------------------------------------------------------------
+function initNavTime() {
+    const el = document.getElementById('navTime');
+    if (!el) return;
+
+    const format = new Intl.DateTimeFormat('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+        timeZone: 'Africa/Johannesburg',
+    });
+
+    function tick() {
+        const now = new Date();
+        el.textContent = format.format(now) + ' SAST';
+        el.dateTime = now.toISOString();
+    }
+
+    tick();
+    setInterval(tick, 1000);
+}
+
+// ---------------------------------------------------------------------------
+// Contact form
+// "Let's chat" opens a dialog asking for a name and a message. There is no
+// backend, so submitting opens the visitor's email app with a prefilled draft
+// addressed to the trigger link's mailto address.
+// ---------------------------------------------------------------------------
+function initContactForm() {
+    const trigger = document.querySelector('[data-contact-open]');
+    const dialog = document.getElementById('contactDialog');
+    const form = document.getElementById('contactForm');
+    // Without <dialog> support the link keeps working as a plain mailto
+    if (!trigger || !dialog || !form || typeof dialog.showModal !== 'function') return;
+
+    trigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        dialog.showModal();
+        if (window.lenis) window.lenis.stop();
+    });
+
+    dialog.addEventListener('close', () => {
+        if (window.lenis) window.lenis.start();
+    });
+
+    // A click on the backdrop lands on the dialog element itself
+    dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+    });
+
+    dialog.querySelectorAll('[data-contact-close]').forEach((button) => {
+        button.addEventListener('click', () => dialog.close());
+    });
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const name = form.elements.name.value.trim();
+        const message = form.elements.message.value.trim();
+        if (!name || !message) return;
+        const subject = encodeURIComponent('Hello from ' + name);
+        const body = encodeURIComponent(message + '\n\n' + name);
+        window.location.href = trigger.getAttribute('href') + '?subject=' + subject + '&body=' + body;
+        form.reset();
+        dialog.close();
+    });
+}
+
+// ---------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     splitWords();
+    initNavAlign();
+    initNavTime();
+    initContactForm();
     initMobileNav();
     initPortfolioTabs();
     const lenis = initSmoothScroll();
