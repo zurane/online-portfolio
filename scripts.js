@@ -376,34 +376,52 @@ function initNavTime() {
 
 // ---------------------------------------------------------------------------
 // Contact form
-// "Let's chat" opens a dialog asking for a name and a message. There is no
-// backend, so submitting opens the visitor's email app with a prefilled draft
-// addressed to the trigger link's mailto address.
+// "Let's chat" toggles a panel above the chips asking for a name and a message
+// (the slide itself is CSS, driven by .is-open). There is no backend, so
+// submitting opens the visitor's email app with a prefilled draft addressed to
+// the trigger link's mailto address.
 // ---------------------------------------------------------------------------
 function initContactForm() {
     const trigger = document.querySelector('[data-contact-open]');
-    const dialog = document.getElementById('contactDialog');
+    const panel = document.getElementById('contactPanel');
     const form = document.getElementById('contactForm');
-    // Without <dialog> support the link keeps working as a plain mailto
-    if (!trigger || !dialog || !form || typeof dialog.showModal !== 'function') return;
+    if (!trigger || !panel || !form) return;
+
+    const isOpen = () => panel.classList.contains('is-open');
+
+    // Bring the panel's top edge into view if it would open above the viewport
+    function scrollPanelIntoView() {
+        const fixedBar = getComputedStyle(document.querySelector('.nav-bar')).position === 'fixed';
+        const overshoot = panel.getBoundingClientRect().top - (fixedBar ? 90 : 24);
+        if (overshoot >= 0) return;
+        const target = window.scrollY + overshoot;
+        if (window.lenis) window.lenis.scrollTo(target);
+        else window.scrollTo({ top: target, behavior: 'smooth' });
+    }
+
+    function setOpen(open) {
+        panel.classList.toggle('is-open', open);
+        panel.inert = !open;
+        trigger.setAttribute('aria-expanded', String(open));
+        if (open) {
+            form.elements.name.focus({ preventScroll: true });
+            scrollPanelIntoView();
+        } else if (panel.contains(document.activeElement)) {
+            trigger.focus({ preventScroll: true });
+        }
+    }
 
     trigger.addEventListener('click', (event) => {
         event.preventDefault();
-        dialog.showModal();
-        if (window.lenis) window.lenis.stop();
+        setOpen(!isOpen());
     });
 
-    dialog.addEventListener('close', () => {
-        if (window.lenis) window.lenis.start();
+    panel.querySelectorAll('[data-contact-close]').forEach((button) => {
+        button.addEventListener('click', () => setOpen(false));
     });
 
-    // A click on the backdrop lands on the dialog element itself
-    dialog.addEventListener('click', (event) => {
-        if (event.target === dialog) dialog.close();
-    });
-
-    dialog.querySelectorAll('[data-contact-close]').forEach((button) => {
-        button.addEventListener('click', () => dialog.close());
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && isOpen()) setOpen(false);
     });
 
     form.addEventListener('submit', (event) => {
@@ -415,7 +433,7 @@ function initContactForm() {
         const body = encodeURIComponent(message + '\n\n' + name);
         window.location.href = trigger.getAttribute('href') + '?subject=' + subject + '&body=' + body;
         form.reset();
-        dialog.close();
+        setOpen(false);
     });
 }
 

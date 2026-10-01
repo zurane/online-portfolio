@@ -661,94 +661,161 @@ main {
   }
 }
 
-// Contact dialog opened by "Let's chat" (see initContactForm() in scripts.js)
-.contact-dialog {
-  width: min(440px, calc(100% - 40px));
-  // The global reset zeroes the margin that centres a modal dialog
-  margin: auto;
-  border: 1px solid #ffffff14;
-  border-radius: 15px;
-  background-color: #141414;
+// Shrink-wraps the chip row so the contact panel can match its width
+.contact-stack {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+
+  .contact-cta-wrapper {
+    display: flex;
+  }
+
+  @media (max-width: 700px) {
+    display: block;
+  }
+}
+
+// Contact form toggled by "Let's chat" (see initContactForm() in scripts.js).
+// The panel is a clip window sitting just above the chips; the form inside
+// slides up into it, so it appears to rise from behind the links container.
+.contact-panel {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: calc(100% + 6px);
+  z-index: 2;
+  overflow: hidden;
+  visibility: hidden;
+  text-align: left;
   color: $primary-color;
   font-family: $primary-font-family;
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+  // Stay visible until the slide-out has finished
+  transition: visibility 0s linear 0.6s;
 
-  &::backdrop {
-    background-color: rgba(0, 0, 0, 0.6);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
+  // The chip row has no side padding once it stacks
+  @media (max-width: 700px) {
+    left: 0;
+    right: 0;
+  }
+
+  &.is-open {
+    visibility: visible;
+    transition-delay: 0s;
+
+    .contact-form {
+      transform: translateY(0);
+    }
   }
 
   .contact-form {
+    border: 1px solid #ffffff1f;
+    border-radius: 8px;
+    background-color: #000000;
+    overflow: hidden;
+    transform: translateY(100%);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    .contact-form {
+      transition: none;
+    }
+  }
+
+  .contact-form-body {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding: 24px;
+    gap: 20px;
+    padding: 24px 24px 28px;
   }
 
   .contact-form-title {
-    font-size: 1.4rem;
-    font-weight: 500;
-    letter-spacing: -0.03em;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 
   .contact-field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    font-size: 0.85rem;
-    color: $muted-text;
+    display: block;
 
     input,
     textarea {
+      display: block;
       width: 100%;
-      padding: 14px;
-      border: 1px solid transparent;
-      border-radius: 10px;
-      background-color: #262626;
+      padding: 15px 16px;
+      border: 1px solid #ffffff1f;
+      border-radius: 0;
+      background-color: transparent;
       color: $primary-color;
       font: inherit;
-      font-size: 1rem;
+      font-size: 0.95rem;
+
+      &::placeholder {
+        color: #6b6b6b;
+        opacity: 1;
+      }
 
       &:focus-visible {
         outline: none;
-        border-color: $stroke-color;
+        border-color: #ffffff80;
       }
     }
 
     textarea {
-      resize: vertical;
-      min-height: 120px;
+      resize: none;
+      height: 120px;
     }
   }
 
+  // Footer split into two equal cells: Cancel | Send
   .contact-form-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 5px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid #ffffff1f;
 
     button {
-      padding: 14px 18px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      padding: 20px;
       border: 0;
-      border-radius: 12px;
+      border-radius: 0;
+      background-color: transparent;
       font: inherit;
+      font-size: 1.25rem;
       cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      & + button {
+        border-left: 1px solid #ffffff1f;
+      }
+
+      &:hover {
+        background-color: #ffffff0d;
+      }
 
       &:focus-visible {
         outline: 2px solid $stroke-color;
-        outline-offset: 2px;
+        outline-offset: -2px;
       }
+    }
+
+    .material-symbols-outlined {
+      font-size: 1.1rem;
+      font-weight: 300;
     }
   }
 
   .contact-form-cancel {
-    background-color: transparent;
-    color: $muted-text;
+    color: #ff4d4d;
   }
 
   .contact-form-submit {
-    background-color: $primary-color;
-    color: #000000;
+    color: #ffffff;
   }
 }
 
