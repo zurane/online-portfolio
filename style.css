@@ -346,8 +346,10 @@ main .section-intro .intro-image img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: 50% 12%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 50% 12%;
+     object-position: 50% 12%;
   border: 1px solid rgba(0, 0, 0, 0.0588235294);
   filter: grayscale(1);
   transform: translateZ(0);
@@ -444,7 +446,8 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   filter: blur(var(--blur));
   transform: scale(var(--blur-scale));
   will-change: filter, transform;
@@ -653,6 +656,10 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
   font: inherit;
   font-size: 0.95rem;
 }
+.contact-panel .contact-field input::-moz-placeholder, .contact-panel .contact-field textarea::-moz-placeholder {
+  color: #6b6b6b;
+  opacity: 1;
+}
 .contact-panel .contact-field input::placeholder,
 .contact-panel .contact-field textarea::placeholder {
   color: #6b6b6b;
@@ -722,7 +729,6 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
     align-items: center;
     padding: 14px 20px;
     background-color: rgba(250, 249, 245, 0.72);
-    -webkit-backdrop-filter: blur(24px) saturate(1.4);
     backdrop-filter: blur(24px) saturate(1.4);
     border-radius: 0 0 10px 10px;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
@@ -813,7 +819,8 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
     flex: 0 0 58px;
     width: 58px;
     height: 58px;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
   .section-contact .contact-cta-wrapper .contact-chip a {
     flex: 1 1 0;
@@ -905,26 +912,12 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
   background-color: #faf9f5;
 }
 .page-header--dark .case-hero {
-  position: relative;
   flex: 1 1 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 0;
-  overflow: hidden;
+  padding: 60px clamp(50px, 7.15vw, 103px);
   background-color: #dbf4ff;
-}
-.page-header--dark .case-hero-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-}
-.page-header--dark .case-hero-video::-webkit-media-controls, .page-header--dark .case-hero-video::-webkit-media-controls-start-playback-button {
-  display: none !important;
-  -webkit-appearance: none;
 }
 .page-header--dark .case-hero-text {
   max-width: 880px;
@@ -1028,7 +1021,8 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .case-study .case-card--screen {
   aspect-ratio: 334/480;
@@ -1039,7 +1033,8 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
   height: 100%;
   width: auto;
   max-width: 100%;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   border-radius: 5.5%/2.5%;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
 }
@@ -1064,7 +1059,8 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .case-study .case-process {
   margin-top: 64px;
@@ -1334,6 +1330,4 @@ html.is-loading {
     animation: none;
     opacity: 1;
   }
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

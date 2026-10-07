@@ -274,6 +274,32 @@ function initMobileNav() {
 }
 
 // ---------------------------------------------------------------------------
+// Portfolio shuffle
+// Cards are re-ordered at random on every load (Fisher-Yates), then their
+// reveal-stagger-N classes are reassigned so the entrance animation still
+// runs in the new visual order. Runs before initPortfolioTabs() and
+// initReveal() so both see the final DOM order.
+function shufflePortfolio() {
+    const list = document.querySelector('.portfolio-list');
+    if (!list) return;
+    const cards = Array.from(list.querySelectorAll('.portfolio'));
+    if (cards.length < 2) return;
+
+    for (let i = cards.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+
+    cards.forEach((card, index) => {
+        Array.from(card.classList)
+            .filter((name) => name.startsWith('reveal-stagger-'))
+            .forEach((name) => card.classList.remove(name));
+        card.classList.add('reveal-stagger-' + Math.min(index + 1, 10));
+        list.appendChild(card);
+    });
+}
+
+// ---------------------------------------------------------------------------
 // Portfolio filter tabs
 // Each tab carries data-filter; each card lists its categories in data-category
 // (space separated). Cards that match replay the reveal animation so a filter
@@ -444,6 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavTime();
     initContactForm();
     initMobileNav();
+    shufflePortfolio();
     initPortfolioTabs();
     const lenis = initSmoothScroll();
     if (lenis) lenis.stop(); // no scrolling while the preloader is up
