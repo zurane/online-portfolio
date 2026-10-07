@@ -31,17 +31,13 @@
             <!-- Local time in Johannesburg, kept ticking by initNavTime() -->
             <time class="nav-time" id="navTime" aria-hidden="true"></time>
         </nav>
-        <!-- Full-height opening panel: the design challenge in one paragraph -->
+        <!-- Full-height opening panel: a silent looping video with no player controls.
+             The poster shows until the video can play (and on data-saver connections). -->
         <div class="case-hero">
-            <p class="case-hero-text reveal">
-                In South African townships, children often walk to and from school alone or use
-                unregulated informal transport, which exposes them to crime and to
-                <span class="case-hero-mark">getting lost</span>, while their parents have no reliable
-                way to know they arrived <span class="case-hero-mark">safely</span>. The challenge is to
-                design an affordable, <span class="case-hero-mark">easy-to-use solution</span> that gives
-                caregivers real-time peace of mind despite limited access to technology and varying levels
-                of digital literacy.
-            </p>
+            <video class="case-hero-video" src="../assets/gemini_generated_video_a90a4c49.mp4"
+                poster="../assets/safeband-bg-img.jpg" autoplay muted loop playsinline preload="metadata"
+                disablepictureinpicture controlslist="nodownload nofullscreen noplaybackrate noremoteplayback"
+                aria-hidden="true" tabindex="-1"></video>
         </div>
     </header>
     <main class="case-study">
@@ -54,18 +50,9 @@
                     Reimagining Child Safety
                 </h2>
                 <!-- Statement rows: small label on the left, copy in the story column -->
-                <div class="case-row reveal reveal-stagger-1">
-                    <h3 class="case-row-label">About</h3>
-                    <div class="case-copy">
-                        <p>
-                            Safeband aims to help protect children during their journey to school. It gives
-                            parents and guardians real-time updates from the moment a child leaves home until
-                            they arrive at their learning environment.
-                        </p>
-                    </div>
-                </div>
+              
                 <div class="case-row reveal reveal-stagger-2">
-                    <h3 class="case-row-label">Problem</h3>
+                    <h3 class="case-row-label">Problem statement</h3>
                     <div class="case-copy">
                         <p>
                             In South Africa, A Child Is Reported Missing Every Five Hours and according to
@@ -73,7 +60,7 @@
                                 rel="noopener">Missing Children SA</a>, about 77% of reported children are found.
                             That means roughly 23% remain unaccounted for.
                         </p>
-                        <p>In South African townships, children often walk to and from school alone or use unregulated
+                        <p>In townships, children often walk to and from school alone or use unregulated
                             informal transport, which exposes them to crime and to getting lost, while their parents
                             have no reliable way to know they arrived safely. The challenge is to design an affordable,
                             easy-to-use solution that gives caregivers real-time peace of mind despite limited access to
@@ -81,13 +68,12 @@
                     </div>
                 </div>
                 <div class="case-row reveal reveal-stagger-3">
-                    <h3 class="case-row-label">Approach</h3>
+                    <h3 class="case-row-label">Solution design</h3>
                     <div class="case-copy">
                         <p>
-                            SafeBand pairs a wearable band with a smart app so parents always know where their child is
-                            and how they're doing. The band tracks location in real time and picks up signs of distress,
+                            Introducing SafeBand, a wearable device paired with an app. It tracks location in real time and picks up vitals for signs of child distress,
                             such as a spike in heart rate or panic, then alerts parents right away. If a child goes
-                            missing, one tap sends their full profile to SAPS in under a minute and creates a
+                            missing, a one tap feature sends a child full profile to SAPS in under a minute and creates a
                             missing-child poster ready to share on social media.
                         </p>
 
@@ -130,20 +116,7 @@
                     width="2468" height="1200" loading="lazy" />
             </div>
         </section>
-
-        <!-- Conclusion -->
-        <section class="case-conclusion">
-            <div class="case-conclusion-inner reveal">
-                <h2 class="case-conclusion-label">Conclusion</h2>
-                <p>
-                    Safeband cannot fix poor public infrastructure or unregulated transport. It can,
-                    however, ease some of the anxiety parents and guardians feel while their children
-                    travel to school. Scholar patrols and road safety programmes remain essential, and
-                    community members should be encouraged to take part. Children’s safety is a shared
-                    responsibility; technology is one tool that can help us fulfil&nbsp;it.
-                </p>
-            </div>
-        </section>
+        
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>

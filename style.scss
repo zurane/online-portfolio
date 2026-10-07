@@ -1072,14 +1072,33 @@ $case-gutter: clamp(50px, 7.15vw, 103px);
     }
   }
 
-  // Light-blue panel, edge to edge, that fills the rest of the first screen
+  // Edge-to-edge video panel that fills the rest of the first screen
   .case-hero {
+    position: relative;
     flex: 1 1 auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 60px $case-gutter;
+    min-height: 0;
+    overflow: hidden;
     background-color: #dbf4ff;
+  }
+
+  // Covers the panel like a background image; the browser's own controls stay
+  // off (no `controls` attribute) and the WebKit overlay button is hidden too
+  .case-hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+
+    &::-webkit-media-controls,
+    &::-webkit-media-controls-start-playback-button {
+      display: none !important;
+      -webkit-appearance: none;
+    }
   }
 
   .case-hero-text {
