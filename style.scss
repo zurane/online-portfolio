@@ -465,9 +465,10 @@ main {
   border-bottom: 1px solid #00000010;
   padding: 0 $bleed-gutter 120px;
 
+  // Three cards per row on desktop; two under 1100px, one on phones
   .portfolio-list {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 40px $bleed-gap;
   }
 
