@@ -8,8 +8,6 @@ $stroke-color: #00ec97;
 $primary-font-family: "Google Sans", sans-serif;
 // Width of the centred intro column; the nav links span the same width
 $intro-column: clamp(680px, 54vw, 1040px);
-// Loaded per page from Google Fonts (see portfolio/safeband.html)
-$serif-font-family: "Hedvig Letters Serif", Georgia, serif;
 $global-lt-spacing: -0.05em;
 // Width of the centred project column; the header text and guide lines align to its edges.
 $portfolio-column: clamp(710px, 56vw, 1140px);
@@ -31,37 +29,6 @@ $muted-text: #8c8c8c;
   }
 }
 
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 // Reveal classes
 .reveal {
   opacity: 0;
@@ -69,18 +36,6 @@ $muted-text: #8c8c8c;
 
   &.revealed {
     animation: slideInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-
-  &.reveal-left.revealed {
-    animation: slideInLeft 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-
-  &.reveal-right.revealed {
-    animation: slideInRight 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-
-  &.reveal-fade.revealed {
-    animation: fadeIn 0.6s ease-out forwards;
   }
 
   // Stagger effect for multiple items
@@ -379,27 +334,6 @@ main {
         .material-symbols-outlined {
           transform: translateX(2px);
         }
-      }
-    }
-
-    // Headshot: square crop, capped width, pinned to the column's right edge
-    .intro-image {
-      width: min(100%, 400px);
-      aspect-ratio: 1 / 1;
-      justify-self: end;
-      overflow: hidden;
-      background-color: #e6e4de;
-
-      img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: 50% 12%;
-        border: 1px solid #0000000f;
-        filter: grayscale(1);
-        transform: translateZ(0);
-
       }
     }
   }
@@ -995,12 +929,6 @@ main {
         gap: 28px;
       }
 
-      .intro-image {
-        order: 1;
-        width: 100%;
-        justify-self: stretch;
-      }
-
       .intro-link {
         font-size: 1.3rem;
       }
@@ -1041,413 +969,735 @@ main {
 
 // ---------------------------------------------------------------------------
 // Case study pages (portfolio/*.html)
+// Light editorial page: a dark hero panel up top, serif headline and meta,
+// then a black story section holding the copy and stacked image panels.
 // ---------------------------------------------------------------------------
-$case-bg: #0a0a0a;
-$case-gutter: clamp(50px, 7.15vw, 103px);
+$case-light: #fdfafc; // page background
+$case-ink: #111111;
+$case-dark: #0a0a0a; // story section
+$case-panel: #121212; // image panels
+$case-frame: #efeae0; // cream frame around the hero card
+$case-accent: #ff8a3d; // list markers
+// Edge inset for the full-bleed panels
+$case-gutter: clamp(16px, 2.1vw, 30px);
+// Case studies use the site's Google Sans throughout
+$case-serif: $primary-font-family;
+$case-rainbow: linear-gradient(
+  90deg,
+  #ff3d5a,
+  #ff9a2e,
+  #ffe34d,
+  #5cf08a,
+  #3fd7ff,
+  #6a6cff,
+  #d85cff
+);
 
 .page-case-study {
-  background-color: $case-bg;
+  background-color: $case-light;
 }
 
-// Dark variant of the header for pages with a dark background
-.page-header--dark {
-  display: flex;
-  flex-direction: column;
+// Light header that hugs the nav bar: the hero lives in <main> on this layout
+.page-header--case {
   height: auto;
-  min-height: 100vh;
-  min-height: 100svh;
   overflow: visible;
-  background-color: $case-bg;
+  background-color: $case-light;
 
-  .nav-bar {
-    flex: 0 0 auto;
-
-    .nav-brand,
-    .nav-time,
-    .nav-links a {
-      color: $primary-color;
-    }
-
-    .nav-toggle .nav-toggle-bar {
-      background-color: $primary-color;
-    }
-  }
-
-  // Light-blue panel, edge to edge, that fills the rest of the first screen
-  .case-hero {
-    flex: 1 1 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 60px $case-gutter;
-    background-color: #dbf4ff;
-  }
-
-  .case-hero-text {
-    max-width: 880px;
-    font-family: $serif-font-family;
-    font-size: clamp(1.35rem, 2.15vw, 1.95rem);
-    font-weight: 400;
-    line-height: 1.32;
-    letter-spacing: -0.01em;
-    color: #0a0a0a;
-    text-wrap: pretty;
-  }
-
-  .case-hero-mark {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.14em;
+  &::before {
+    display: none;
   }
 }
 
 .case-study {
-  padding: 0 $case-gutter 110px;
-  font-family: $primary-font-family;
+  padding-bottom: clamp(80px, 8vw, 140px);
+  font-family: $case-serif;
+  color: $case-ink;
+}
+
+// Full-bleed dark panel with a blurred prism "light leak" bleeding in from the
+// edges. The rainbow sits on ::before and a dark vignette on ::after keeps the
+// centre clean; both stay behind the content thanks to isolation + z-index.
+.case-panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin: 0 $case-gutter;
+  background-color: $case-panel;
+  border-radius: 2px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -12%;
+    z-index: -2;
+    background:
+      $case-rainbow bottom left / 125% 40% no-repeat,
+      linear-gradient(90deg, #d85cff, #3fd7ff, #ffe34d, #ff3d5a) top right / 70% 32% no-repeat,
+      linear-gradient(180deg, #ff3d5a, #ffe34d, #3fd7ff) top left / 16% 70% no-repeat;
+    filter: blur(38px) saturate(1.25);
+    opacity: 0.8;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(
+      ellipse 84% 80% at 50% 46%,
+      $case-panel 42%,
+      rgba($case-panel, 0.9) 68%,
+      rgba($case-panel, 0) 100%
+    );
+  }
+}
+
+// --- Hero -----------------------------------------------------------------
+
+.case-hero {
+  padding-top: 10px;
+}
+
+.case-panel--hero {
+  padding: clamp(28px, 5.5vw, 80px) clamp(20px, 12vw, 175px);
+}
+
+// Cream mat around the hero cards
+.case-frame {
+  padding: 10px;
+  background-color: $case-frame;
+  border-radius: 3px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+.case-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 10px;
+}
+
+.case-hero-stack {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+  min-height: 0;
+}
+
+.case-hero-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+  background-color: #1b1b1b;
   color: #ffffff;
 
-  // Project story: headline, copy and closing title sit in a right-hand column
-  // that starts ~41% of the way across the viewport (--case-offset); the row
-  // labels (About, Problem, Approach) use the space to its left
-  .case-intro-inner {
-    --case-offset: 39.6%;
-    // Matches the .case-study side padding
-    --case-bleed: #{$case-gutter};
-    padding-top: clamp(80px, 8.3vw, 120px);
+  > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
-  // Full-width statement row: divider on top, label left, copy in the story column
-  .case-row {
-    display: grid;
-    grid-template-columns: var(--case-offset) minmax(0, 1fr);
-    // Pulled out through the page gutter so the divider runs edge to edge
-    margin: 0 calc(-1 * var(--case-bleed));
-    padding: 24px var(--case-bleed) 56px;
-    border-top: 1px solid #ffffff1f;
-  }
+  // Cream card with the artwork inset and centred
+  &--light {
+    background-color: $case-frame;
 
-  .case-row-label {
-    font-size: 0.8rem;
-    font-weight: 400;
-    line-height: 1.35;
-    color: $muted-text;
-  }
+    .case-hero-card-fit {
+      inset: 8% 8% 26%;
+      width: auto;
+      height: auto;
+      max-width: 84%;
+      max-height: 66%;
+      margin: auto;
+      object-fit: contain;
+    }
 
-  .case-headline {
-    max-width: 745px;
-    margin-left: var(--case-offset);
-    margin-bottom: 64px;
-    font-size: clamp(2.25rem, 4vw, 3.625rem);
-    font-weight: 700;
-    line-height: 1.14;
-    letter-spacing: $global-lt-spacing;
-    color: #2e2e2e;
-  }
-
-  .case-copy {
-    max-width: 640px;
-    font-size: 1.35rem;
-    line-height: 1.35;
-    letter-spacing: -0.02em;
-
-    p + p {
-      margin-top: 28px;
+    &::after {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.7) 100%);
     }
   }
 
-  .case-copy-title {
-    // Offset with padding so the divider above still runs edge to edge
-    margin: 0 calc(-1 * var(--case-bleed));
-    padding: 24px var(--case-bleed) 0 calc(var(--case-bleed) + var(--case-offset));
-    border-top: 1px solid #ffffff1f;
-    font-size: 1.5rem;
-    font-weight: 600;
+  // Phone screenshot anchored to the top edge
+  .case-hero-card-top {
+    object-position: top center;
+  }
+
+  // Darken the lower half so the text reads over the artwork
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 30%,
+      rgba(0, 0, 0, 0.62) 68%,
+      rgba(0, 0, 0, 0.9) 100%
+    );
+  }
+
+  &--main {
+    aspect-ratio: 322 / 268;
+  }
+}
+
+.case-hero-card-body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  padding: clamp(14px, 2vw, 28px);
+}
+
+.case-hero-card-title {
+  max-width: 18em;
+  font-size: clamp(1.05rem, 1.75vw, 1.65rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
+.case-hero-card-note {
+  font-size: clamp(0.85rem, 1.05vw, 1rem);
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+// Small dark pill in the top-left corner of a card
+.case-chip {
+  position: absolute;
+  top: clamp(10px, 1.4vw, 20px);
+  left: clamp(10px, 1.4vw, 20px);
+  z-index: 1;
+  padding: 6px 10px;
+  background-color: rgba(10, 10, 10, 0.85);
+  font-family: $primary-font-family;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+}
+
+// Figures row: label above, large serif number below, divider on top
+.case-stats {
+  display: flex;
+  gap: clamp(12px, 1.6vw, 24px);
+  margin-top: clamp(12px, 1.6vw, 24px);
+  padding-top: clamp(10px, 1.2vw, 16px);
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+
+  > div {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  dt {
+    font-family: $primary-font-family;
+    font-size: 0.66rem;
     line-height: 1.3;
-    letter-spacing: -0.02em;
+    color: rgba(255, 255, 255, 0.78);
   }
 
-  // Inline source links in the copy
-  .case-link {
-    color: inherit;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-    text-decoration-color: rgba(255, 255, 255, 0.4);
-    transition: text-decoration-color 0.2s ease;
-
-    &:hover,
-    &:focus-visible {
-      text-decoration-color: currentColor;
-    }
-
-    &:focus-visible {
-      outline: 2px solid $stroke-color;
-      outline-offset: 3px;
-    }
-  }
-
-  // Three tiles: exploded band, app screen, photo (proportions from the mockup).
-  // The row breaks out of the page gutter and runs edge to edge.
-  .case-showcase {
-    display: grid;
-    grid-template-columns: minmax(0, 338fr) minmax(0, 334fr) minmax(0, 388fr);
-    gap: 12px;
-    margin: 108px calc(-1 * #{$case-gutter}) 0;
-  }
-
-  // Light-blue tiles with artwork inset and centred
-  .case-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 10%;
-    background-color: #dbf4ff;
-
-    // Exploded band: fills the padded area
-    &--image {
-      aspect-ratio: 338 / 480;
-
-      img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      }
-    }
-
-    // App screen: phone-shaped screenshot centred at 80% of the tile's height
-    &--screen {
-      aspect-ratio: 334 / 480;
-      align-items: center;
-
-      img {
-        display: block;
-        height: 100%;
-        width: auto;
-        max-width: 100%;
-        object-fit: contain;
-        border-radius: 5.5% / 2.5%;
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-      }
-    }
-  }
-
-  // Small note beneath a showcase row, e.g. an image credit
-  .case-caption {
-    grid-column: 1 / -1;
-    margin-top: -4px;
-    padding-right: $case-gutter;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 1.4;
-    letter-spacing: 0;
-    text-transform: uppercase;
-    text-align: right;
-    color: $muted-text;
-  }
-
-  .case-photo {
-    aspect-ratio: 388 / 480;
-    overflow: hidden;
-    background-color: $secondary-color;
-
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  .case-process {
-    margin-top: 64px;
-  }
-
-  .case-heading {
-    max-width: 15em;
-    margin-bottom: 72px;
-    font-size: clamp(2rem, 3.1vw, 2.75rem);
-    font-weight: 500;
-    line-height: 1.17;
-    letter-spacing: -0.03em;
-  }
-
-  .case-figure {
-    background-color: #ffffff;
-
-    // Soft-cornered panel for static diagrams
-    &--rounded {
-      border-radius: 14px;
-      overflow: hidden;
-    }
-
-    // Space between stacked heading + figure pairs
-    + .case-heading {
-      margin-top: 110px;
-    }
-
-    img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    // Embeds (e.g. Figma) fill the column and keep a 16:9 frame
-    iframe {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 16 / 9;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-    }
-  }
-
-  // Closing statement: small blue label over a centred serif paragraph
-  .case-conclusion {
-    padding-top: 140px;
-  }
-
-  // Light-blue rule down the left edge, spanning label and paragraph
-  .case-conclusion-inner {
-    max-width: 950px;
-    margin: 0 auto;
-    padding-left: 40px;
-    border-left: 8px solid #dbf4ff;
-  }
-
-  .case-conclusion-label {
-    margin-bottom: 8px;
-    font-size: 1.115rem;
-    font-weight: 500;
-    line-height: 1.4;
-    letter-spacing: -0.02em;
-    color: #dbf4ff;
-  }
-
-  .case-conclusion p {
-    font-family: $serif-font-family;
-    font-size: clamp(1.25rem, 2.25vw, 2rem);
+  dd {
+    margin-top: 4px;
+    font-size: clamp(1.7rem, 3.4vw, 3.6rem);
     font-weight: 400;
-    line-height: 1.32;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+  }
+
+  &--single {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+
+    dd {
+      font-size: clamp(1.5rem, 2.6vw, 2.75rem);
+    }
+  }
+}
+
+// --- Title and meta -------------------------------------------------------
+
+.case-title {
+  padding: clamp(28px, 3vw, 44px) $case-gutter clamp(32px, 3.6vw, 56px);
+}
+
+.case-headline {
+  margin-bottom: clamp(28px, 3vw, 44px);
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: $global-lt-spacing;
+}
+
+// Three short columns, each with a thin rule under its label
+.case-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+
+  > div {
+    flex: 0 0 auto;
+    width: clamp(150px, 15vw, 220px);
+  }
+
+  dt {
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    font-size: clamp(1.05rem, 1.35vw, 1.3rem);
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  dd {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #4a4a4a;
+  }
+}
+
+// --- Story ----------------------------------------------------------------
+
+.case-story {
+  padding: clamp(80px, 8.5vw, 125px) 0 $case-gutter;
+  background-color: $case-dark;
+  color: #ffffff;
+
+  .case-panel + .case-panel {
+    margin-top: 12px;
+  }
+}
+
+// Copy sits in the right half of the page
+.case-story-copy {
+  width: min(640px, calc(50% - #{$case-gutter}));
+  margin: 0 0 clamp(56px, 6vw, 90px) 50%;
+  font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  text-wrap: pretty;
+
+  p + p {
+    margin-top: 1.2em;
+  }
+}
+
+// Inline source links in the copy
+.case-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+  transition: text-decoration-color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration-color: currentColor;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $stroke-color;
+    outline-offset: 3px;
+  }
+}
+
+// Panel 1: three phones side by side, bleeding off the bottom edge
+.case-screens {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(12px, 2.4vw, 36px);
+  padding: clamp(24px, 3.5vw, 52px) $case-gutter 0;
+}
+
+.case-phone {
+  position: relative;
+  flex: 0 1 clamp(150px, 20vw, 290px);
+  min-width: 0;
+  aspect-ratio: 9 / 19.5;
+  margin: 0 0 -3%;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  border-radius: clamp(14px, 1.6vw, 24px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  // Photo screen: zoomed past the tile's pixel border, headline over a fade
+  .case-phone-photo {
+    object-position: 42% 50%;
+    transform: scale(1.75);
+    transform-origin: 50% 46%;
+  }
+
+  .case-phone-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 60% 9% 20%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.85) 60%);
+    font-size: clamp(1.05rem, 1.7vw, 1.6rem);
+    line-height: 1.15;
     letter-spacing: -0.01em;
-    color: #ffffff;
-    // Avoid a single short word stranded on the last line
     text-wrap: pretty;
   }
 }
 
-@media (max-width: 900px) {
-  .case-study {
-    // Story column spans the full width on narrower screens
-    .case-intro-inner {
-      --case-offset: 0px;
-    }
+// Grey wireframe standing in for a screen that isn't designed yet
+.case-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  padding: 14% 9% 10%;
+  background-color: #1d1d1d;
 
-    // Label stacks above its copy
-    .case-row {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 14px;
-      padding-bottom: 40px;
-    }
+  span {
+    display: block;
+    height: 10px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 
-    // Two tiles side by side, photo full width beneath them
-    .case-showcase {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+  .is-short {
+    width: 55%;
+  }
 
-    .case-photo {
-      grid-column: 1 / -1;
-      aspect-ratio: 16 / 10;
+  .is-title {
+    width: 80%;
+    height: 26px;
+    margin: 18px 0 6px;
+    background-color: rgba(255, 255, 255, 0.16);
+  }
+
+  .is-media {
+    flex: 1 1 auto;
+    min-height: 100px;
+    margin: 12px 0;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
+// Panel 2: artwork on a cream card, copy and feature list beside it
+.case-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+  padding: clamp(32px, 5vw, 72px) clamp(24px, 9vw, 130px);
+}
+
+.case-feature-media {
+  display: flex;
+  aspect-ratio: 4 / 3;
+  padding: 10%;
+  background-color: $case-frame;
+  border-radius: 2px;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.case-feature-text {
+  h3 {
+    font-size: clamp(1.5rem, 2.3vw, 2.1rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    text-wrap: pretty;
+  }
+
+  p {
+    margin-top: 14px;
+    font-family: $primary-font-family;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    color: rgba(255, 255, 255, 0.72);
+  }
+}
+
+.case-feature-list {
+  margin-top: 24px;
+  list-style: none;
+
+  li {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    font-family: $primary-font-family;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+
+    &::before {
+      content: "\2733";
+      flex: 0 0 auto;
+      color: $case-accent;
     }
   }
 }
 
-@media (max-width: 700px) {
-  .page-header--dark {
-    .nav-bar {
-      background-color: rgba($case-bg, 0.72);
+// Panel 3: two browser-style frames filling the panel height
+.case-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  height: clamp(360px, 52vw, 760px);
+  padding: 0 $case-gutter;
+}
 
-      .nav-links a {
-        color: #b4b4b4;
-      }
+.case-browser {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  background-color: #ffffff;
+  color: $case-ink;
+  border-radius: 2px;
+
+  &--dark {
+    background-color: #161616;
+    color: #ffffff;
+
+    .case-browser-head {
+      border-bottom-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+}
+
+// Mock site header: brand on the left, page title underneath
+.case-browser-head {
+  flex: 0 0 auto;
+  padding: clamp(14px, 1.6vw, 22px) clamp(16px, 2vw, 28px) clamp(10px, 1.2vw, 16px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.case-browser-brand {
+  display: block;
+  font-family: $primary-font-family;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: $global-lt-spacing;
+  text-transform: uppercase;
+}
+
+.case-browser-title {
+  display: block;
+  margin-top: 10px;
+  font-size: clamp(1.2rem, 1.9vw, 1.8rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
+}
+
+.case-browser-media {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: clamp(12px, 1.6vw, 22px);
+  // The flowchart is wide, so it keeps its height and scrolls sideways
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+
+  img {
+    display: block;
+    width: auto;
+    height: 100%;
+    max-width: none;
+  }
+
+  // Figma embed fills the frame
+  iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+}
+
+// Small note beneath the panels, e.g. an image credit
+.case-caption {
+  padding: 14px $case-gutter 0;
+  font-family: $primary-font-family;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-transform: uppercase;
+  text-align: right;
+  color: $muted-text;
+}
+
+// --- Related --------------------------------------------------------------
+
+.case-related {
+  padding: clamp(32px, 3.4vw, 48px) $case-gutter 0;
+}
+
+.case-related-label {
+  margin-bottom: 14px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.case-related-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  list-style: none;
+
+  li {
+    width: clamp(120px, 11.8vw, 170px);
+  }
+
+  a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover img,
+    &:focus-visible img {
+      filter: none;
     }
 
-    // The nav is fixed here, so the panel starts below it
-    .case-hero {
-      margin-top: 72px;
-      padding: 40px 24px;
+    &:focus-visible {
+      outline: 2px solid $case-ink;
+      outline-offset: 3px;
+    }
+  }
+}
+
+// Grey tile; project artwork fades in from greyscale on hover
+.case-related-tile {
+  display: block;
+  aspect-ratio: 170 / 210;
+  overflow: hidden;
+  background-color: #e3e3e3;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1);
+    transition: filter 0.3s ease;
+  }
+}
+
+.case-related-name {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #555555;
+}
+
+// --- Responsive -----------------------------------------------------------
+
+@media (max-width: 900px) {
+  // Copy spans the full width on narrower screens
+  .case-story-copy {
+    width: auto;
+    margin-left: 0;
+    padding: 0 $case-gutter;
+  }
+
+  .case-feature {
+    grid-template-columns: minmax(0, 1fr);
+    padding-left: clamp(24px, 5vw, 48px);
+    padding-right: clamp(24px, 5vw, 48px);
+  }
+
+  .case-split {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+  }
+
+  .case-browser {
+    aspect-ratio: 4 / 3.6;
+  }
+}
+
+@media (max-width: 700px) {
+  // The nav is fixed here, so the hero starts below it
+  .case-hero {
+    padding-top: 82px;
+  }
+
+  .case-panel--hero {
+    padding: 24px 16px;
+  }
+
+  .case-frame {
+    padding: 6px;
+  }
+
+  // Main card on top, the two small cards side by side beneath it
+  .case-hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .case-hero-stack {
+    grid-template-rows: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+
+    .case-hero-card {
+      aspect-ratio: 1 / 1;
     }
   }
 
-  .case-study {
-    padding: 0 20px 60px;
+  .case-hero-card--main {
+    aspect-ratio: 4 / 3.4;
+  }
 
-    .case-intro-inner {
-      --case-bleed: 20px;
-      padding-top: 80px;
+  .case-stats {
+    gap: 10px;
+
+    dt {
+      font-size: 0.6rem;
     }
+  }
 
-    .case-headline {
-      margin-bottom: 40px;
-    }
+  .case-meta > div {
+    width: calc(50% - 11px);
+  }
 
-    .case-copy {
-      font-size: 1.125rem;
-    }
+  .case-story {
+    padding-top: 56px;
+  }
 
-    .case-copy-title {
-      font-size: 1.25rem;
-    }
+  .case-screens {
+    gap: 10px;
+  }
 
-    .case-showcase {
-      grid-template-columns: minmax(0, 1fr);
-      margin: 60px -20px 0;
-      gap: 12px;
-    }
+  .case-phone {
+    margin-bottom: -4%;
+  }
 
-    .case-caption {
-      padding-right: 20px;
-    }
+  .case-browser {
+    aspect-ratio: 4 / 4.2;
+  }
 
-    .case-photo {
-      aspect-ratio: 4 / 5;
-    }
-
-    .case-process {
-      margin-top: 48px;
-    }
-
-    .case-conclusion {
-      padding-top: 80px;
-    }
-
-    .case-conclusion-inner {
-      padding-left: 20px;
-      border-left-width: 5px;
-    }
-
-    .case-heading {
-      margin-bottom: 36px;
-    }
-
-    .case-figure + .case-heading {
-      margin-top: 64px;
-    }
-
-    // Keep the flowchart legible: let it scroll sideways instead of shrinking
-    .case-figure {
-      overflow-x: auto;
-
-      img {
-        width: 760px;
-        max-width: none;
-      }
-
-      // Taller frame so the embedded canvas is usable on a phone
-      iframe {
-        aspect-ratio: 3 / 4;
-      }
-    }
+  .case-related-list li {
+    width: calc((100% - 28px) / 3);
   }
 }
 
