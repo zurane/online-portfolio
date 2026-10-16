@@ -464,11 +464,74 @@ function initContactForm() {
 }
 
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// Story copy clamp
+// Case study copy with more than three paragraphs is cut off just below the
+// third one, so the next paragraph ghosts into a fade, with a "Read more"
+// control beneath. Copy of three paragraphs or fewer is left as it is.
+// ---------------------------------------------------------------------------
+function initStoryClamp() {
+    const VISIBLE_PARAGRAPHS = 3;
+
+    document.querySelectorAll('.case-story-copy').forEach((copy) => {
+        const paragraphs = copy.querySelectorAll(':scope > p');
+        if (paragraphs.length <= VISIBLE_PARAGRAPHS) return;
+
+        // Wrap the paragraphs so the control can sit outside the clipped box
+        const text = document.createElement('div');
+        text.className = 'case-story-text';
+        while (copy.firstChild) text.appendChild(copy.firstChild);
+        copy.appendChild(text);
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'case-story-more';
+        button.textContent = 'Read more';
+        button.setAttribute('aria-expanded', 'false');
+        copy.appendChild(button);
+
+        const lastVisible = paragraphs[VISIBLE_PARAGRAPHS - 1];
+        let open = false;
+
+        // Cut a line and a half below the last visible paragraph
+        function measure() {
+            const lineHeight = parseFloat(getComputedStyle(lastVisible).lineHeight) || 24;
+            const bottom = lastVisible.getBoundingClientRect().bottom - text.getBoundingClientRect().top;
+            text.style.setProperty('--clamp-height', `${Math.round(bottom + lineHeight * 1.5)}px`);
+        }
+
+        function setOpen(next) {
+            open = next;
+            if (open) {
+                // Grow to the full height first so the max-height can animate,
+                // then let the box size itself once the transition has run
+                text.style.setProperty('--clamp-height', `${text.scrollHeight}px`);
+                text.addEventListener('transitionend', () => {
+                    if (open) copy.classList.remove('is-clamped');
+                }, { once: true });
+            } else {
+                measure();
+                copy.classList.add('is-clamped');
+            }
+            button.textContent = open ? 'Read less' : 'Read more';
+            button.setAttribute('aria-expanded', String(open));
+        }
+
+        button.addEventListener('click', () => setOpen(!open));
+        window.addEventListener('resize', () => { if (!open) measure(); });
+        if (document.fonts) document.fonts.ready.then(() => { if (!open) measure(); });
+
+        copy.classList.add('is-clamped');
+        measure();
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     splitWords();
     initNavAlign();
     initNavTime();
     initContactForm();
+    initStoryClamp();
     initMobileNav();
     shufflePortfolio();
     initPortfolioTabs();
