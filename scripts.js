@@ -71,8 +71,8 @@ function initSmoothScroll() {
     }
     requestAnimationFrame(raf);
 
-    // On small screens the nav bar is fixed, so targets need to land below it.
-    // Measured as the logo row only (bar height minus the dropdown list).
+    // The header floats over the hero rather than sitting fixed, so this
+    // normally returns 0; kept so a fixed bar would still be accounted for.
     function fixedHeaderHeight() {
         const bar = document.querySelector('.nav-bar');
         if (!bar || getComputedStyle(bar).position !== 'fixed') return 0;
@@ -223,15 +223,14 @@ function initPreloader() {
 }
 
 // ---------------------------------------------------------------------------
-// Mobile menu
-// The hamburger toggles an `is-open` class on the nav bar; CSS does the rest.
+// Menu
+// The square button toggles an `is-open` class on the nav bar, which reveals
+// the full-screen overlay of links; CSS does the rest.
 function initMobileNav() {
     const navBar = document.querySelector('.nav-bar');
     const toggle = document.getElementById('navToggle');
     const links = document.getElementById('navLinks');
     if (!navBar || !toggle || !links) return;
-
-    const mobile = window.matchMedia('(max-width: 700px)');
 
     function setOpen(open) {
         navBar.classList.toggle('is-open', open);
@@ -265,11 +264,6 @@ function initMobileNav() {
             setOpen(false);
             toggle.focus();
         }
-    });
-
-    // Leaving the mobile breakpoint resets everything
-    mobile.addEventListener('change', (event) => {
-        if (!event.matches && isOpen()) setOpen(false);
     });
 }
 
@@ -340,38 +334,6 @@ function initPortfolioTabs() {
 
     const active = tabs.find((tab) => tab.getAttribute('aria-pressed') === 'true') || tabs[0];
     apply(active.dataset.filter || 'all', false);
-}
-
-// ---------------------------------------------------------------------------
-// Nav alignment
-// The intro headline wraps short of its column, so the last nav link is pulled
-// in to sit above the right edge of the longest headline line (--nav-inset).
-// ---------------------------------------------------------------------------
-function initNavAlign() {
-    const list = document.querySelector('.nav-links');
-    const inner = document.querySelector('.intro-inner');
-    const headline = document.querySelector('.intro-headline');
-    if (!list || !inner || !headline) return;
-
-    function measure() {
-        // The stacked mobile menu doesn't follow the intro column
-        if (getComputedStyle(list).position !== 'absolute') {
-            list.style.removeProperty('--nav-inset');
-            return;
-        }
-        let right = 0;
-        headline.querySelectorAll('.word').forEach((word) => {
-            right = Math.max(right, word.getBoundingClientRect().right);
-        });
-        if (!right) return;
-        const inset = Math.max(0, inner.getBoundingClientRect().right - right);
-        list.style.setProperty('--nav-inset', inset.toFixed(1) + 'px');
-    }
-
-    measure();
-    window.addEventListener('resize', measure);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
-    document.addEventListener('preloader:done', measure, { once: true });
 }
 
 // ---------------------------------------------------------------------------
@@ -528,7 +490,6 @@ function initStoryClamp() {
 
 document.addEventListener('DOMContentLoaded', () => {
     splitWords();
-    initNavAlign();
     initNavTime();
     initContactForm();
     initStoryClamp();

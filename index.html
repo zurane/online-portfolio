@@ -31,28 +31,45 @@
                 <li><a href="#work">Work</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <!-- Local time in Johannesburg, kept ticking by initNavTime() -->
-            <time class="nav-time" id="navTime" aria-hidden="true"></time>
         </nav>
     </header>
     <main>
-        <!-- Intro section -->
+        <!-- Intro: split hero. Headline and sign-off on the left, scattered gallery on the right -->
         <section class="section-intro" id="about">
-            <div class="intro-inner">
-                <span class="intro-overline reveal"></span>
+            <div class="intro-panel">
                 <h2 class="intro-headline reveal text-reveal" data-split="words">
-                    Hi, I’m Mpho — a digital designer and frontend developer crafting clear, thoughtful
-                    experiences across digital products, websites, and visual systems.
+                    Crafting clear, thoughtful experiences across products, websites, and visual systems.
                 </h2>
-
-                <div class="intro-body">
-
-                    <div class="intro-aside reveal reveal-stagger-2">
-
-                        <a href="#" class="intro-link">More about me <span
-                                class="material-symbols-outlined">arrow_forward</span></a>
-                    </div>
-                    
+                <p class="intro-signoff reveal reveal-stagger-3">
+                    <span>Mpho Lebona &mdash; digital designer &amp; frontend developer, Johannesburg</span>
+                    <!-- Local time in Johannesburg, kept ticking by initNavTime() -->
+                    <time class="intro-time" id="navTime" aria-hidden="true"></time>
+                </p>
+            </div>
+            <!-- Decorative: each tile's --tile colour shows until its image lands -->
+            <div class="intro-gallery" aria-hidden="true">
+                <div class="intro-gallery-grid">
+                    <figure class="intro-tile reveal reveal-stagger-1" style="--tile: #e3c48f">
+                        <img src="./assets/safety-band-tile.jpg" alt="" />
+                    </figure>
+                    <figure class="intro-tile reveal reveal-stagger-2" style="--tile: #e2735f">
+                        <img src="./assets/carndiy.jpg" alt="" />
+                    </figure>
+                    <figure class="intro-tile reveal reveal-stagger-3" style="--tile: #e3c48f">
+                        <img src="./assets/pixel-art-103x128.png" alt="" />
+                    </figure>
+                    <figure class="intro-tile reveal reveal-stagger-4" style="--tile: #b3a4e0">
+                        <img src="./assets/dithered-intro-img.jpg" alt="" />
+                    </figure>
+                    <figure class="intro-tile reveal reveal-stagger-5" style="--tile: #f0d13f">
+                        <img src="./assets/pixel-art-94x117.png" alt="" />
+                    </figure>
+                    <figure class="intro-tile reveal reveal-stagger-6" style="--tile: #b3a4e0">
+                        <img src="./assets/home-dashboard.png" alt="" />
+                    </figure>
+                    <figure class="intro-tile reveal reveal-stagger-7" style="--tile: #7a8f4e">
+                        <img src="./assets/pixel-art-89x89.png" alt="" />
+                    </figure>
                 </div>
             </div>
         </section>
@@ -71,7 +88,7 @@
         <!-- portfolio cards: the whole card is the link, so cover images are decorative -->
         <section class="portfolio-grid">
             <div class="portfolio-list" id="portfolio-list">
-              
+
                 <article class="portfolio reveal reveal-stagger-2" data-category="ui-ux">
                     <a href="./portfolio/safeband.html" class="portfolio-link">
                         <div class="portfolio-media">
@@ -79,7 +96,8 @@
                         </div>
                         <div class="portfolio-bar">
                             <h3 class="portfolio-title">Safeband</h3>
-                            <span class="portfolio-overline">A wearable that keeps children safe on the way to school.</span>
+                            <span class="portfolio-overline">A wearable that keeps children safe on the way to
+                                school.</span>
                         </div>
                     </a>
                 </article>
@@ -87,8 +105,7 @@
                 <article class="portfolio reveal reveal-stagger-3" data-category="web-app ui-ux">
                     <a href="#" class="portfolio-link">
                         <div class="portfolio-media">
-                            <img src="assets/carndiy.jpg"
-                                alt="" loading="lazy" />
+                            <img src="assets/carndiy.jpg" alt="" loading="lazy" />
                             <span class="portfolio-badge">Coming soon</span>
                         </div>
                         <div class="portfolio-bar">
@@ -101,8 +118,7 @@
                 <article class="portfolio reveal reveal-stagger-4" data-category="website">
                     <a href="#" class="portfolio-link">
                         <div class="portfolio-media">
-                            <img src="assets/pixel-art-103x128.png"
-                                alt="" loading="lazy" />
+                            <img src="assets/pixel-art-103x128.png" alt="" loading="lazy" />
                             <span class="portfolio-badge">Coming soon</span>
                         </div>
                         <div class="portfolio-bar">
