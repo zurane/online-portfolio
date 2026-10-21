@@ -17,6 +17,16 @@ $portfolio-gutter: 20px;
 $bleed-gutter: 24px;
 $bleed-gap: 20px;
 $muted-text: #8c8c8c;
+// Muted text on the white portfolio section (5.3:1 against #fff)
+$muted-on-light: #6b6b6b;
+$ink-on-light: #111111;
+// Display titles (hero headline, section headings): Switzer Semibold,
+// 80px on desktop with 1:1 leading and -3.2px tracking (-0.04em)
+$title-size: clamp(2.4rem, 4.6vw, 5rem);
+$title-weight: 600;
+$title-leading: 1;
+$title-tracking: -0.04em;
+$title-color: #3c3c3c;
 
 // Scroll Reveal Animations
 @keyframes slideInUp {
@@ -124,22 +134,27 @@ $menu-ease: cubic-bezier(0.76, 0, 0.24, 1);
     align-items: center;
     padding: 28px $nav-gutter;
 
+    // Brand: the black and white SVG marks share one grid cell and crossfade,
+    // so the mark stays legible when the dark menu overlay opens
     .nav-brand {
       pointer-events: auto;
-      // The ɰ glyph hangs below the baseline, so lift it to sit optically
-      // level with the menu button
       position: relative;
       z-index: 2;
-      top: -0.16em;
+      display: grid;
       text-decoration: none;
-      line-height: 1;
-      text-transform: uppercase;
-      font-family: $primary-font-family;
-      font-size: 3.65rem;
-      color: #000000;
-      font-weight: 900;
-      letter-spacing: $global-lt-spacing;
-      transition: color 0.4s ease;
+      line-height: 0;
+    }
+
+    .nav-brand-logo {
+      grid-area: 1 / 1;
+      display: block;
+      width: auto;
+      height: 34px;
+      transition: opacity 0.4s ease;
+    }
+
+    .nav-brand-logo--white {
+      opacity: 0;
     }
 
     // Clock moved into the hero sign-off on the home page; hidden if a page still carries it here
@@ -249,8 +264,12 @@ $menu-ease: cubic-bezier(0.76, 0, 0.24, 1);
     }
 
     &.is-open {
-      .nav-brand {
-        color: $primary-color;
+      .nav-brand-logo--black {
+        opacity: 0;
+      }
+
+      .nav-brand-logo--white {
+        opacity: 1;
       }
 
       .nav-links {
@@ -294,10 +313,11 @@ body.menu-open {
 
 main {
   // Intro: a full-height split. The left panel carries the headline with a
-  // sign-off pinned to its bottom edge; the right panel is a scattered gallery
-  // of square tiles on a slightly deeper tone of the same warm ground.
+  // sign-off pinned to its bottom edge; the right panel is one dithered
+  // portrait. $intro-bg-alt is sampled from that PNG's backdrop so the square
+  // image disappears into the panel.
   $intro-bg: #f2f0eb;
-  $intro-bg-alt: #e9e5df;
+  $intro-bg-alt: #d8d7d2;
   $intro-ink: #2b2b2b;
 
   .section-intro {
@@ -320,10 +340,11 @@ main {
     .intro-headline {
       margin: 0;
       max-width: 20ch;
-      font-size: clamp(2.4rem, 3.9vw, 4.5rem);
-      font-weight: 700;
-      line-height: 0.98;
-      letter-spacing: -0.03em;
+      font-size: $title-size;
+      font-weight: $title-weight;
+      line-height: $title-leading;
+      letter-spacing: $title-tracking;
+      color: $title-color;
 
       // Tight leading needs a deeper clip box so descenders survive the word reveal
       .word {
@@ -355,47 +376,26 @@ main {
       opacity: 0.6;
     }
 
-    // Gallery: tiles dropped onto a four-column grid at fixed cells, with the
-    // last column running off the right edge like a contact sheet that keeps going
-    .intro-gallery {
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      padding: 110px 0 50px 70px;
-      background-color: $intro-bg-alt;
-    }
-
-    .intro-gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 24px 20px;
-      width: calc(100% + 28px);
-    }
-
-    .intro-tile {
+    // Portrait: the square PNG covers the whole panel, pinned to the top so the
+    // head is never cropped on wide screens; the shoulders give way instead
+    .intro-portrait {
+      position: relative;
       margin: 0;
-      aspect-ratio: 10 / 11;
       overflow: hidden;
-      background-color: var(--tile, #d9d2c5);
+      background-color: $intro-bg-alt;
 
       img {
-        display: block;
+        position: absolute;
+        inset: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: 50% 0;
       }
-
-      &:nth-child(1) { grid-area: 1 / 1; }
-      &:nth-child(2) { grid-area: 1 / 2; }
-      &:nth-child(3) { grid-area: 2 / 2; }
-      &:nth-child(4) { grid-area: 2 / 3; }
-      &:nth-child(5) { grid-area: 2 / 4; }
-      &:nth-child(6) { grid-area: 3 / 1; }
-      &:nth-child(7) { grid-area: 3 / 2; }
     }
   }
 
-  // Tablet: the split stacks, and the gallery condenses onto three columns
+  // Tablet: the split stacks and the portrait becomes a full-width square
   @media (max-width: 900px) {
     .section-intro {
       grid-template-columns: 1fr;
@@ -411,24 +411,8 @@ main {
         font-size: clamp(2.4rem, 7vw, 4rem);
       }
 
-      .intro-gallery {
-        padding: 40px $nav-gutter 48px;
-      }
-
-      .intro-gallery-grid {
-        width: 100%;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
-      }
-
-      .intro-tile {
-        &:nth-child(1) { grid-area: 1 / 1; }
-        &:nth-child(2) { grid-area: 1 / 2; }
-        &:nth-child(3) { grid-area: 2 / 2; }
-        &:nth-child(4) { grid-area: 2 / 3; }
-        &:nth-child(5) { grid-area: 3 / 1; }
-        &:nth-child(6) { grid-area: 3 / 2; }
-        &:nth-child(7) { display: none; }
+      .intro-portrait {
+        aspect-ratio: 1;
       }
     }
   }
@@ -441,14 +425,26 @@ main {
     align-items: baseline;
     gap: 12px 24px;
     padding: 80px $bleed-gutter 18px;
-    background-color: #000000;
+    background-color: #ffffff;
+
+    // Section title on its own row above the tabs and count
+    .portfolio-heading {
+      flex: 1 0 100%;
+      margin: 0 0 28px;
+      font-family: $primary-font-family;
+      font-size: $title-size;
+      font-weight: $title-weight;
+      line-height: $title-leading;
+      letter-spacing: $title-tracking;
+      color: $title-color;
+    }
 
     p {
       font-family: $body-font-family;
       font-size: 14px;
       font-weight: 400 !important;
       letter-spacing: $global-lt-spacing;
-      color: $muted-text;
+      color: $muted-on-light;
     }
 
     .portfolio-tabs {
@@ -461,7 +457,7 @@ main {
       padding: 0;
       border: 0;
       background: none;
-      color: $muted-text;
+      color: $muted-on-light;
       font-family: $primary-font-family;
       font-size: 13px;
       text-transform: uppercase;
@@ -473,7 +469,7 @@ main {
       transition: color 0.2s ease;
 
       &:hover {
-        color: #c8c8c8;
+        color: $ink-on-light;
       }
 
       &:focus-visible {
@@ -482,7 +478,7 @@ main {
       }
 
       &[aria-pressed="true"] {
-        color: #ffffff;
+        color: $ink-on-light;
       }
     }
   }
@@ -490,7 +486,7 @@ main {
 
 // Full-bleed row of portrait cards: cover on top, title and categories below
 .portfolio-grid {
-  background-color: #000000;
+  background-color: #ffffff;
   border-bottom: 1px solid #00000010;
   padding: 0 $bleed-gutter 120px;
 
@@ -506,7 +502,7 @@ main {
     font-family: $body-font-family;
     font-size: 14px;
     letter-spacing: $global-lt-spacing;
-    color: $muted-text;
+    color: $muted-on-light;
 
     &[hidden] {
       display: none;
@@ -588,7 +584,7 @@ main {
       font-weight: 700;
       line-height: 1.4;
       letter-spacing: -0.01em;
-      color: #ffffff;
+      color: $ink-on-light;
     }
 
     .portfolio-overline {
@@ -598,7 +594,7 @@ main {
       font-size: 13px;
       font-weight: 400;
       line-height: 1.4;
-      color: $muted-text;
+      color: $muted-on-light;
     }
   }
 }
@@ -855,8 +851,8 @@ main {
   .page-header .nav-bar {
     padding: 18px $nav-gutter-mobile;
 
-    .nav-brand {
-      font-size: 2.3rem;
+    .nav-brand-logo {
+      height: 28px;
     }
 
     .nav-toggle {
@@ -932,18 +928,15 @@ main {
         font-size: 1rem;
       }
 
-      .intro-gallery {
-        padding: 28px $nav-gutter-mobile 36px;
-
-        .intro-gallery-grid {
-          gap: 10px;
-        }
-      }
     }
 
     .section-portfolio {
       gap: 12px;
       padding: 50px $bleed-gutter 14px;
+
+      .portfolio-heading {
+        margin-bottom: 18px;
+      }
 
       // Tabs become a single horizontally scrollable row
       .portfolio-tabs {

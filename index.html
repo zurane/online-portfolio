@@ -20,7 +20,11 @@
     </div>
     <header class="page-header">
         <nav class="nav-bar">
-            <a href="#" class="nav-brand" aria-label="Back to top">ɰ</a>
+            <a href="#" class="nav-brand" aria-label="Back to top">
+                <!-- Both marks are stacked; the white one fades in while the menu overlay is open -->
+                <img class="nav-brand-logo nav-brand-logo--black" src="./assets/Logo-black.svg" alt="" width="68" height="34" />
+                <img class="nav-brand-logo nav-brand-logo--white" src="./assets/Logo-white.svg" alt="" width="68" height="34" />
+            </a>
             <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false"
                 aria-controls="navLinks">
                 <span class="nav-toggle-bar"></span>
@@ -34,48 +38,26 @@
         </nav>
     </header>
     <main>
-        <!-- Intro: split hero. Headline and sign-off on the left, scattered gallery on the right -->
+        <!-- Intro: split hero. Headline and sign-off on the left, one full-height dithered portrait on the right -->
         <section class="section-intro" id="about">
             <div class="intro-panel">
                 <h2 class="intro-headline reveal text-reveal" data-split="words">
                     Designing intuitive, user-centered digital experiences and memorable visual identities.
                 </h2>
                 <p class="intro-signoff reveal reveal-stagger-3">
-                    <span>Mpho Lebona &mdash; digital designer &amp; frontend developer, Johannesburg</span>
+                    <span>Mpho Lebona &mdash; digital designer &amp;<br/> frontend developer, Johannesburg</span>
                     <!-- Local time in Johannesburg, kept ticking by initNavTime() -->
                     <time class="intro-time" id="navTime" aria-hidden="true"></time>
                 </p>
             </div>
-            <!-- Decorative: each tile's --tile colour shows until its image lands -->
-            <div class="intro-gallery" aria-hidden="true">
-                <div class="intro-gallery-grid">
-                    <figure class="intro-tile reveal reveal-stagger-1" style="--tile: #e3c48f">
-                        <img src="./assets/safety-band-tile.jpg" alt="" />
-                    </figure>
-                    <figure class="intro-tile reveal reveal-stagger-2" style="--tile: #e2735f">
-                        <img src="./assets/carndiy.jpg" alt="" />
-                    </figure>
-                    <figure class="intro-tile reveal reveal-stagger-3" style="--tile: #e3c48f">
-                        <img src="./assets/pixel-art-103x128.png" alt="" />
-                    </figure>
-                    <figure class="intro-tile reveal reveal-stagger-4" style="--tile: #b3a4e0">
-                        <img src="./assets/dithered-intro-img.jpg" alt="" />
-                    </figure>
-                    <figure class="intro-tile reveal reveal-stagger-5" style="--tile: #f0d13f">
-                        <img src="./assets/pixel-art-94x117.png" alt="" />
-                    </figure>
-                    <figure class="intro-tile reveal reveal-stagger-6" style="--tile: #b3a4e0">
-                        <img src="./assets/home-dashboard.png" alt="" />
-                    </figure>
-                    <figure class="intro-tile reveal reveal-stagger-7" style="--tile: #7a8f4e">
-                        <img src="./assets/pixel-art-89x89.png" alt="" />
-                    </figure>
-                </div>
-            </div>
+            <!-- Decorative: one dithered portrait fills the right panel. Its baked-in backdrop matches the panel colour -->
+            <figure class="intro-portrait reveal reveal-stagger-2" aria-hidden="true">
+                <img src="./assets/headshots/dither-profile-img.png" alt="Profile image of Mpho Lebona" />
+            </figure>
         </section>
         <!-- Portfolio section -->
         <section class="section-portfolio" id="work">
-            <h2 class="visually-hidden">Projects &amp; portfolio</h2>
+            <h2 class="portfolio-heading reveal">Selected work</h2>
             <!-- Filter tabs: data-filter matches a token in each card's data-category -->
             <div class="portfolio-tabs" role="group" aria-label="Filter projects">
                 <button class="portfolio-tab" type="button" aria-pressed="true" data-filter="all">All</button>
