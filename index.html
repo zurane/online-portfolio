@@ -32,7 +32,7 @@
             </button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#about">About</a></li>
-                <li><a href="#work">Work</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -56,8 +56,8 @@
             </figure>
         </section>
         <!-- Portfolio section -->
-        <section class="section-portfolio" id="work">
-            <h2 class="portfolio-heading reveal">Selected work</h2>
+        <section class="section-portfolio" id="portfolio">
+            <h2 class="portfolio-heading reveal">Portfolio</h2>
             <!-- Filter tabs: data-filter matches a token in each card's data-category -->
             <div class="portfolio-tabs" role="group" aria-label="Filter projects">
                 <button class="portfolio-tab" type="button" aria-pressed="true" data-filter="all">All</button>
@@ -67,7 +67,8 @@
             </div>
             <p class="portfolio-count" aria-live="polite">(4)</p>
         </section>
-        <!-- portfolio cards: the whole card is the link, so cover images are decorative -->
+        <!-- portfolio cards: the whole card is the link, so cover images are decorative.
+             The cover stays hidden behind the grey panel until hover/focus. -->
         <section class="portfolio-grid">
             <div class="portfolio-list" id="portfolio-list">
 
@@ -76,11 +77,11 @@
                         <div class="portfolio-media">
                             <img src="./assets/safety-band-tile.jpg" alt="" loading="lazy" />
                         </div>
-                        <div class="portfolio-bar">
+                        <div class="portfolio-head">
                             <h3 class="portfolio-title">Safeband</h3>
-                            <span class="portfolio-overline">A wearable that keeps children safe on the way to
-                                school.</span>
+                            <span class="portfolio-badge">Case study</span>
                         </div>
+                        <p class="portfolio-overline">A wearable that keeps children safe on the way to school.</p>
                     </a>
                 </article>
 
@@ -88,25 +89,25 @@
                     <a href="#" class="portfolio-link">
                         <div class="portfolio-media">
                             <img src="assets/carndiy.jpg" alt="" loading="lazy" />
+                        </div>
+                        <div class="portfolio-head">
+                            <h3 class="portfolio-title">Car DIY</h3>
                             <span class="portfolio-badge">Coming soon</span>
                         </div>
-                        <div class="portfolio-bar">
-                            <h3 class="portfolio-title">Car DIY</h3>
-                            <span class="portfolio-overline">Your guide to car maintenance and DIY tips.</span>
-                        </div>
+                        <p class="portfolio-overline">Your guide to car maintenance and DIY tips.</p>
                     </a>
                 </article>
 
                 <article class="portfolio reveal reveal-stagger-4" data-category="website">
                     <a href="#" class="portfolio-link">
                         <div class="portfolio-media">
-                            <img src="assets/pixel-art-103x128.png" alt="" loading="lazy" />
+                            <img src="assets/khuphuka-website-snap.jpg" alt="" loading="lazy" />
+                        </div>
+                        <div class="portfolio-head">
+                            <h3 class="portfolio-title">Khuphuka</h3>
                             <span class="portfolio-badge">Coming soon</span>
                         </div>
-                        <div class="portfolio-bar">
-                            <h3 class="portfolio-title">Khuphuka</h3>
-                            <span class="portfolio-overline">A Leadership training academy.</span>
-                        </div>
+                        <p class="portfolio-overline">A youth leadership and training academy.</p>
                     </a>
                 </article>
             </div>

@@ -20,6 +20,9 @@ $muted-text: #8c8c8c;
 // Muted text on the white portfolio section (5.3:1 against #fff)
 $muted-on-light: #6b6b6b;
 $ink-on-light: #111111;
+// Project card panel and the type size shared by its title and description
+$card-surface: #f2f2f2;
+$card-title-size: clamp(1.4rem, 1.9vw, 2rem);
 // Display titles (hero headline, section headings): Switzer Semibold,
 // 80px on desktop with 1:1 leading and -3.2px tracking (-0.04em)
 $title-size: clamp(2.4rem, 4.6vw, 5rem);
@@ -417,20 +420,19 @@ main {
     }
   }
 
-  // Portfolio section header: plain text filter tabs on the left, count on the right
+  // Portfolio section header: filter tabs on the left, title centred, count on the right
   .section-portfolio {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: baseline;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: end;
     gap: 12px 24px;
-    padding: 80px $bleed-gutter 18px;
+    padding: 80px $bleed-gutter 40px;
     background-color: #ffffff;
 
-    // Section title on its own row above the tabs and count
     .portfolio-heading {
-      flex: 1 0 100%;
-      margin: 0 0 28px;
+      grid-column: 2;
+      grid-row: 1;
+      margin: 0;
       font-family: $primary-font-family;
       font-size: $title-size;
       font-weight: $title-weight;
@@ -448,9 +450,18 @@ main {
     }
 
     .portfolio-tabs {
+      grid-column: 1;
+      grid-row: 1;
       display: flex;
       flex-wrap: wrap;
       gap: 4px 18px;
+    }
+
+    .portfolio-count {
+      grid-column: 3;
+      grid-row: 1;
+      justify-self: end;
+      margin: 0;
     }
 
     .portfolio-tab {
@@ -484,7 +495,7 @@ main {
   }
 }
 
-// Full-bleed row of portrait cards: cover on top, title and categories below
+// Full-bleed row of square project cards; the cover is revealed on hover
 .portfolio-grid {
   background-color: #ffffff;
   border-bottom: 1px solid #00000010;
@@ -515,10 +526,21 @@ main {
       display: none;
     }
 
+    // Grey panel: title and chip along the top, large description at the bottom.
+    // The cover image sits underneath and fades in on hover/focus.
     .portfolio-link {
-      display: block;
-      color: inherit;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 32px;
+      aspect-ratio: 1;
+      padding: clamp(20px, 2.2vw, 34px);
+      overflow: hidden;
+      background-color: $card-surface;
+      color: $ink-on-light;
       text-decoration: none;
+      isolation: isolate;
 
       &:focus-visible {
         outline: 2px solid $stroke-color;
@@ -527,74 +549,104 @@ main {
     }
 
     .portfolio-media {
-      position: relative;
-      display: block;
-      aspect-ratio: 4 / 5;
-      overflow: hidden;
-      background-color: $secondary-color;
-      // --blur and --blur-scale are set per frame by initScrollBlur() in scripts.js
-      --blur: 14px;
-      --blur-scale: 1.06;
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+
+      // Darkens the cover so the white text stays readable over any image
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.6) 100%);
+      }
 
       img {
         display: block;
         width: 100%;
         height: 100%;
         object-fit: cover;
-        filter: blur(var(--blur));
-        transform: scale(var(--blur-scale));
-        will-change: filter, transform;
-        transition: transform 0.6s ease;
+        transform: scale(1.06);
+        transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
       }
     }
 
-    .portfolio-link:hover .portfolio-media img,
-    .portfolio-link:focus-visible .portfolio-media img {
-      transform: scale(calc(var(--blur-scale) + 0.03));
+    .portfolio-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
     }
 
-    // Small status chip over the cover, e.g. "Coming soon"
+    // Title with a leading dot
+    .portfolio-title {
+      display: flex;
+      align-items: center;
+      gap: 0.85em;
+      margin: 0;
+      font-family: $primary-font-family;
+      font-size: $card-title-size;
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      transition: color 0.3s ease;
+
+      &::before {
+        content: "";
+        flex: 0 0 auto;
+        width: 0.38em;
+        height: 0.38em;
+        border-radius: 50%;
+        background-color: currentColor;
+      }
+    }
+
+    // Small status chip, e.g. "Coming soon"
     .portfolio-badge {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      z-index: 1;
-      padding: 6px 8px;
-      border-radius: 3px;
-      background-color: rgba(255, 255, 255, 0.14);
-      backdrop-filter: blur(6px);
-      color: rgba(255, 255, 255, 0.85);
+      flex: 0 0 auto;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background-color: #ffffff;
+      color: $muted-on-light;
       font-family: $primary-font-family;
       font-size: 11px;
       font-weight: 500;
       line-height: 1;
-    }
-
-    .portfolio-bar {
-      padding-top: 12px;
-      font-family: $primary-font-family;
-      letter-spacing: -0.01em;
-    }
-
-    .portfolio-title {
-      margin: 0;
-      font-family: $primary-font-family;
-      font-size: 13px;
-      text-transform: capitalize;
-      font-weight: 700;
-      line-height: 1.4;
-      letter-spacing: -0.01em;
-      color: $ink-on-light;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .portfolio-overline {
-      display: block;
-      margin-top: 2px;
-      font-family: $body-font-family;
-      font-size: 13px;
-      font-weight: 400;
-      line-height: 1.4;
-      color: $muted-on-light;
+      max-width: 14em;
+      margin: 0;
+      font-family: $primary-font-family;
+      font-size: $card-title-size;
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+      transition: color 0.3s ease;
+    }
+
+    .portfolio-link:hover,
+    .portfolio-link:focus-visible {
+      color: #ffffff;
+
+      .portfolio-media {
+        opacity: 1;
+      }
+
+      .portfolio-media img {
+        transform: scale(1);
+      }
+
+      .portfolio-badge {
+        background-color: rgba(255, 255, 255, 0.18);
+        color: #ffffff;
+        backdrop-filter: blur(6px);
+      }
     }
   }
 }
@@ -607,7 +659,7 @@ main {
 
 @media (prefers-reduced-motion: reduce) {
   main .section-portfolio .portfolio-tab,
-  .portfolio-grid .portfolio .portfolio-media img {
+  .portfolio-grid .portfolio * {
     transition: none !important;
   }
 }
@@ -930,17 +982,25 @@ main {
 
     }
 
+    // Title back on its own row; tabs and count share the row below
     .section-portfolio {
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 12px;
       padding: 50px $bleed-gutter 14px;
 
       .portfolio-heading {
+        grid-column: 1 / -1;
         margin-bottom: 18px;
+      }
+
+      .portfolio-count {
+        grid-column: 2;
+        grid-row: 2;
       }
 
       // Tabs become a single horizontally scrollable row
       .portfolio-tabs {
-        flex: 1 1 0;
+        grid-row: 2;
         min-width: 0;
         flex-wrap: nowrap;
         overflow-x: auto;

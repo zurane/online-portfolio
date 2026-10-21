@@ -96,51 +96,6 @@ function initSmoothScroll() {
 }
 
 // ---------------------------------------------------------------------------
-// Scroll blur on project covers
-// Each cover starts blurred and sharpens as it travels up into the viewport.
-// Progress 0 = image top at the bottom edge, 1 = image top 55% of the way up.
-// ---------------------------------------------------------------------------
-function initScrollBlur(lenis) {
-    const covers = document.querySelectorAll('.portfolio-media');
-    if (!covers.length) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        covers.forEach((el) => {
-            el.style.setProperty('--blur', '0px');
-            el.style.setProperty('--blur-scale', '1');
-        });
-        return;
-    }
-
-    const MAX_BLUR = 14;   // px at progress 0
-    const TRAVEL = 0.55;   // fraction of viewport height over which the blur clears
-    let ticking = false;
-
-    function update() {
-        ticking = false;
-        const vh = window.innerHeight;
-        covers.forEach((el) => {
-            const top = el.getBoundingClientRect().top;
-            const progress = Math.min(1, Math.max(0, (vh - top) / (vh * TRAVEL)));
-            // ease-out so the last bit of blur lingers then clears softly
-            const eased = 1 - Math.pow(1 - progress, 2);
-            el.style.setProperty('--blur', ((1 - eased) * MAX_BLUR).toFixed(2) + 'px');
-            el.style.setProperty('--blur-scale', (1 + (1 - eased) * 0.06).toFixed(4));
-        });
-    }
-
-    function request() {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(update);
-    }
-
-    if (lenis) lenis.on('scroll', request);
-    window.addEventListener('scroll', request, { passive: true });
-    window.addEventListener('resize', request);
-    update();
-}
-
-// ---------------------------------------------------------------------------
 // Preloader
 // Runs the label sequence over a minimum duration, waits for window load, then wipes
 // the overlay upward and fires "preloader:done".
@@ -502,7 +457,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('preloader:done', () => {
         if (lenis) lenis.start();
         initReveal();
-        initScrollBlur(lenis);
     }, { once: true });
 
     initPreloader();
