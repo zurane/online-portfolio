@@ -414,6 +414,12 @@ main {
         font-size: clamp(2.4rem, 7vw, 4rem);
       }
 
+      // Time always sits on its own line under the sign-off
+      .intro-signoff {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
       .intro-portrait {
         aspect-ratio: 1;
       }
