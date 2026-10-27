@@ -436,11 +436,11 @@ main {
     background-color: #ffffff;
 
     .portfolio-heading {
-      grid-column: 2;
+      grid-column: 1;
       grid-row: 1;
       margin: 0;
       font-family: $primary-font-family;
-      font-size: $title-size;
+      font-size: clamp(2rem, 3vw, 1.25rem);
       font-weight: $title-weight;
       line-height: $title-leading;
       letter-spacing: $title-tracking;
@@ -456,11 +456,12 @@ main {
     }
 
     .portfolio-tabs {
-      grid-column: 1;
+      grid-column: 2;
       grid-row: 1;
       display: flex;
       flex-wrap: wrap;
       gap: 4px 18px;
+      justify-content: center;
     }
 
     .portfolio-count {
@@ -1006,6 +1007,8 @@ main {
 
       // Tabs become a single horizontally scrollable row
       .portfolio-tabs {
+        grid-column: 1;
+        justify-content: flex-start;
         grid-row: 2;
         min-width: 0;
         flex-wrap: nowrap;

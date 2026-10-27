@@ -357,11 +357,11 @@ main .section-portfolio {
   background-color: #ffffff;
 }
 main .section-portfolio .portfolio-heading {
-  grid-column: 2;
+  grid-column: 1;
   grid-row: 1;
   margin: 0;
   font-family: "Switzer", sans-serif;
-  font-size: clamp(2.4rem, 4.6vw, 5rem);
+  font-size: clamp(2rem, 3vw, 1.25rem);
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.04em;
@@ -375,11 +375,12 @@ main .section-portfolio p {
   color: #6b6b6b;
 }
 main .section-portfolio .portfolio-tabs {
-  grid-column: 1;
+  grid-column: 2;
   grid-row: 1;
   display: flex;
   flex-wrap: wrap;
   gap: 4px 18px;
+  justify-content: center;
 }
 main .section-portfolio .portfolio-count {
   grid-column: 3;
@@ -840,6 +841,8 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
     grid-row: 2;
   }
   main .section-portfolio .portfolio-tabs {
+    grid-column: 1;
+    justify-content: flex-start;
     grid-row: 2;
     min-width: 0;
     flex-wrap: nowrap;
