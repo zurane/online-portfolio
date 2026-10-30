@@ -489,7 +489,7 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
   gap: 0.85em;
   margin: 0;
   font-family: "Switzer", sans-serif;
-  font-size: clamp(1.4rem, 1.9vw, 2rem);
+  font-size: clamp(1.15rem, 1.4vw, 1.5rem);
   font-weight: 400;
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -510,7 +510,7 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
   background-color: #ffffff;
   color: #6b6b6b;
   font-family: "Switzer", sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
   line-height: 1;
   text-transform: uppercase;
@@ -521,7 +521,7 @@ main .section-portfolio .portfolio-tab[aria-pressed=true] {
   max-width: 14em;
   margin: 0;
   font-family: "Switzer", sans-serif;
-  font-size: clamp(1.4rem, 1.9vw, 2rem);
+  font-size: clamp(1.15rem, 1.4vw, 1.5rem);
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.04em;
