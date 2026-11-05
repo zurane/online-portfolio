@@ -12,240 +12,118 @@
     <title>Safeband</title>
 </head>
 
-<body class="page-case-study">
-    <header class="page-header page-header--case">
+<body>
+    <header class="page-header">
         <nav class="nav-bar">
             <a href="../index.html" class="nav-brand" aria-label="Back to home">
-                <!-- Both marks are stacked; the white one fades in while the menu overlay is open -->
-                <img class="nav-brand-logo nav-brand-logo--black" src="../assets/Logo-black.svg" alt="" width="68" height="34" />
-                <img class="nav-brand-logo nav-brand-logo--white" src="../assets/Logo-white.svg" alt="" width="68" height="34" />
+                <img class="nav-brand-logo" src="../assets/Logo-black.svg" alt="" width="68" height="34" />
             </a>
-            <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false"
-                aria-controls="navLinks">
-                <span class="nav-toggle-bar"></span>
-                <span class="nav-toggle-bar"></span>
-            </button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="../index.html#about">About</a></li>
-                <li><a href="../index.html#work">Work</a></li>
-                <li><a href="../index.html#contact">Contact</a></li>
-            </ul>
         </nav>
     </header>
 
     <main class="case-study">
-        <h1 class="visually-hidden">Safeband</h1>
+        <!-- Title block: same type and clock as the home page intro -->
+        <section class="section-intro">
+            <a class="case-back" href="../index.html" aria-label="Back to all work">
+                <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1"
+                    aria-hidden="true">
+                    <path d="M18 10H2.5M10 2.5 2.5 10l7.5 7.5" />
+                </svg>
+            </a>
+            <h1 class="intro-headline reveal text-reveal" data-split="words">Safeband</h1>
+            <!-- Local time in Johannesburg, kept ticking by initNavTime() -->
+            <time class="intro-time reveal reveal-stagger-3" id="navTime" aria-hidden="true"></time>
+        </section>
 
-        <!-- Hero: full-bleed dark panel with a prism light leak and a framed card inside -->
+        <!-- Hero: full-bleed prism band holding one dark card -->
         <section class="case-hero">
-            <div class="case-panel case-panel--hero">
-                <div class="case-frame">
-                    <div class="case-hero-grid">
-                        <article class="case-hero-card case-hero-card--main">
-                            <img src="../assets/safe-band.png"
-                                alt="Five children in school uniform walking together along a township road" />
-                            <span class="case-chip">Case study</span>
-                            <div class="case-hero-card-body">
-                                <p class="case-hero-card-title">Safeband gives parents a live view of their child’s
-                                    journey to school.</p>
-                                <dl class="case-stats">
-                                    <div>
-                                        <dt>Reported children found</dt>
-                                        <dd>77%</dd>
-                                    </div>
-                                    <div>
-                                        <dt>Remain unaccounted for</dt>
-                                        <dd>23%</dd>
-                                    </div>
-                                    <div>
-                                        <dt>To report to SAPS</dt>
-                                        <dd>&lt;1 min</dd>
-                                    </div>
-                                </dl>
-                            </div>
-                        </article>
-                        <div class="case-hero-stack">
-                            <article class="case-hero-card case-hero-card--light">
-                                <img class="case-hero-card-fit" src="../assets/mpho-lebona-band-large-exploded-clean.png"
-                                    alt="Exploded view of the Safeband: woven strap, sensor module, circuit board, coin cell battery and clasp" />
-                                <div class="case-hero-card-body">
-                                    <p class="case-hero-card-note">Updates from the moment a child leaves home until
-                                        they arrive.</p>
-                                </div>
-                            </article>
-                            <article class="case-hero-card">
-                                <img class="case-hero-card-top" src="../assets/home-dashboard.png"
-                                    alt="Safeband app home screen with live map, transit status and heart rate" />
-                                <div class="case-hero-card-body">
-                                    <dl class="case-stats case-stats--single">
-                                        <div>
-                                            <dt>Heart rate monitored</dt>
-                                            <dd>24/7</dd>
-                                        </div>
-                                    </dl>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
+            <div class="case-hero-card">
+                <div class="case-hero-media">
+                    <img src="../assets/mpho-lebona-band-large-exploded-clean.png"
+                        alt="Exploded view of the Safeband: woven strap with two status lights, sensor module, circuit board, coin cell battery and clasp" />
                 </div>
-            </div>
-        </section>
-
-        <!-- Title and project meta -->
-        <section class="case-title">
-            <h2 class="case-headline reveal text-reveal" data-split="words">Reimagining Child Safety</h2>
-            <dl class="case-meta reveal reveal-stagger-2">
-                <div>
-                    <dt>Deliverables</dt>
-                    <dd>Visual identity, UX design.</dd>
-                </div>
-                <div>
-                    <dt>Industry</dt>
-                    <dd>Child safety, wearables.</dd>
-                </div>
-                <div>
-                    <dt>Year</dt>
-                    <dd>2026.</dd>
-                </div>
-            </dl>
-        </section>
-
-        <!-- Dark story: copy in the right-hand column, then stacked image panels -->
-        <section class="case-story">
-            <div class="case-story-copy reveal">
-                <p>
-                    According to <a href="https://missingchildren.org.za/" class="case-link" target="_blank"
-                        rel="noopener">Missing Children SA</a>, about 77% of reported children are found. That means
-                    roughly 23% remain unaccounted for.
-                </p>
-                <p>
-                    Safeband aims to help protect children during their journey to school. It gives parents and
-                    guardians real-time updates from the moment a child leaves home until they arrive at their
-                    learning environment.
-                </p>
-                <p>
-                    The solution offers more than location tracking. It can monitor basic health information, such as
-                    heart rate, which may help flag signs of stress or illness. It also aims to speed up the process of
-                    reporting a missing child to the South African Police Service (SAPS), with social media sharing
-                    options to help raise awareness.
-                </p>
-                <p>
-                    The solution offers more than location tracking. It can monitor basic health information, such as
-                    heart rate, which may help flag signs of stress or illness. It also aims to speed up the process of
-                    reporting a missing child to the South African Police Service (SAPS), with social media sharing
-                    options to help raise awareness.
-                </p>
-            </div>
-
-            <!-- Panel 1: three app screens -->
-            <div class="case-panel reveal">
-                <div class="case-screens">
-                    <figure class="case-phone">
-                        <img class="case-phone-photo" src="../assets/safety-band-tile.jpg" alt="" />
-                        <figcaption class="case-phone-caption">On the way to school, in real time</figcaption>
-                    </figure>
-                    <figure class="case-phone">
-                        <img src="../assets/home-dashboard.png"
-                            alt="Safeband app home screen showing a connected child, a Report Missing Child button, live map, school transit status, heart rate and daily activity"
-                            width="603" height="1311" loading="lazy" />
-                    </figure>
-                    <!-- Placeholder screen until the next app view is ready -->
-                    <figure class="case-phone" aria-label="Placeholder screen">
-                        <div class="case-skeleton">
-                            <span class="is-short"></span>
-                            <span class="is-title"></span>
-                            <span></span>
-                            <span class="is-short"></span>
-                            <span class="is-media"></span>
-                            <span></span>
-                            <span class="is-short"></span>
-                        </div>
-                    </figure>
-                </div>
-            </div>
-
-            <!-- Panel 2: the band, with what the service offers -->
-            <div class="case-panel reveal">
-                <div class="case-feature">
-                    <div class="case-feature-media">
-                        <img src="../assets/mpho-lebona-band-large-exploded-clean.png"
-                            alt="Exploded view of the Safeband: woven strap with two status lights, sensor module, circuit board, coin cell battery and clasp"
-                            loading="lazy" />
-                    </div>
-                    <div class="case-feature-text">
-                        <h3>Your child’s journey, backed by Safeband</h3>
+                <div class="case-hero-text">
+                    <div>
+                        <h2>Your child’s journey, backed by Safeband</h2>
                         <p>A wearable band paired with an app. It tracks location in real time, picks up vitals for
                             signs of distress and alerts parents right away.</p>
-                        <ul class="case-feature-list">
-                            <li>Live location from home to school</li>
-                            <li>Heart rate and distress alerts</li>
-                            <li>One-tap missing child report to SAPS</li>
-                            <li>Shareable missing-child poster</li>
-                            <li>School transit and arrival status</li>
-                        </ul>
+                    </div>
+                    <ul class="case-hero-list">
+                        <li>Live location from home to school</li>
+                        <li>Heart rate and distress alerts</li>
+                        <li>One-tap missing child report to SAPS</li>
+                        <li>Shareable missing-child poster</li>
+                        <li>School transit and arrival status</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statement and project type -->
+        <section class="case-statement">
+            <h2 class="case-headline reveal text-reveal" data-split="words">Reimagining Child Safety</h2>
+            <div class="case-details">
+                <dl class="case-type reveal reveal-stagger-2">
+                    <dt>(Type of project)</dt>
+                    <dd>Visual identity</dd>
+                    <dd>UX design</dd>
+                </dl>
+                <button class="case-read reveal reveal-stagger-2" id="caseStoryToggle" type="button"
+                    aria-expanded="false" aria-controls="caseStory">
+                    <span>(Read case study)</span>
+                    <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1"
+                        aria-hidden="true">
+                        <path d="M8 1v14M1 8h14" />
+                    </svg>
+                </button>
+            </div>
+            <!-- The story: slides open under the row above (initCaseStory()) -->
+            <div class="case-story" id="caseStory" inert>
+                <div class="case-story-clip">
+                    <div class="case-story-copy">
+                        <p>
+                            According to <a href="https://missingchildren.org.za/" target="_blank"
+                                rel="noopener">Missing Children SA</a>, about 77% of reported children are found. That
+                            means roughly 23% remain unaccounted for.
+                        </p>
+                        <p>
+                            Safeband aims to help protect children during their journey to school. It gives parents and
+                            guardians real-time updates from the moment a child leaves home until they arrive at their
+                            learning environment.
+                        </p>
+                        <p>
+                            The solution offers more than location tracking. It can monitor basic health information,
+                            such as heart rate, which may help flag signs of stress or illness. It also aims to speed
+                            up the process of reporting a missing child to the South African Police Service (SAPS),
+                            with social media sharing options to help raise awareness.
+                        </p>
                     </div>
                 </div>
             </div>
-
-            <!-- Panel 3: process diagram and the interactive prototype -->
-            <div class="case-panel reveal">
-                <div class="case-split">
-                    <figure class="case-browser">
-                        <figcaption class="case-browser-head">
-                            <span class="case-browser-brand">Safeband</span>
-                            <span class="case-browser-title">Approach and thinking process</span>
-                        </figcaption>
-                        <div class="case-browser-media">
-                            <img src="../assets/process-diagram-1.png"
-                                alt="Flowchart of the design process: start, gather insights from simulated conversations, analyze data and identify patterns, generate and evaluate ideas, finalize solution"
-                                width="2468" height="1200" loading="lazy" />
-                        </div>
-                    </figure>
-                    <figure class="case-browser case-browser--dark">
-                        <figcaption class="case-browser-head">
-                            <span class="case-browser-brand">Safeband</span>
-                            <span class="case-browser-title">Application interface prototype</span>
-                        </figcaption>
-                        <div class="case-browser-media">
-                            <iframe title="Safeband interactive prototype on Figma"
-                                src="https://embed.figma.com/proto/OxTif3NBsAn3J4bV3UBwND/Safeband?node-id=5-12&viewport=-1229%2C657%2C0.44&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=5%3A12&page-id=0%3A1&embed-host=share"
-                                loading="lazy" allowfullscreen></iframe>
-                        </div>
-                    </figure>
-                </div>
-            </div>
-            <p class="case-caption">Product imagery AI generated</p>
         </section>
 
-        <!-- Related projects -->
-        <section class="case-related">
-            <h2 class="case-related-label">Related</h2>
-            <ul class="case-related-list">
-                <li>
-                    <a href="../index.html#work">
-                        <span class="case-related-tile"><img src="../assets/carndiy.jpg" alt="" loading="lazy" /></span>
-                        <span class="case-related-name">Car DIY</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../index.html#work">
-                        <span class="case-related-tile"><img src="../assets/pixel-art-103x128.png" alt=""
-                                loading="lazy" /></span>
-                        <span class="case-related-name">Khuphuka</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../index.html#work">
-                        <span class="case-related-tile"></span>
-                        <span class="case-related-name">Coming soon</span>
-                    </a>
-                </li>
-            </ul>
+        <!-- Three full-width panels -->
+        <section class="case-panels">
+            <figure class="case-media case-media--brand reveal">
+                <img src="../assets/safeband-bg-img.jpg"
+                    alt="The Safeband wordmark over a pale blue exploded view of the band" loading="lazy" />
+            </figure>
+            <figure class="case-media case-media--diagram reveal">
+                <img src="../assets/process-diagram-1.png"
+                    alt="Flowchart of the design process: start, gather insights from simulated conversations, analyze data and identify patterns, generate and evaluate ideas, finalize solution"
+                    loading="lazy" />
+            </figure>
+            <figure class="case-media case-media--embed reveal">
+                <iframe title="Safeband interactive prototype on Figma"
+                    src="https://embed.figma.com/proto/OxTif3NBsAn3J4bV3UBwND/Safeband?node-id=5-12&viewport=-1229%2C657%2C0.44&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=5%3A12&page-id=0%3A1&embed-host=share"
+                    loading="lazy" allowfullscreen></iframe>
+            </figure>
+            <p class="case-caption">Product imagery AI generated</p>
         </section>
     </main>
 
     <!-- Site footer: same contact section as the home page -->
-    <section class="section-contact" id="contact">
+    <section class="section-contact section-contact--light" id="contact">
         <div class="contact-stack">
             <!-- Contact form: slides up from behind the chips when "Let's chat" is clicked.
                  Submitting hands the name and message to the visitor's email app. -->
@@ -273,7 +151,6 @@
             </div>
             <div class="contact-cta-wrapper reveal">
                 <div class="contact-chip">
-                    <img src="../assets/portfolio-img-placeholder.jpg" alt="" width="58">
                     <!-- Toggles the contact panel; the mailto stays as the no-JS fallback -->
                     <a href="mailto:hola.mpho@gmail.com" data-contact-open aria-controls="contactPanel"
                         aria-expanded="false">Let's chat</a>

@@ -21,69 +21,81 @@
     <header class="page-header">
         <nav class="nav-bar">
             <a href="#" class="nav-brand" aria-label="Back to top">
-                <!-- Both marks are stacked; the white one fades in while the menu overlay is open -->
-                <img class="nav-brand-logo nav-brand-logo--black" src="./assets/Logo-black.svg" alt="" width="68"
-                    height="34" />
-                <img class="nav-brand-logo nav-brand-logo--white" src="./assets/Logo-white.svg" alt="" width="68"
-                    height="34" />
+                <img class="nav-brand-logo" src="./assets/Logo-black.svg" alt="" width="68" height="34" />
             </a>
-            <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false"
-                aria-controls="navLinks">
-                <span class="nav-toggle-bar"></span>
-                <span class="nav-toggle-bar"></span>
+            <!-- Reveals the bio panel; the label gives way to an up arrow while it is open (initBio()) -->
+            <button class="nav-more" id="bioToggle" type="button" aria-expanded="false" aria-controls="bioPanel">
+                <span class="nav-more-label">More info</span>
+                <svg class="nav-more-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor"
+                    stroke-width="1" aria-hidden="true">
+                    <path d="M10 18V2.5M2.5 10 10 2.5l7.5 7.5" />
+                </svg>
             </button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
         </nav>
     </header>
     <main>
-        <!-- Intro: split hero. Headline and sign-off on the left, one full-height dithered portrait on the right -->
+        <!-- Intro: who and where, with the local time underneath -->
         <section class="section-intro" id="about">
-            <div class="intro-panel">
-                <h2 class="intro-headline reveal text-reveal" data-split="words">
-                    Designing intuitive, user-centered digital experiences.
-                </h2>
-                <p class="intro-signoff reveal reveal-stagger-3">
-                    <span>Mpho Lebona &mdash; digital designer &amp;<br /> frontend developer, Johannesburg</span>
-                    <!-- Local time in Johannesburg, kept ticking by initNavTime() -->
-                    <time class="intro-time" id="navTime" aria-hidden="true"></time>
-                </p>
+            <h1 class="intro-headline reveal text-reveal" data-split="words">
+                Mpho Lebona &mdash; digital designer &amp; frontend developer, Johannesburg
+            </h1>
+            <!-- Local time in Johannesburg, kept ticking by initNavTime() -->
+            <time class="intro-time reveal reveal-stagger-3" id="navTime" aria-hidden="true"></time>
+        </section>
+        <!-- Bio: slides open under the intro and pushes the portfolio down -->
+        <section class="section-bio" id="bioPanel" aria-label="About Mpho Lebona" inert>
+            <div class="bio-clip">
+                <div class="bio-grid">
+                    <div class="bio-text">
+                        <!-- Draft copy: only says what the site already says. Replace with your own words. -->
+                        <div class="bio-copy">
+                            <p>I'm a digital designer and frontend developer based in Johannesburg, designing intuitive,
+                                user-centered digital experiences.</p>
+                            <p>I work across interface design and code, so what gets designed is also what gets
+                                built.</p>
+                            <p>Recent projects include Safeband, a wearable that keeps children safe on the way to
+                                school; CarnDIY, a guide to car maintenance and DIY tips; and Khuphuka, a youth
+                                leadership and training academy.</p>
+                        </div>
+                        <div class="bio-connect">
+                            <h2 class="bio-connect-title">Connect</h2>
+                            <ul>
+                                <li><a href="tel:+27683307272">+27 68 330 7272</a></li>
+                                <li><a href="mailto:hola.mpho@gmail.com">Email</a></li>
+                                <li><a href="https://www.linkedin.com/in/mpho-lebona/" target="_blank"
+                                        rel="noopener">LinkedIn</a></li>
+                                <li><a href="https://github.com/zurane/" target="_blank" rel="noopener">Github</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bio-image">
+                        <img src="./assets/headshots/dither-profile-img.png" alt="Portrait of Mpho Lebona" />
+                    </div>
+                </div>
             </div>
-            <!-- Decorative: one dithered portrait fills the right panel. Its baked-in backdrop matches the panel colour -->
-            <figure class="intro-portrait reveal reveal-stagger-2" aria-hidden="true">
-                <img src="./assets/headshots/dither-profile-img.png" alt="Profile image of Mpho Lebona" />
-            </figure>
         </section>
         <!-- Portfolio section -->
         <section class="section-portfolio" id="portfolio">
-            <h2 class="portfolio-heading reveal">Featured</h2>
+            <h2 class="portfolio-heading reveal">Featured work</h2>
             <!-- Filter tabs: data-filter matches a token in each card's data-category -->
             <div class="portfolio-tabs" role="group" aria-label="Filter projects">
                 <button class="portfolio-tab" type="button" aria-pressed="true" data-filter="all">All</button>
-                <button class="portfolio-tab" type="button" aria-pressed="false" data-filter="web-app">Web apps</button>
                 <button class="portfolio-tab" type="button" aria-pressed="false" data-filter="website">Websites</button>
-                <button class="portfolio-tab" type="button" aria-pressed="false" data-filter="ui-ux">UI / UX</button>
+                <button class="portfolio-tab" type="button" aria-pressed="false" data-filter="ui-ux">UI/UX</button>
             </div>
-            <p class="portfolio-count" aria-live="polite">(4)</p>
+            <p class="portfolio-count" aria-live="polite">[ 3 ]</p>
         </section>
-        <!-- portfolio cards: the whole card is the link, so cover images are decorative.
-             The cover stays hidden behind the grey panel until hover/focus. -->
+        <!-- Portfolio cards: the whole card is the link, so cover images are decorative -->
         <section class="portfolio-grid">
             <div class="portfolio-list" id="portfolio-list">
 
-                <article class="portfolio reveal reveal-stagger-2" data-category="ui-ux">
-                    <a href="./portfolio/safeband.html" class="portfolio-link">
+                <article class="portfolio reveal reveal-stagger-2" data-category="website">
+                    <a href="#" class="portfolio-link">
                         <div class="portfolio-media">
-                            <img src="./assets/safety-band-tile.jpg" alt="" loading="lazy" />
+                            <img src="assets/kla-project-cover.jpg" alt="" loading="lazy" />
+                            <span class="portfolio-badge">Coming soon</span>
                         </div>
-                        <div class="portfolio-head">
-                            <h3 class="portfolio-title">Safeband</h3>
-                            <span class="portfolio-badge">Case study</span>
-                        </div>
-                        <p class="portfolio-overline">A wearable that keeps children safe on the way to school.</p>
+                        <h3 class="portfolio-title">Khuphuka Leadership Academy</h3>
                     </a>
                 </article>
 
@@ -91,32 +103,26 @@
                     <a href="#" class="portfolio-link">
                         <div class="portfolio-media">
                             <img src="assets/carndiy.jpg" alt="" loading="lazy" />
-                        </div>
-                        <div class="portfolio-head">
-                            <h3 class="portfolio-title">Car DIY</h3>
                             <span class="portfolio-badge">Coming soon</span>
                         </div>
-                        <p class="portfolio-overline">Your guide to car maintenance and DIY tips.</p>
+                        <h3 class="portfolio-title">CarnDIY</h3>
                     </a>
                 </article>
 
-                <article class="portfolio reveal reveal-stagger-4" data-category="website">
-                    <a href="#" class="portfolio-link">
+                <article class="portfolio reveal reveal-stagger-4" data-category="ui-ux">
+                    <a href="./portfolio/safeband.html" class="portfolio-link">
                         <div class="portfolio-media">
-                            <img src="assets/kla-project-cover.jpg" alt="" loading="lazy" />
+                            <img src="./assets/safety-band-tile.jpg" alt="" loading="lazy" />
+                            <span class="portfolio-badge">Case study</span>
                         </div>
-                        <div class="portfolio-head">
-                            <h3 class="portfolio-title">Khuphuka</h3>
-                            <span class="portfolio-badge">Coming soon</span>
-                        </div>
-                        <p class="portfolio-overline">A youth leadership and training academy.</p>
+                        <h3 class="portfolio-title">Safeband</h3>
                     </a>
                 </article>
             </div>
             <p class="portfolio-empty" hidden>Nothing in this category yet.</p>
         </section>
 
-        <section class="section-contact" id="contact">
+        <section class="section-contact section-contact--light" id="contact">
             <div class="contact-stack">
                 <!-- Contact form: slides up from behind the chips when "Let's chat" is clicked.
                      Submitting hands the name and message to the visitor's email app. -->
@@ -144,7 +150,6 @@
                 </div>
                 <div class="contact-cta-wrapper reveal">
                     <div class="contact-chip">
-                        <img src="./assets/portfolio-img-placeholder.jpg" alt="" width="58">
                         <!-- Toggles the contact panel; the mailto stays as the no-JS fallback -->
                         <a href="mailto:hola.mpho@gmail.com" data-contact-open aria-controls="contactPanel"
                             aria-expanded="false">Let's chat</a>

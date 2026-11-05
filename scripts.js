@@ -178,47 +178,34 @@ function initPreloader() {
 }
 
 // ---------------------------------------------------------------------------
-// Menu
-// The square button toggles an `is-open` class on the nav bar, which reveals
-// the full-screen overlay of links; CSS does the rest.
-function initMobileNav() {
-    const navBar = document.querySelector('.nav-bar');
-    const toggle = document.getElementById('navToggle');
-    const links = document.getElementById('navLinks');
-    if (!navBar || !toggle || !links) return;
+// Bio panel
+// "More info" slides the bio open under the intro (the slide itself is CSS,
+// driven by .is-open).
+// ---------------------------------------------------------------------------
+function initBio() {
+    const toggle = document.getElementById('bioToggle');
+    const panel = document.getElementById('bioPanel');
+    if (!toggle || !panel) return;
+
+    const isOpen = () => panel.classList.contains('is-open');
 
     function setOpen(open) {
-        navBar.classList.toggle('is-open', open);
-        document.body.classList.toggle('menu-open', open);
+        panel.classList.toggle('is-open', open);
+        panel.inert = !open;
         toggle.setAttribute('aria-expanded', String(open));
-        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-        if (window.lenis) {
-            if (open) window.lenis.stop();
-            else window.lenis.start();
-        }
+        // The visible label is hidden while open, so the arrow needs a name of its own
+        if (open) toggle.setAttribute('aria-label', 'Close more info');
+        else toggle.removeAttribute('aria-label');
     }
-
-    const isOpen = () => navBar.classList.contains('is-open');
 
     toggle.addEventListener('click', () => setOpen(!isOpen()));
 
-    // Tapping a link closes the menu before the page scrolls. Capture phase so
-    // Lenis is restarted before the anchor's own scrollTo handler runs —
-    // Lenis silently drops scroll requests while it is stopped.
-    links.addEventListener('click', (event) => {
-        if (event.target.closest('a')) setOpen(false);
-    }, true);
-
-    // Tap outside the panel
-    document.addEventListener('click', (event) => {
-        if (isOpen() && !navBar.contains(event.target)) setOpen(false);
-    });
-
     document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && isOpen()) {
-            setOpen(false);
-            toggle.focus();
-        }
+        // Escape belongs to the contact form while that is open
+        if (event.key !== 'Escape' || !isOpen() || document.querySelector('.contact-panel.is-open')) return;
+        const focusInside = panel.contains(document.activeElement);
+        setOpen(false);
+        if (focusInside) toggle.focus({ preventScroll: true });
     });
 }
 
@@ -275,7 +262,7 @@ function initPortfolioTabs() {
             }
             shown += 1;
         });
-        if (count) count.textContent = '(' + shown + ')';
+        if (count) count.textContent = '[ ' + shown + ' ]';
         if (empty) empty.hidden = shown > 0;
     }
 
@@ -381,65 +368,20 @@ function initContactForm() {
 }
 
 // ---------------------------------------------------------------------------
+// Case study story
+// "(Read case study)" slides the story open (the slide itself is CSS, driven by
+// .is-open) and its plus turns into a cross.
 // ---------------------------------------------------------------------------
-// Story copy clamp
-// Case study copy with more than three paragraphs is cut off just below the
-// third one, so the next paragraph ghosts into a fade, with a "Read more"
-// control beneath. Copy of three paragraphs or fewer is left as it is.
-// ---------------------------------------------------------------------------
-function initStoryClamp() {
-    const VISIBLE_PARAGRAPHS = 3;
+function initCaseStory() {
+    const toggle = document.getElementById('caseStoryToggle');
+    const story = document.getElementById('caseStory');
+    if (!toggle || !story) return;
 
-    document.querySelectorAll('.case-story-copy').forEach((copy) => {
-        const paragraphs = copy.querySelectorAll(':scope > p');
-        if (paragraphs.length <= VISIBLE_PARAGRAPHS) return;
-
-        // Wrap the paragraphs so the control can sit outside the clipped box
-        const text = document.createElement('div');
-        text.className = 'case-story-text';
-        while (copy.firstChild) text.appendChild(copy.firstChild);
-        copy.appendChild(text);
-
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'case-story-more';
-        button.textContent = 'Read more';
-        button.setAttribute('aria-expanded', 'false');
-        copy.appendChild(button);
-
-        const lastVisible = paragraphs[VISIBLE_PARAGRAPHS - 1];
-        let open = false;
-
-        // Cut a line and a half below the last visible paragraph
-        function measure() {
-            const lineHeight = parseFloat(getComputedStyle(lastVisible).lineHeight) || 24;
-            const bottom = lastVisible.getBoundingClientRect().bottom - text.getBoundingClientRect().top;
-            text.style.setProperty('--clamp-height', `${Math.round(bottom + lineHeight * 1.5)}px`);
-        }
-
-        function setOpen(next) {
-            open = next;
-            if (open) {
-                // Grow to the full height first so the max-height can animate,
-                // then let the box size itself once the transition has run
-                text.style.setProperty('--clamp-height', `${text.scrollHeight}px`);
-                text.addEventListener('transitionend', () => {
-                    if (open) copy.classList.remove('is-clamped');
-                }, { once: true });
-            } else {
-                measure();
-                copy.classList.add('is-clamped');
-            }
-            button.textContent = open ? 'Read less' : 'Read more';
-            button.setAttribute('aria-expanded', String(open));
-        }
-
-        button.addEventListener('click', () => setOpen(!open));
-        window.addEventListener('resize', () => { if (!open) measure(); });
-        if (document.fonts) document.fonts.ready.then(() => { if (!open) measure(); });
-
-        copy.classList.add('is-clamped');
-        measure();
+    toggle.addEventListener('click', () => {
+        const open = !story.classList.contains('is-open');
+        story.classList.toggle('is-open', open);
+        story.inert = !open;
+        toggle.setAttribute('aria-expanded', String(open));
     });
 }
 
@@ -447,8 +389,8 @@ document.addEventListener('DOMContentLoaded', () => {
     splitWords();
     initNavTime();
     initContactForm();
-    initStoryClamp();
-    initMobileNav();
+    initBio();
+    initCaseStory();
     shufflePortfolio();
     initPortfolioTabs();
     const lenis = initSmoothScroll();
