@@ -188,6 +188,12 @@ main .section-intro .intro-headline {
   line-height: 1.125;
   letter-spacing: -0.05em;
   color: #1f1f1f;
+  text-wrap: balance;
+}
+@media (max-width: 700px) {
+  main .section-intro .intro-headline {
+    font-size: 1.5rem;
+  }
 }
 main .section-intro .intro-headline .word {
   padding-bottom: 0.18em;
@@ -201,6 +207,23 @@ main .section-intro .intro-time {
   line-height: 1.4;
   text-transform: uppercase;
   color: #6b6b6b;
+}
+main .section-intro.is-collapsible {
+  display: grid;
+  grid-template-rows: 1fr;
+  padding: 0;
+  transition: grid-template-rows 0.7s cubic-bezier(0.76, 0, 0.24, 1), border-bottom-color 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+}
+main .section-intro.is-collapsible .intro-clip {
+  min-height: 0;
+  overflow: hidden;
+}
+main .section-intro.is-collapsible .intro-inner {
+  padding: 32px max(clamp(20px, 4.7vw, 67px), (100% - 1560px) / 2) 34px;
+}
+main .section-intro.is-collapsible.is-collapsed {
+  grid-template-rows: 0fr;
+  border-bottom-color: transparent;
 }
 main .section-portfolio {
   display: grid;
@@ -311,6 +334,7 @@ main .section-portfolio .portfolio-tab:focus-visible {
 .section-bio .bio-image {
   position: relative;
   min-width: 0;
+  margin-right: max(clamp(20px, 4.7vw, 67px), (100vw - 1560px) / 2);
   background-color: #d8d7d2;
 }
 .section-bio .bio-image img {
@@ -340,6 +364,7 @@ main .section-portfolio .portfolio-tab:focus-visible {
     max-width: none;
   }
   .section-bio .bio-image {
+    margin-right: 0;
     aspect-ratio: 1;
   }
 }

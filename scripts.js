@@ -187,10 +187,13 @@ function initBio() {
     const panel = document.getElementById('bioPanel');
     if (!toggle || !panel) return;
 
+    // The intro (headline + clock) folds away while the bio is open
+    const intro = document.getElementById('about');
     const isOpen = () => panel.classList.contains('is-open');
 
     function setOpen(open) {
         panel.classList.toggle('is-open', open);
+        if (intro) intro.classList.toggle('is-collapsed', open);
         panel.inert = !open;
         toggle.setAttribute('aria-expanded', String(open));
         // The visible label is hidden while open, so the arrow needs a name of its own

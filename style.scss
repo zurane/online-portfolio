@@ -220,6 +220,13 @@ main {
       line-height: 1.125;
       letter-spacing: $global-lt-spacing;
       color: $secondary-color;
+      // Evens out the line lengths so no lone word is left hanging
+      text-wrap: balance;
+
+      // Phones: smaller so "developer, Johannesburg" fits on one line
+      @media (max-width: 700px) {
+        font-size: 1.5rem;
+      }
 
       // Tight leading needs a deeper clip box so descenders survive the word reveal
       .word {
@@ -237,6 +244,30 @@ main {
       line-height: 1.4;
       text-transform: uppercase;
       color: $muted-on-light;
+    }
+
+    // Home intro: folds shut while the bio panel is open (same slide as .section-bio)
+    &.is-collapsible {
+      display: grid;
+      grid-template-rows: 1fr;
+      padding: 0;
+      transition:
+        grid-template-rows 0.7s $menu-ease,
+        border-bottom-color 0.7s $menu-ease;
+
+      .intro-clip {
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      .intro-inner {
+        padding: 32px $home-gutter 34px;
+      }
+
+      &.is-collapsed {
+        grid-template-rows: 0fr;
+        border-bottom-color: transparent;
+      }
     }
   }
 
@@ -376,6 +407,8 @@ main {
   .bio-image {
     position: relative;
     min-width: 0;
+    // Stops at the right gutter, in line with the nav arrow (vw for the same reason as .bio-text)
+    margin-right: max(clamp(20px, 4.7vw, 67px), calc((100vw - 1560px) / 2));
     background-color: #d8d7d2;
 
     img {
@@ -408,6 +441,7 @@ main {
     }
 
     .bio-image {
+      margin-right: 0;
       aspect-ratio: 1;
     }
   }

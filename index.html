@@ -34,13 +34,17 @@
         </nav>
     </header>
     <main>
-        <!-- Intro: who and where, with the local time underneath -->
-        <section class="section-intro" id="about">
-            <h1 class="intro-headline reveal text-reveal" data-split="words">
-                Mpho Lebona &mdash; digital designer &amp; frontend developer, Johannesburg
-            </h1>
-            <!-- Local time in Johannesburg, kept ticking by initNavTime() -->
-            <time class="intro-time reveal reveal-stagger-3" id="navTime" aria-hidden="true"></time>
+        <!-- Intro: who and where, with the local time underneath. Collapses while the bio is open (initBio()) -->
+        <section class="section-intro is-collapsible" id="about">
+            <div class="intro-clip">
+                <div class="intro-inner">
+                    <h1 class="intro-headline reveal text-reveal" data-split="words">
+                        Mpho Lebona &mdash; digital designer &amp; frontend developer, Johannesburg
+                    </h1>
+                    <!-- Local time in Johannesburg, kept ticking by initNavTime() -->
+                    <time class="intro-time reveal reveal-stagger-3" id="navTime" aria-hidden="true"></time>
+                </div>
+            </div>
         </section>
         <!-- Bio: slides open under the intro and pushes the portfolio down -->
         <section class="section-bio" id="bioPanel" aria-label="About Mpho Lebona" inert>
