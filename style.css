@@ -307,10 +307,50 @@ main .section-portfolio .portfolio-tab:focus-visible {
 .section-bio .bio-copy {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  max-width: 340px;
+  gap: 20px;
+  max-width: 440px;
 }
-.section-bio .bio-connect-title {
+.section-bio .bio-lead {
+  max-width: 440px;
+  font-family: "Switzer", sans-serif;
+  font-size: clamp(1.25rem, 1.6vw, 1.6rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #111111;
+  text-wrap: balance;
+}
+.section-bio .bio-text > *,
+.section-bio .bio-image {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.section-bio.is-open .bio-text > *,
+.section-bio.is-open .bio-image {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.section-bio.is-open .bio-text > :nth-child(1) {
+  transition-delay: 0.25s;
+}
+.section-bio.is-open .bio-text > :nth-child(2) {
+  transition-delay: 0.35s;
+}
+.section-bio.is-open .bio-text > :nth-child(3) {
+  transition-delay: 0.45s;
+}
+.section-bio.is-open .bio-image {
+  transition-delay: 0.3s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .section-bio .bio-text > *,
+  .section-bio .bio-image {
+    transform: none;
+    transition: none;
+  }
+}
+.section-bio .bio-label {
   margin-bottom: 10px;
   font: inherit;
   font-weight: 700;
@@ -334,7 +374,7 @@ main .section-portfolio .portfolio-tab:focus-visible {
 .section-bio .bio-image {
   position: relative;
   min-width: 0;
-  margin-right: max(clamp(20px, 4.7vw, 67px), (100vw - 1560px) / 2);
+  margin: 32px max(clamp(20px, 4.7vw, 67px), (100vw - 1560px) / 2) 40px 0;
   background-color: #d8d7d2;
 }
 .section-bio .bio-image img {
@@ -364,7 +404,7 @@ main .section-portfolio .portfolio-tab:focus-visible {
     max-width: none;
   }
   .section-bio .bio-image {
-    margin-right: 0;
+    margin: 0;
     aspect-ratio: 1;
   }
 }

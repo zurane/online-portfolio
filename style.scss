@@ -372,11 +372,57 @@ main {
   .bio-copy {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    max-width: 340px;
+    gap: 20px;
+    max-width: 440px;
   }
 
-  .bio-connect-title {
+  // Opening line at the top of the column, set large in the display face
+  .bio-lead {
+    max-width: 440px;
+    font-family: $primary-font-family;
+    font-size: clamp(1.25rem, 1.6vw, 1.6rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: $ink-on-light;
+    text-wrap: balance;
+  }
+
+  // Stagger the column in once the panel opens
+  .bio-text > *,
+  .bio-image {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  &.is-open {
+    .bio-text > *,
+    .bio-image {
+      opacity: 1;
+      transform: none;
+      transition:
+        opacity 0.6s ease,
+        transform 0.7s $menu-ease;
+    }
+
+    .bio-text > :nth-child(1) { transition-delay: 0.25s; }
+    .bio-text > :nth-child(2) { transition-delay: 0.35s; }
+    .bio-text > :nth-child(3) { transition-delay: 0.45s; }
+    .bio-image { transition-delay: 0.3s; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bio-text > *,
+    .bio-image {
+      transform: none;
+      transition: none;
+    }
+  }
+
+  // Small bold label above the Connect links
+  .bio-label {
     margin-bottom: 10px;
     font: inherit;
     font-weight: 700;
@@ -407,8 +453,9 @@ main {
   .bio-image {
     position: relative;
     min-width: 0;
-    // Stops at the right gutter, in line with the nav arrow (vw for the same reason as .bio-text)
-    margin-right: max(clamp(20px, 4.7vw, 67px), calc((100vw - 1560px) / 2));
+    // Inset to match .bio-text's top/bottom padding, and stops at the right gutter in
+    // line with the nav arrow (vw for the same reason as .bio-text)
+    margin: 32px max(clamp(20px, 4.7vw, 67px), calc((100vw - 1560px) / 2)) 40px 0;
     background-color: #d8d7d2;
 
     img {
@@ -441,7 +488,7 @@ main {
     }
 
     .bio-image {
-      margin-right: 0;
+      margin: 0;
       aspect-ratio: 1;
     }
   }
