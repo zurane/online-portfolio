@@ -1,19 +1,14 @@
 @import url("https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800,900&display=swap");
-
 // Colors
 $primary-color: #faf9f5;
 $secondary-color: #1f1f1f;
-$divider-color: #5b5b5b;
 $stroke-color: #00ec97;
 $primary-font-family: "Switzer", sans-serif; // headings, nav, labels, UI
 $body-font-family: Arial, Helvetica, sans-serif; // paragraphs and running copy
-// Width of the centred intro column; the nav links span the same width
-$intro-column: clamp(680px, 54vw, 1040px);
 $global-lt-spacing: -0.05em;
 // Width of the centred project column; the header text and guide lines align to its edges.
 $portfolio-column: clamp(710px, 56vw, 1140px);
 $portfolio-gutter: 20px;
-$muted-text: #8c8c8c;
 // Home page: shared edge inset (content stops growing at 1560px), hairlines, label type
 $home-gutter: max(clamp(20px, 4.7vw, 67px), calc((100% - 1560px) / 2));
 $home-rule: #e8e8e8;
@@ -21,13 +16,6 @@ $home-label-size: 12px;
 // Muted text on the white portfolio section (5.3:1 against #fff)
 $muted-on-light: #6b6b6b;
 $ink-on-light: #111111;
-// Display titles (hero headline, section headings): Switzer Semibold,
-// 80px on desktop with 1:1 leading and -3.2px tracking (-0.04em)
-$title-size: clamp(2.4rem, 4.6vw, 5rem);
-$title-weight: 600;
-$title-leading: 1;
-$title-tracking: -0.04em;
-$title-color: #3c3c3c;
 
 // Scroll Reveal Animations
 @keyframes slideInUp {
@@ -223,9 +211,11 @@ main {
       // Evens out the line lengths so no lone word is left hanging
       text-wrap: balance;
 
-      // Phones: smaller so "developer, Johannesburg" fits on one line
+      // Phones: smaller, and fill each line rather than balancing (balance
+      // leaves words like "developer" wrapping when they'd fit)
       @media (max-width: 700px) {
         font-size: 1.5rem;
+        text-wrap: pretty;
       }
 
       // Tight leading needs a deeper clip box so descenders survive the word reveal
@@ -487,6 +477,12 @@ main {
       max-width: none;
     }
 
+    // Balanced wrapping leaves short ragged lines on narrow screens; fill the width instead
+    .bio-lead {
+      max-width: none;
+      text-wrap: pretty;
+    }
+
     .bio-image {
       margin: 0;
       aspect-ratio: 1;
@@ -494,8 +490,8 @@ main {
   }
 }
 
-// Three cards at a glance: the cover is always visible, status pill on top and
-// the name underneath. Stays in three columns until the phone layout.
+// Two cards per row: the cover is always visible, status pill on top and
+// the name, description and tags underneath. One column on phones.
 .portfolio-grid {
   background-color: #ffffff;
   border-bottom: 1px solid $home-rule;
@@ -503,8 +499,8 @@ main {
 
   .portfolio-list {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 40px 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 56px 20px;
   }
 
   .portfolio-empty {
@@ -539,11 +535,24 @@ main {
     // The grey shows while the cover is loading
     .portfolio-media {
       position: relative;
-      aspect-ratio: 420 / 463;
+      aspect-ratio: 4 / 3;
       overflow: hidden;
+      border-radius: 8px;
       background-color: #d9d9d9;
 
-      img {
+      // Wide media (e.g. landscape reels): show the full frame, with the
+      // reel's own navy filling the letterbox
+      &.portfolio-media--contain {
+        background-color: #132447;
+
+        video,
+        img {
+          object-fit: contain;
+        }
+      }
+
+      img,
+      video {
         display: block;
         width: 100%;
         height: 100%;
@@ -570,23 +579,52 @@ main {
     }
 
     .portfolio-title {
-      margin: 12px 0 0;
+      margin: 16px 0 0;
+      color: $ink-on-light;
       font-family: $primary-font-family;
-      font-size: $home-label-size;
+      font-size: clamp(22px, 1.8vw, 28px);
       font-weight: 400;
-      line-height: 1.4;
-      text-transform: uppercase;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
       transition: color 0.2s ease;
+    }
+
+    .portfolio-desc {
+      margin: 10px 0 0;
+      color: $muted-on-light;
+      font-family: $primary-font-family;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .portfolio-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        padding: 5px 10px;
+        border-radius: 4px;
+        background-color: #ecebe6;
+        color: #2b2b2b;
+        font-family: $primary-font-family;
+        font-size: 13px;
+        line-height: 1.2;
+      }
     }
 
     .portfolio-link:hover,
     .portfolio-link:focus-visible {
-      .portfolio-media img {
+      .portfolio-media img,
+      .portfolio-media video {
         transform: scale(1.03);
       }
 
       .portfolio-title {
-        color: $ink-on-light;
+        color: $muted-on-light;
       }
     }
   }
@@ -1061,7 +1099,6 @@ main {
 // dark card, a statement and project type, then three full-width panels.
 // ---------------------------------------------------------------------------
 $case-card: #1f1d1c;
-$case-accent: #ff8a3d; // list markers
 $case-panel-gutter: clamp(16px, 1.35vw, 30px);
 
 .case-study {

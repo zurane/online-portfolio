@@ -18,6 +18,7 @@
         </div>
         <div class="preloader-label" id="preloaderLabel">Please wait...</div>
     </div>
+    
     <header class="page-header">
         <nav class="nav-bar">
             <a href="#" class="nav-brand" aria-label="Back to top">
@@ -33,8 +34,9 @@
             </button>
         </nav>
     </header>
+
     <main>
-        <!-- Intro: who and where, with the local time underneath. Collapses while the bio is open (initBio()) -->
+        <!-- Intro: Collapses while the bio is open (initBio()) -->
         <section class="section-intro is-collapsible" id="about">
             <div class="intro-clip">
                 <div class="intro-inner">
@@ -52,13 +54,19 @@
                 <div class="bio-grid">
                     <div class="bio-text">
                         <!-- Lead at the top, small copy centred, Connect at the bottom (space-between on .bio-text).
-                             Draft copy: only says what the site already says. Replace with your own words. -->
-                        <p class="bio-lead">I design and build digital experiences, bringing together design thinking, visual communication and web development</p>
+                              -->
+                        <p class="bio-lead">I design and build digital experiences, bringing together design thinking,
+                            visual communication and web development</p>
                         <div class="bio-copy">
-                            <p>My background spans graphic design, UX/UI and web development, giving me an appreciation for both how things look and how they work. I enjoy exploring ideas, solving problems and bringing digital experiences to life, from initial concepts and interfaces to functional websites.
-</p>
-<p>Based in Johannesburg, South Africa. Curious by nature, driven by creativity and always looking for better ways to build.
-</p>
+                            <p>Based in Johannesburg, South Africa. Curious by nature, driven by creativity and always
+                                looking for better ways to build.
+                            </p>
+                            <p>My background spans graphic design, UX/UI and web development, giving me an appreciation
+                                for both how things look and how they work. I enjoy exploring ideas, solving problems
+                                and bringing digital experiences to life, from initial concepts and interfaces to
+                                functional websites.
+                            </p>
+
                         </div>
                         <div class="bio-connect">
                             <h2 class="bio-label">Connect</h2>
@@ -94,11 +102,18 @@
 
                 <article class="portfolio reveal reveal-stagger-2" data-category="website">
                     <a href="#" class="portfolio-link">
-                        <div class="portfolio-media">
-                            <img src="assets/kla-project-cover.jpg" alt="" loading="lazy" />
+                        <div class="portfolio-media portfolio-media--contain">
+                            <video src="assets/Mpho_Osei_Tutu_Portfolio_Reel_Blue.mp4" autoplay muted loop playsinline
+                                preload="metadata" aria-hidden="true"></video>
                             <span class="portfolio-badge">Coming soon</span>
                         </div>
-                        <h3 class="portfolio-title">Khuphuka Leadership Academy</h3>
+                        <h3 class="portfolio-title">Osei Tutu Portfolio Reel</h3>
+                        <p class="portfolio-desc">A showreel of brand and social work</p>
+                        <ul class="portfolio-tags">
+                            <li>Branding</li>
+                            <li>Social</li>
+                            <li>Website</li>
+                        </ul>
                     </a>
                 </article>
 
@@ -109,6 +124,12 @@
                             <span class="portfolio-badge">Coming soon</span>
                         </div>
                         <h3 class="portfolio-title">CarnDIY</h3>
+                        <p class="portfolio-desc">Helping drivers fix their own cars</p>
+                        <ul class="portfolio-tags">
+                            <li>Automotive</li>
+                            <li>Web App</li>
+                            <li>UI/UX</li>
+                        </ul>
                     </a>
                 </article>
 
@@ -119,6 +140,12 @@
                             <span class="portfolio-badge">Case study</span>
                         </div>
                         <h3 class="portfolio-title">Safeband</h3>
+                        <p class="portfolio-desc">A wearable that keeps people safer</p>
+                        <ul class="portfolio-tags">
+                            <li>Wearables</li>
+                            <li>Safety</li>
+                            <li>UI/UX</li>
+                        </ul>
                     </a>
                 </article>
             </div>
@@ -171,4 +198,5 @@
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
     <script src="scripts.js"></script>
 </body>
+
 </html>

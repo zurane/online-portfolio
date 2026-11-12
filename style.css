@@ -1,5 +1,4 @@
-@import url("https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800,900&display=swap");
-@keyframes slideInUp {
+@import url("https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800,900&display=swap");@keyframes slideInUp {
   from {
     opacity: 0;
     transform: translateY(24px);
@@ -193,6 +192,7 @@ main .section-intro .intro-headline {
 @media (max-width: 700px) {
   main .section-intro .intro-headline {
     font-size: 1.5rem;
+    text-wrap: pretty;
   }
 }
 main .section-intro .intro-headline .word {
@@ -403,6 +403,10 @@ main .section-portfolio .portfolio-tab:focus-visible {
   .section-bio .bio-copy {
     max-width: none;
   }
+  .section-bio .bio-lead {
+    max-width: none;
+    text-wrap: pretty;
+  }
   .section-bio .bio-image {
     margin: 0;
     aspect-ratio: 1;
@@ -416,8 +420,8 @@ main .section-portfolio .portfolio-tab:focus-visible {
 }
 .portfolio-grid .portfolio-list {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 40px 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 56px 20px;
 }
 .portfolio-grid .portfolio-empty {
   padding: 48px 0;
@@ -443,11 +447,20 @@ main .section-portfolio .portfolio-tab:focus-visible {
 }
 .portfolio-grid .portfolio .portfolio-media {
   position: relative;
-  aspect-ratio: 420/463;
+  aspect-ratio: 4/3;
   overflow: hidden;
+  border-radius: 8px;
   background-color: #d9d9d9;
 }
-.portfolio-grid .portfolio .portfolio-media img {
+.portfolio-grid .portfolio .portfolio-media.portfolio-media--contain {
+  background-color: #132447;
+}
+.portfolio-grid .portfolio .portfolio-media.portfolio-media--contain video,
+.portfolio-grid .portfolio .portfolio-media.portfolio-media--contain img {
+  object-fit: contain;
+}
+.portfolio-grid .portfolio .portfolio-media img,
+.portfolio-grid .portfolio .portfolio-media video {
   display: block;
   width: 100%;
   height: 100%;
@@ -471,21 +484,48 @@ main .section-portfolio .portfolio-tab:focus-visible {
   white-space: nowrap;
 }
 .portfolio-grid .portfolio .portfolio-title {
-  margin: 12px 0 0;
+  margin: 16px 0 0;
+  color: #111111;
   font-family: "Switzer", sans-serif;
-  font-size: 12px;
+  font-size: clamp(22px, 1.8vw, 28px);
   font-weight: 400;
-  line-height: 1.4;
-  text-transform: uppercase;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
   transition: color 0.2s ease;
 }
+.portfolio-grid .portfolio .portfolio-desc {
+  margin: 10px 0 0;
+  color: #6b6b6b;
+  font-family: "Switzer", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.portfolio-grid .portfolio .portfolio-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.portfolio-grid .portfolio .portfolio-tags li {
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: #ecebe6;
+  color: #2b2b2b;
+  font-family: "Switzer", sans-serif;
+  font-size: 13px;
+  line-height: 1.2;
+}
 .portfolio-grid .portfolio .portfolio-link:hover .portfolio-media img,
-.portfolio-grid .portfolio .portfolio-link:focus-visible .portfolio-media img {
+.portfolio-grid .portfolio .portfolio-link:focus-visible .portfolio-media img,
+.portfolio-grid .portfolio .portfolio-link:hover .portfolio-media video,
+.portfolio-grid .portfolio .portfolio-link:focus-visible .portfolio-media video {
   transform: scale(1.03);
 }
 .portfolio-grid .portfolio .portfolio-link:hover .portfolio-title,
 .portfolio-grid .portfolio .portfolio-link:focus-visible .portfolio-title {
-  color: #111111;
+  color: #6b6b6b;
 }
 
 @media (prefers-reduced-motion: reduce) {
